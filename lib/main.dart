@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import './styles/color.dart' show CustomColor;
-// import './test.dart';
+import 'package:disneymobile/styles/color.dart';
 import './screens/authenticate/register/register.dart' show Register;
 
 void main() {

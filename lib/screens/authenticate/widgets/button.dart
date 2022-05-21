@@ -16,14 +16,17 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double resizeScreensWidth = MediaQuery.of(context).size.width / 375;
+    final double resizeScreensHeight = MediaQuery.of(context).size.height / 768;
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(top: 50),
         decoration: BoxDecoration(
             color: mainColor, borderRadius: BorderRadius.circular(50)),
-        width: MediaQuery.of(context).size.width * 0.9,
-        padding: const EdgeInsets.all(15),
+        width: resizeScreensWidth * 343,
+        height: resizeScreensHeight * 51,
+        padding: const EdgeInsets.all(16),
         child: Center(
           child: Text(
             text.toUpperCase(),

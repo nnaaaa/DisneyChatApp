@@ -23,7 +23,7 @@ class CustomTextInput extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.only(left: 10),
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.9, 
       child: TextField(
         onChanged: ((value) => userTyped(value)),
         keyboardType: keyboard,
