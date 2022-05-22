@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './component/buttonSign.dart' show buttonSign;
+import './component/buttonSign.dart';
 import './component/itemInput.dart';
 import 'package:disneymobile/styles/color.dart';
 
@@ -28,9 +28,9 @@ class _RegisterState extends State<Register> {
       body: Container(
           padding: const EdgeInsets.all(20),
           child: Column(
-            children: <Widget>[
-              listInput(),
-              buttonSign(),
+            children: const [
+              ListInput(),
+              ButtonSign(),
             ],
           )),
     );

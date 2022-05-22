@@ -19,7 +19,6 @@ class Authenticate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: Responsibility.setHeight(context, 50)),
                     child: CustomButton(
                       accentColor: Colors.white,
                       text: 'Sign In',

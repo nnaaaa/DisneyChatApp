@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/screens/authenticate/widgets/button.dart';
 
-class buttonSign extends StatefulWidget {
-  buttonSign({Key? key}) : super(key: key);
+class ButtonSign extends StatefulWidget {
+  const ButtonSign({Key? key}) : super(key: key);
 
   @override
-  State<buttonSign> createState() => _buttonSignState();
+  State<ButtonSign> createState() => _ButtonSignState();
 }
 
-class _buttonSignState extends State<buttonSign> {
+class _ButtonSignState extends State<ButtonSign> {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      accentColor: CustomColor.secondary,
+      accentColor: Colors.white,
       text: 'Sign Up',
       mainColor: CustomColor.primary,
       onPress: () {
