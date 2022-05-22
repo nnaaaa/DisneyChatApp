@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/reponsive.dart';
 
 class CustomButton extends StatelessWidget {
   final Color accentColor;
@@ -16,16 +17,13 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double resizeScreensWidth = MediaQuery.of(context).size.width / 375;
-    final double resizeScreensHeight = MediaQuery.of(context).size.height / 768;
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
         margin: const EdgeInsets.only(top: 50),
         decoration: BoxDecoration(
-            color: mainColor, borderRadius: BorderRadius.circular(50)),
-        width: resizeScreensWidth * 343,
-        height: resizeScreensHeight * 51,
+            color: mainColor, borderRadius: BorderRadius.circular(15)),
+        width: Responsibility.setWidth(context, 343),
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Text(
