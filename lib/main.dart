@@ -1,9 +1,22 @@
+import 'package:disneymobile/states/rootState.dart';
+
 import 'package:flutter/material.dart';
-
 import 'package:device_preview/device_preview.dart' show DevicePreview;
+import 'package:redux_toolkit/redux_toolkit.dart' show configureStore;
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
+    show StoreProvider;
 
-void main() {
-  runApp(DevicePreview(enabled: true, builder: (context) => const App()));
+void main() async {
+  final store = await configureStore<RootState>(
+    (builder) {
+      builder.withReducer(RootState.reducer);
+      builder.withPreloadedState(RootState.initState());
+    },
+  );
+  runApp(DevicePreview(
+      enabled: true,
+      builder: (context) =>
+          StoreProvider<RootState>(store: store, child: const App())));
 }
 
 class App extends StatelessWidget {
@@ -16,7 +29,6 @@ class App extends StatelessWidget {
         title: 'Disney',
         builder: DevicePreview.appBuilder,
         locale: DevicePreview.locale(context),
-        home: Container()
-    );
+        home: Container());
   }
 }
