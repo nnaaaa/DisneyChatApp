@@ -44,7 +44,12 @@ dev_dependencies:
   redux_toolkit: ^0.1.4
   flutter_redux_hooks: ^0.1.3
 
+  # local storage
+  shared_preferences: ^2.0.15
 
+  # web api and authenticate
+  dio: ^3.0.10
+  
   flutter_test:
     sdk: flutter
 
@@ -61,6 +66,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+  assets:
+    - assets/icon.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

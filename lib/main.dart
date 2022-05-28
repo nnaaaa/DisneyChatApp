@@ -1,3 +1,6 @@
+import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/screens/authenticate/authenticate.dart';
+import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 
 import 'package:flutter/material.dart';
@@ -29,6 +32,17 @@ class App extends StatelessWidget {
         title: 'Disney',
         builder: DevicePreview.appBuilder,
         locale: DevicePreview.locale(context),
-        home: Container());
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        home: FutureBuilder(
+            future: UserAPI.getProfile(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final user = snapshot.data ;
+                return const Home();
+              }
+              print(snapshot.data);
+              return const Authenticate();
+            }));
   }
 }
