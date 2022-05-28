@@ -1,5 +1,8 @@
+import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/screens/authenticate/login/login.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
+
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -91,13 +94,16 @@ class _RegisterState extends State<Register> {
                   margin: const EdgeInsets.only(top: 30),
                   child: CustomButton(
                     text: 'Submit',
-                    onPress: () {
+                    onPress: () async {
                       if (_formKey.currentState!.validate()) {
+                        await AuthAPI.register(
+                            _usernameController.text.toString(),
+                            _emailController.text.toString(),
+                            _passwordController.text.toString());
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Register ...')),
-                        );
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => const Login()));
                       }
                     },
                   ),

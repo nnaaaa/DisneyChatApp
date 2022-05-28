@@ -1,4 +1,7 @@
 import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -73,13 +76,13 @@ class _LoginState extends State<Login> {
                     text: 'Submit',
                     onPress: () async {
                       if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Login ...')),
-                        );
                         await AuthAPI.localLogin(
                             _emailController.text.toString(),
                             _passwordController.text.toString());
-                        
+                        final userJson = await UserAPI.getProfile();
+                        final user = User.fromJson(userJson);
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) => HomeScreen(user: user)));
                       }
                     },
                   ),

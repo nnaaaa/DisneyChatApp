@@ -1,7 +1,9 @@
 import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/models/user.dart';
 
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
@@ -37,12 +39,14 @@ class App extends StatelessWidget {
         home: FutureBuilder(
             future: UserAPI.getProfile(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final user = snapshot.data ;
-                return const Home();
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const LoadingScreen();
               }
-              print(snapshot.data);
-              return const Authenticate();
+              if (!snapshot.hasData) {
+                return const AuthScreen();
+              }
+              final user = User.fromJson(snapshot.data as Map<String, dynamic>);
+              return HomeScreen(user: user);
             }));
   }
 }

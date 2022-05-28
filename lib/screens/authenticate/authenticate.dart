@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:disneymobile/widgets/button.dart';
 import './register/register.dart';
 
-class Authenticate extends StatelessWidget {
-  const Authenticate({Key? key}) : super(key: key);
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

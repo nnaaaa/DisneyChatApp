@@ -1,7 +1,7 @@
-
 import 'package:disneymobile/APIs/dio.dart' show API;
 import 'package:dio/dio.dart' show Response;
-import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 
 class Token {
   static getAccessToken() async {
@@ -35,6 +35,12 @@ class AuthAPI {
   static Future<Response> localLogin(String email, String password) async {
     return await API().getPortal().post('$baseRoute/login',
         data: {'account': email, 'password': password});
+  }
+
+  static Future<Response> register(
+      String username, String email, String password) async {
+    return await API().getPortal().post('$baseRoute/register',
+        data: {'username': username, 'account': email, 'password': password});
   }
 
   static Future<Response> refreshToken(String refreshToken) async {
