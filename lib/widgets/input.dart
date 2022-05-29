@@ -6,24 +6,28 @@ class CustomTextInput extends StatelessWidget {
   final bool obscure;
   final TextInputType keyboardType;
   final bool autofocus;
-  const CustomTextInput(
-      {Key? key,
+  late String? Function(String?)? onValidate;
+  CustomTextInput(
+      {super.key,
       required this.placeholder,
       required this.controller,
       this.obscure = false,
-      this.keyboardType = TextInputType.text,this.autofocus = false})
-      : super(key: key);
+      this.keyboardType = TextInputType.text,
+      this.autofocus = false,
+      this.onValidate}) {
+				onValidate ??= (value) {
+					if (value == null || value.isEmpty) {
+						return 'Please enter some text';
+					}
+					return null;
+    };
+  }
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
+      validator:onValidate,
       autofocus: autofocus,
       obscureText: obscure,
       decoration: InputDecoration(

@@ -2,11 +2,16 @@ import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/models/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
+
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatefulHookWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -14,12 +19,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  late bool isLoading;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    isLoading = false;
     _emailController.addListener(() {});
     _passwordController.addListener(() {});
   }
@@ -35,6 +42,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
     final formKey = GlobalKey<FormState>();
+
+    final dispatch = useDispatch<RootState>();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -69,24 +78,39 @@ class _LoginState extends State<Login> {
                     obscure: true,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 30),
-                  child: CustomButton(
-                    backgroundColor: primaryColor,
-                    text: 'Submit',
-                    onPress: () async {
-                      if (formKey.currentState!.validate()) {
-                        await AuthAPI.localLogin(
-                            _emailController.text.toString(),
-                            _passwordController.text.toString());
-                        final userJson = await UserAPI.getProfile();
-                        final user = User.fromJson(userJson);
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (ctx) => HomeScreen(user: user)));
-                      }
-                    },
-                  ),
-                ),
+                !isLoading
+                    ? Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: CustomButton(
+                          // backgroundColor: primaryColor,
+                          text: 'Submit',
+                          onPress: () async {
+                            if (formKey.currentState!.validate()) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await AuthAPI.localLogin(
+                                  _emailController.text.toString(),
+                                  _passwordController.text.toString());
+                              final userJson = await UserAPI.getProfile();
+                              final user = User.fromJson(userJson);
+                              dispatch(AddUserAction(payload: user));
+                              setState(() {
+                                isLoading = false;
+                              });
+                              if (!mounted) return;
+
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (ctx) =>
+                                          HomeScreen()));
+                            }
+                          },
+                        ),
+                      )
+                    : Container(
+                        margin: const EdgeInsets.only(top: 50),
+                        child: const CircularProgressIndicator()),
               ],
             ),
           )),

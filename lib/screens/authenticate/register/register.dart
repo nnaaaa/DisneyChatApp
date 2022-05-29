@@ -1,11 +1,17 @@
 import 'package:disneymobile/APIs/auth.dart';
-import 'package:disneymobile/screens/authenticate/login/login.dart';
+import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
 
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class Register extends StatefulWidget {
+class Register extends StatefulHookWidget {
   const Register({Key? key}) : super(key: key);
 
   @override
@@ -41,6 +47,8 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     final Color secondaryColor = Theme.of(context).colorScheme.secondary;
+
+    final dispatch = useDispatch<RootState>();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -85,6 +93,12 @@ class _RegisterState extends State<Register> {
                 Container(
                   margin: const EdgeInsets.only(top: 16),
                   child: CustomTextInput(
+                    onValidate: (value) {
+                      if (value != _passwordController.text.toString()) {
+                        return 'Please type correct password';
+                      }
+                      return null;
+                    },
                     placeholder: 'Confirm',
                     controller: _confirmController,
                     obscure: true,
@@ -100,10 +114,13 @@ class _RegisterState extends State<Register> {
                             _usernameController.text.toString(),
                             _emailController.text.toString(),
                             _passwordController.text.toString());
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const Login()));
+
+                        final userJson = await UserAPI.getProfile();
+                        final user = User.fromJson(userJson);
+                        dispatch(AddUserAction(payload: user));
+                        if (!mounted) return;
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (ctx) => HomeScreen()));
                       }
                     },
                   ),

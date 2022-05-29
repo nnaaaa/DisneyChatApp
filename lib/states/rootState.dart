@@ -1,14 +1,19 @@
 
 
+import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/states/slices/user.dart';
+
 class RootState {
-  RootState();
+User? user;
+    
+  RootState({this.user});
 
   static RootState reducer(RootState state, dynamic action) {
-    return RootState();
+    return RootState(user: UserSlice().reducer()(state.user,action));
   }
 
   static RootState initState() {
-    return RootState();
+    return RootState(user: UserSlice().initState());
     
   }
 }
