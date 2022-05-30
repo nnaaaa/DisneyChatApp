@@ -1,30 +1,70 @@
 import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/models/user.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
+import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/states/slices/user.dart';
 
-import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useSelector;
-import 'package:flutter_hooks/flutter_hooks.dart' show HookWidget;
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
+    show useSelector, useDispatch;
+import 'package:flutter_hooks/flutter_hooks.dart'
+    show useEffect, StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class HomeScreen extends HookWidget {
+class HomeScreen extends StatefulHookWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late bool isLoading;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isLoading = true;
+  }
 
   @override
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
+    final dispatch = useDispatch<RootState>();
+
+    useEffect(() {
+      UserAPI.getProfile().then(
+        (value) {
+          if (value == null) {
+            return;
+          }
+          final userFromJson = User.fromJson(value as Map<String, dynamic>);
+          dispatch(AddUserAction(payload: userFromJson));
+          setState(() {
+            isLoading = false;
+          });
+        },
+      ).catchError((error) {
+        Navigator.of(context).pushReplacementNamed('/auth');
+        setState(() {
+            isLoading = false;
+          });
+      });
+      return () {};
+    }, []);
+
+    if (isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            );
-          }
-        ),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          );
+        }),
         actions: [
           Builder(
             builder: (context) => IconButton(
@@ -67,7 +107,7 @@ class HomeScreen extends HookWidget {
           )
         ],
       ),
-      // endDrawer: ,
     );
   }
 }
+

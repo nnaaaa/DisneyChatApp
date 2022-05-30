@@ -11,14 +11,14 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class Register extends StatefulHookWidget {
-  const Register({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulHookWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -119,8 +119,7 @@ class _RegisterState extends State<Register> {
                         final user = User.fromJson(userJson);
                         dispatch(AddUserAction(payload: user));
                         if (!mounted) return;
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (ctx) => HomeScreen()));
+                        Navigator.of(context).pushReplacementNamed('/');
                       }
                     },
                   ),

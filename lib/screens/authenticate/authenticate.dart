@@ -1,8 +1,6 @@
-import 'package:disneymobile/screens/authenticate/login/login.dart';
 import 'package:disneymobile/widgets/icon.dart';
 import 'package:flutter/material.dart';
 import 'package:disneymobile/widgets/button.dart';
-import './register/register.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -25,8 +23,7 @@ class AuthScreen extends StatelessWidget {
                 backgroundColor: primaryColor,
                 text: 'Login',
                 onPress: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Login()));
+                  Navigator.of(context).pushReplacementNamed('/login');
                 },
               ),
             ),
@@ -35,10 +32,7 @@ class AuthScreen extends StatelessWidget {
               child: CustomButton(
                 text: 'Register',
                 onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Register()),
-                  );
+                    Navigator.of(context).pushReplacementNamed('/register');
                 },
               ),
             )

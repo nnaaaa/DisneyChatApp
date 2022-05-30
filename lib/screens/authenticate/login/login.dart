@@ -11,14 +11,14 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class Login extends StatefulHookWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginScreen extends StatefulHookWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   late bool isLoading;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -100,10 +100,7 @@ class _LoginState extends State<Login> {
                               });
                               if (!mounted) return;
 
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          HomeScreen()));
+                              Navigator.of(context).pushReplacementNamed('/');
                             }
                           },
                         ),
