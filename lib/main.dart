@@ -1,11 +1,7 @@
-import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/authenticate/login/login.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
-import 'package:disneymobile/screens/loading/loading.dart';
-import 'package:disneymobile/models/user.dart';
-import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;
 
 import 'package:flutter/material.dart';
@@ -35,19 +31,18 @@ class App extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Disney',
-      builder: DevicePreview.appBuilder,
-      locale: DevicePreview.locale(context),
-      useInheritedMediaQuery: true,
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/auth': (context) => const AuthScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/login': (context) => const LoginScreen(),
-        // '/register':(context) => const HomeScreen(),
-      }
-    );
+        title: 'Disney',
+        builder: DevicePreview.appBuilder,
+        locale: DevicePreview.locale(context),
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        routes: {
+          HomeScreen.route: (context) => const HomeScreen(),
+          AuthScreen.route: (context) => const AuthScreen(),
+          RegisterScreen.route: (context) => const RegisterScreen(),
+          LoginScreen.route: (context) => const LoginScreen(),
+          // '/register':(context) => const HomeScreen(),
+        });
     // home: FutureBuilder(
     //     future: UserAPI.getProfile(),
     //     builder: (context, snapshot) {

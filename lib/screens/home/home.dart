@@ -13,6 +13,7 @@ import 'package:flutter_hooks/flutter_hooks.dart'
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulHookWidget {
+  static const route = '/';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -46,10 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ).catchError((error) {
-        Navigator.of(context).pushReplacementNamed('/auth');
+        Navigator.of(context).pushReplacementNamed(AuthScreen.route);
         setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
+        });
       });
       return () {};
     }, []);
@@ -59,13 +60,38 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
-        leading: Builder(builder: (context) {
-          return IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          );
-        }),
+        leading: Builder(
+            builder: (context) => IconButton(
+                  icon: const Icon(Icons.settings),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                )),
         actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () => Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      Scaffold(
+                          appBar: AppBar(
+                            title: const Text('Search'),
+                          ),
+                          body: const Center(
+                            child: Text('Search'),
+                          )),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, 1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.ease;
+                    final tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  })),
+            ),
+          ),
           Builder(
             builder: (context) => IconButton(
               icon: const Icon(Icons.people),
@@ -82,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Center(
         child: Text('Members'),
       )),
-
       body: Column(
         children: [
           user != null
@@ -110,4 +135,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

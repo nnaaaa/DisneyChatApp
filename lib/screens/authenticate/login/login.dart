@@ -12,6 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulHookWidget {
+  static const route = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -100,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                               if (!mounted) return;
 
-                              Navigator.of(context).pushReplacementNamed('/');
+                              Navigator.of(context)
+                                  .pushReplacementNamed(HomeScreen.route);
                             }
                           },
                         ),

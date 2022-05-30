@@ -12,6 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulHookWidget {
+  static const route = '/register';
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
@@ -119,7 +120,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         final user = User.fromJson(userJson);
                         dispatch(AddUserAction(payload: user));
                         if (!mounted) return;
-                        Navigator.of(context).pushReplacementNamed('/');
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomeScreen.route);
                       }
                     },
                   ),
