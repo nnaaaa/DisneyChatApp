@@ -27,7 +27,7 @@ class AuthScreen extends StatelessWidget {
                 backgroundColor: primaryColor,
                 text: 'Login',
                 onPress: () {
-                  Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+                  Navigator.of(context).pushNamed(LoginScreen.route);
                 },
               ),
             ),
@@ -37,7 +37,7 @@ class AuthScreen extends StatelessWidget {
                 text: 'Register',
                 onPress: () {
                   Navigator.of(context)
-                      .pushReplacementNamed(RegisterScreen.route);
+                      .pushNamed(RegisterScreen.route);
                 },
               ),
             )

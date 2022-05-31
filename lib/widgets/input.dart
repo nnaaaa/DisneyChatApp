@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextInput extends StatelessWidget {
   final String placeholder;
   final TextEditingController controller;
+  String? errorText;
   final bool obscure;
   final TextInputType keyboardType;
   final bool autofocus;
@@ -11,6 +12,7 @@ class CustomTextInput extends StatelessWidget {
       {super.key,
       required this.placeholder,
       required this.controller,
+      this.errorText,
       this.obscure = false,
       this.keyboardType = TextInputType.text,
       this.autofocus = false,
@@ -41,6 +43,7 @@ class CustomTextInput extends StatelessWidget {
         hintStyle: const TextStyle(
           fontFamily: 'Poppins',
         ),
+        errorText: errorText
       ),
     );
   }

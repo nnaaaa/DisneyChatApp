@@ -1,6 +1,5 @@
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
-import 'package:disneymobile/models/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -20,6 +19,7 @@ class RegisterScreen extends StatefulHookWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isLoading = false;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -30,6 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void initState() {
     super.initState();
+
     _usernameController.addListener(() {});
     _emailController.addListener(() {});
     _passwordController.addListener(() {});
@@ -110,18 +111,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: CustomButton(
                     text: 'Submit',
                     onPress: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await AuthAPI.register(
-                            _usernameController.text.toString(),
-                            _emailController.text.toString(),
-                            _passwordController.text.toString());
+                      try {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        if (_formKey.currentState!.validate()) {
+                          await AuthAPI.register(
+                              _usernameController.text.toString(),
+                              _emailController.text.toString(),
+                              _passwordController.text.toString());
 
-                        final userJson = await UserAPI.getProfile();
-                        final user = User.fromJson(userJson);
-                        dispatch(AddUserAction(payload: user));
-                        if (!mounted) return;
-                        Navigator.of(context)
-                            .pushReplacementNamed(HomeScreen.route);
+                          final user = await UserAPI.getProfile();
+                          dispatch(AddUserAction(payload: user));
+                          if (!mounted) return;
+                          Navigator.of(context)
+                              .pushReplacementNamed(HomeScreen.route);
+                        }
+                      } catch (e) {
+                        print('$e');
+                      } finally {
+                        setState(() {
+                          isLoading = false;
+                        });
                       }
                     },
                   ),

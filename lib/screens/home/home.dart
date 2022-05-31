@@ -116,7 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     user.avatar != null
                         ? Image.network(user.avatar!)
                         : const Center(),
-                    Text(user.account)
+                    Text(user.account),
+                    Text(user.id),
                   ]),
                 )
               : const Text('Null user'),
@@ -125,8 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ElevatedButton(
                 onPressed: () {
                   Token.removeToken();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => const AuthScreen()));
+                  Navigator.of(context).pushNamed(AuthScreen.route);
                 },
                 child: const Text('Logout')),
           )

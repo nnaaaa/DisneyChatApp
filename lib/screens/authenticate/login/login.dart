@@ -1,6 +1,5 @@
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
-import 'package:disneymobile/models/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -86,23 +85,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           // backgroundColor: primaryColor,
                           text: 'Submit',
                           onPress: () async {
-                            if (formKey.currentState!.validate()) {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              await AuthAPI.localLogin(
-                                  _emailController.text.toString(),
-                                  _passwordController.text.toString());
-                              final userJson = await UserAPI.getProfile();
-                              final user = User.fromJson(userJson);
-                              dispatch(AddUserAction(payload: user));
+                            try {
+                              if (formKey.currentState!.validate()) {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await AuthAPI.localLogin(
+                                    _emailController.text.toString(),
+                                    _passwordController.text.toString());
+                                final user = await UserAPI.getProfile();
+                                dispatch(AddUserAction(payload: user));
+
+                                if (!mounted) return;
+
+                                Navigator.of(context)
+                                    .pushReplacementNamed(HomeScreen.route);
+                              }
+                            } catch (e) {
+                              print('$e');
+                            } finally {
                               setState(() {
                                 isLoading = false;
                               });
-                              if (!mounted) return;
-
-                              Navigator.of(context)
-                                  .pushReplacementNamed(HomeScreen.route);
                             }
                           },
                         ),
