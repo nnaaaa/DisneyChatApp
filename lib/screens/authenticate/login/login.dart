@@ -3,6 +3,7 @@ import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
+import 'package:disneymobile/utilities/validator.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
 
@@ -23,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -41,9 +44,32 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
-    final formKey = GlobalKey<FormState>();
 
     final dispatch = useDispatch<RootState>();
+
+    Future<void> onSubmit() async {
+      try {
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            isLoading = true;
+          });
+          await AuthAPI.localLogin(_emailController.text.toString(),
+              _passwordController.text.toString());
+
+          final user = await UserAPI.getProfile();
+          dispatch(AddUserAction(payload: user));
+
+          if (!mounted) return;
+          Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+        }
+      } catch (e) {
+        print('$e');
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -59,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
           padding: const EdgeInsets.all(20),
           child: Form(
-            key: formKey,
+            key: _formKey,
             child: Column(
               children: [
                 Container(
@@ -67,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: CustomTextInput(
                     placeholder: 'Email',
                     controller: _emailController,
+                    onValidate: Validator.getEmailValidator(),
                     autofocus: true,
                   ),
                 ),
@@ -75,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: CustomTextInput(
                     placeholder: 'Password',
                     controller: _passwordController,
+                    onValidate: Validator.getPasswordValidator(),
                     obscure: true,
                   ),
                 ),
@@ -84,31 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: CustomButton(
                           // backgroundColor: primaryColor,
                           text: 'Submit',
-                          onPress: () async {
-                            try {
-                              if (formKey.currentState!.validate()) {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                await AuthAPI.localLogin(
-                                    _emailController.text.toString(),
-                                    _passwordController.text.toString());
-                                final user = await UserAPI.getProfile();
-                                dispatch(AddUserAction(payload: user));
-
-                                if (!mounted) return;
-
-                                Navigator.of(context)
-                                    .pushReplacementNamed(HomeScreen.route);
-                              }
-                            } catch (e) {
-                              print('$e');
-                            } finally {
-                              setState(() {
-                                isLoading = false;
-                              });
-                            }
-                          },
+                          onPress: onSubmit,
                         ),
                       )
                     : Container(

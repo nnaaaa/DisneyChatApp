@@ -6,7 +6,6 @@ class UserAPI {
   static Future<dynamic> getProfile() async {
     final user = await API().getPortal().get('$baseRoute/getProfile');
     if (user.data == null) return null;
-    final userJson = await UserAPI.getProfile();
-    return User.fromJson(userJson);
+    return User.fromJson(user.data);
   }
 }

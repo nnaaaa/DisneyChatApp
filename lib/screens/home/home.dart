@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late bool isLoading;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isLoading = true;
   }
@@ -36,12 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     useEffect(() {
       UserAPI.getProfile().then(
-        (value) {
-          if (value == null) {
+        (user) {
+          if (user == null) {
             return;
           }
-          final userFromJson = User.fromJson(value as Map<String, dynamic>);
-          dispatch(AddUserAction(payload: userFromJson));
+          dispatch(AddUserAction(payload: user));
           setState(() {
             isLoading = false;
           });

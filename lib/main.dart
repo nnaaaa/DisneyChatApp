@@ -41,23 +41,6 @@ class App extends HookWidget {
           AuthScreen.route: (context) => const AuthScreen(),
           RegisterScreen.route: (context) => const RegisterScreen(),
           LoginScreen.route: (context) => const LoginScreen(),
-          // '/register':(context) => const HomeScreen(),
         });
-    // home: FutureBuilder(
-    //     future: UserAPI.getProfile(),
-    //     builder: (context, snapshot) {
-    //         // final dispatch = useDispatch();
-
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return const LoadingScreen();
-    //       }
-    //       if (!snapshot.hasData) {
-    //         return const AuthScreen();
-    //       }
-    //       final user = User.fromJson(snapshot.data as Map<String, dynamic>);
-    //         dispatch(AddUserAction(payload: user));
-
-    //       return const HomeScreen();
-    //     }));
   }
 }

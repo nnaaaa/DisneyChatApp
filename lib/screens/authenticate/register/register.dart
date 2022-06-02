@@ -3,6 +3,7 @@ import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
+import 'package:disneymobile/utilities/validator.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
 
@@ -52,6 +53,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     final dispatch = useDispatch<RootState>();
 
+    Future<void> onSubmit() async {
+      try {
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            isLoading = true;
+          });
+          await AuthAPI.register(
+              _usernameController.text.toString(),
+              _emailController.text.toString(),
+              _passwordController.text.toString());
+
+          final user = await UserAPI.getProfile();
+          dispatch(AddUserAction(payload: user));
+
+          if (!mounted) return;
+          Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+        }
+      } catch (e) {
+        print('$e');
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -74,6 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: CustomTextInput(
                     placeholder: 'Name',
                     controller: _usernameController,
+                    onValidate: Validator.getTextValidator(),
                     autofocus: true,
                   ),
                 ),
@@ -82,6 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: CustomTextInput(
                     placeholder: 'Email',
                     controller: _emailController,
+                    onValidate: Validator.getEmailValidator(),
                   ),
                 ),
                 Container(
@@ -89,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: CustomTextInput(
                     placeholder: 'Password',
                     controller: _passwordController,
+                    onValidate: Validator.getPasswordValidator(),
                     obscure: true,
                   ),
                 ),
@@ -96,6 +126,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.only(top: 16),
                   child: CustomTextInput(
                     onValidate: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please confirm your password';
+                      }
                       if (value != _passwordController.text.toString()) {
                         return 'Please type correct password';
                       }
@@ -110,31 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.only(top: 30),
                   child: CustomButton(
                     text: 'Submit',
-                    onPress: () async {
-                      try {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        if (_formKey.currentState!.validate()) {
-                          await AuthAPI.register(
-                              _usernameController.text.toString(),
-                              _emailController.text.toString(),
-                              _passwordController.text.toString());
-
-                          final user = await UserAPI.getProfile();
-                          dispatch(AddUserAction(payload: user));
-                          if (!mounted) return;
-                          Navigator.of(context)
-                              .pushReplacementNamed(HomeScreen.route);
-                        }
-                      } catch (e) {
-                        print('$e');
-                      } finally {
-                        setState(() {
-                          isLoading = false;
-                        });
-                      }
-                    },
+                    onPress: onSubmit,
                   ),
                 ),
               ],

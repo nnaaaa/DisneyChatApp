@@ -17,11 +17,11 @@ class CustomTextInput extends StatelessWidget {
       this.keyboardType = TextInputType.text,
       this.autofocus = false,
       this.onValidate}) {
-				onValidate ??= (value) {
-					if (value == null || value.isEmpty) {
-						return 'Please enter some text';
-					}
-					return null;
+    onValidate ??= (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter some text';
+      }
+      return null;
     };
   }
   @override
@@ -29,22 +29,21 @@ class CustomTextInput extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      validator:onValidate,
+      validator: onValidate,
       autofocus: autofocus,
       obscureText: obscure,
       decoration: InputDecoration(
-        //   icon: Icon(
-        //     leading,
-        //     color: Colors.deepPurple,
-        //   ),
-        contentPadding: const EdgeInsets.only(left: 10),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        hintText: placeholder,
-        hintStyle: const TextStyle(
-          fontFamily: 'Poppins',
-        ),
-        errorText: errorText
-      ),
+          //   icon: Icon(
+          //     leading,
+          //     color: Colors.deepPurple,
+          //   ),
+          contentPadding: const EdgeInsets.only(left: 10),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+          hintText: placeholder,
+          hintStyle: const TextStyle(
+            fontFamily: 'Poppins',
+          ),
+          errorText: errorText),
     );
   }
 }

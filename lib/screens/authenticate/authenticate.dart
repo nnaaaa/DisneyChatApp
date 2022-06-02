@@ -36,8 +36,7 @@ class AuthScreen extends StatelessWidget {
               child: CustomButton(
                 text: 'Register',
                 onPress: () {
-                  Navigator.of(context)
-                      .pushNamed(RegisterScreen.route);
+                  Navigator.of(context).pushNamed(RegisterScreen.route);
                 },
               ),
             )
