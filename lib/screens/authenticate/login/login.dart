@@ -92,46 +92,48 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 //login form
-                Column(children: [
-                  Container(
-                    padding: EdgeInsets.only(bottom: ResponsiveUtil.height(10)),
-                    child: Text(
-                      'L O G I N',
-                      style: TextStyle(
-                        fontSize: ResponsiveUtil.getResponsiveFontSize(15),
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
+                Form(
+                  key: _formKey,
+                  child: Column(children: [
+                    Container(
+                      padding:
+                          EdgeInsets.only(bottom: ResponsiveUtil.height(10)),
+                      child: Text(
+                        'L O G I N',
+                        style: TextStyle(
+                          fontSize: ResponsiveUtil.getResponsiveFontSize(15),
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: ResponsiveUtil.height(10)),
-                    child: CustomTextInput(
-                      placeholder: 'Email',
-                      onValidate: Validator.getEmailValidator(),
-                      controller: _emailController,
+                    Container(
+                      margin: EdgeInsets.only(top: ResponsiveUtil.height(10)),
+                      child: CustomTextInput(
+                        placeholder: 'Email',
+                        onValidate: Validator.getEmailValidator(),
+                        controller: _emailController,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: ResponsiveUtil.height(13)),
-                    child: CustomTextInput(
-                      placeholder: 'Password',
-                      controller: _passwordController,
-                      onValidate: Validator.getPasswordValidator(),
-                      obscure: true,
+                    Container(
+                      margin: EdgeInsets.only(top: ResponsiveUtil.height(13)),
+                      child: CustomTextInput(
+                        placeholder: 'Password',
+                        controller: _passwordController,
+                        onValidate: Validator.getPasswordValidator(),
+                        obscure: true,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
-                    child: CustomButton(
-                      text: 'Submit',
-                      onPress: () {
-                        final res = AuthAPI.localLogin(_emailController.text.toString(), _passwordController.text.toString());
-                      },
+                    Container(
+                      margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
+                      child: CustomButton(
+                        text: 'Submit',
+                        onPress: onSubmit,
+                      ),
                     ),
-                  ),
-                ]),
-                //Forgot pasword
+                  ]),
+                ),
+                //forgot pasword
                 Container(
                     margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
                     child: GestureDetector(
