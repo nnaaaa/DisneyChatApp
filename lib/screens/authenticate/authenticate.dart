@@ -17,30 +17,44 @@ class AuthScreen extends StatelessWidget {
       //add row here to make it responsive to screen size and orientation change
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const IconWidget(),
-            Container(
-              margin: const EdgeInsets.only(top: 18),
-              child: CustomButton(
-                backgroundColor: primaryColor,
-                text: 'Login',
-                onPress: () {
-                  Navigator.of(context).pushNamed(LoginScreen.route);
-                },
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const IconWidget(),
+              Container(
+                margin: const EdgeInsets.only(top: 18),
+                child: CustomButton(
+                  backgroundColor: primaryColor,
+                  text: 'Login',
+                  onPress: () {
+                    Navigator.pushNamed(context, LoginScreen.route);
+                  },
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 18),
-              child: CustomButton(
-                text: 'Register',
-                onPress: () {
-                  Navigator.of(context).pushNamed(RegisterScreen.route);
-                },
+              Container(
+                margin: const EdgeInsets.only(top: 18),
+                child: CustomButton(
+                  text: 'Register',
+                  onPress: () {
+                    Navigator.pushNamed(context, RegisterScreen.route);
+                  },
+                ),
               ),
-            )
-          ],
+              // Container(
+              //   margin: const EdgeInsets.only(top: 18),
+              //   child: CustomButton(
+              //     text: 'Choose color',
+              //     onPress: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const CustomTheme()));
+              //     },
+              //   ),
+              // )
+            ],
+          ),
         ),
       ),
     );

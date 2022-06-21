@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
-import 'package:disneymobile/screens/home/home.dart';
-import 'package:disneymobile/states/rootState.dart';
-import 'package:disneymobile/states/slices/user.dart';
-import 'package:disneymobile/utilities/validator.dart';
-import 'package:disneymobile/widgets/button.dart';
-import 'package:disneymobile/widgets/input.dart';
+import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
+import 'package:disneymobile/states/rootState.dart' show RootState;
+import 'package:disneymobile/states/slices/user.dart' show AddUserAction;
+import 'package:disneymobile/utilities/validator.dart' show Validator;
+import 'package:disneymobile/widgets/button.dart' show CustomButton;
+import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
+import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
+import 'package:disneymobile/styles/color.dart' show CustomColor;
+import '../register/register.dart' show RegisterScreen;
 
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
@@ -72,55 +77,121 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        centerTitle: true,
-        title: const Text('Login',
-            style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                fontSize: 25)),
-      ),
-      body: Container(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
+        resizeToAvoidBottomInset: false,
+        body: Container(
+            margin: EdgeInsets.only(top: ResponsiveUtil.height(25)),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
+                //image logo
                 Container(
-                  margin: const EdgeInsets.only(top: 16),
-                  child: CustomTextInput(
-                    placeholder: 'Email',
-                    controller: _emailController,
-                    onValidate: Validator.getEmailValidator(),
-                    autofocus: true,
+                  margin: EdgeInsets.only(bottom: ResponsiveUtil.height(10)),
+                  child: Image.asset(
+                    'assets/images/icon.png',
+                    height: ResponsiveUtil.height(200),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 16),
-                  child: CustomTextInput(
-                    placeholder: 'Password',
-                    controller: _passwordController,
-                    onValidate: Validator.getPasswordValidator(),
-                    obscure: true,
+                //login form
+                Column(children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: ResponsiveUtil.height(10)),
+                    child: Text(
+                      'L O G I N',
+                      style: TextStyle(
+                        fontSize: ResponsiveUtil.getResponsiveFontSize(15),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                   ),
-                ),
-                !isLoading
-                    ? Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        child: CustomButton(
-                          // backgroundColor: primaryColor,
-                          text: 'Submit',
-                          onPress: onSubmit,
+                  Container(
+                    margin: EdgeInsets.only(top: ResponsiveUtil.height(10)),
+                    child: CustomTextInput(
+                      placeholder: 'Email',
+                      onValidate: Validator.getEmailValidator(),
+                      controller: _emailController,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: ResponsiveUtil.height(13)),
+                    child: CustomTextInput(
+                      placeholder: 'Password',
+                      controller: _passwordController,
+                      onValidate: Validator.getPasswordValidator(),
+                      obscure: true,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
+                    child: CustomButton(
+                      text: 'Submit',
+                      onPress: () {
+                        final res = AuthAPI.localLogin(_emailController.text.toString(), _passwordController.text.toString());
+                      },
+                    ),
+                  ),
+                ]),
+                //Forgot pasword
+                Container(
+                    margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
+                    child: GestureDetector(
+                      child: Text(
+                        'Forgot your password?',
+                        style: TextStyle(
+                          fontSize: ResponsiveUtil.getResponsiveFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
                         ),
-                      )
-                    : Container(
-                        margin: const EdgeInsets.only(top: 50),
-                        child: const CircularProgressIndicator()),
+                      ),
+                      onTap: () {
+                        log('forgot');
+                      },
+                    )),
+                //list login by gmail, facebook, twitter
+                Container(
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          margin:
+                              EdgeInsets.only(right: ResponsiveUtil.width(10)),
+                          child: Image.asset(
+                            'assets/images/icon_gmail.png',
+                            width: ResponsiveUtil.width(50),
+                            height: ResponsiveUtil.height(50),
+                          )),
+                      Container(
+                          margin:
+                              EdgeInsets.only(right: ResponsiveUtil.width(10)),
+                          child: Image.asset(
+                            'assets/images/icon_github.png',
+                            width: ResponsiveUtil.width(50),
+                            height: ResponsiveUtil.height(50),
+                          )),
+                      Container(
+                          margin: const EdgeInsets.all(0.0),
+                          child: Image.asset(
+                            'assets/images/icon_linkedin.png',
+                            width: ResponsiveUtil.width(50),
+                            height: ResponsiveUtil.height(50),
+                          )),
+                    ],
+                  ),
+                ),
+                //sign up button
+                Container(
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(25)),
+                  child: CustomButton(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    text: 'Sign Up',
+                    // textColor: CustomColor.mainPrimary,
+                    onPress: () {
+                      Navigator.pushNamed(context, RegisterScreen.route);
+                    },
+                  ),
+                ),
               ],
-            ),
-          )),
-    );
+            )));
   }
 }

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/responsive.dart';
+import 'package:disneymobile/styles/color.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 class CustomButton extends StatelessWidget {
   Color? backgroundColor;
   final String text;
@@ -16,13 +21,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        
       onPressed: () => onPress(),
-      style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(backgroundColor ?? Theme.of(context).colorScheme.secondary),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)))),
       child: Container(
         padding: const EdgeInsets.all(16),
         child: Center(
