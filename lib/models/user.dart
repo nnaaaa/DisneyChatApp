@@ -1,26 +1,50 @@
+import 'package:disneymobile/models/BeFriend.dart';
+import 'package:disneymobile/models/GuildMember.dart';
+
 class User {
-  String? username;
-  final String account;
-  final String password;
   final String id;
-  String? avatar;
+  final String account;
+  String? name;
+  String password;
+  String? email;
+  String lastLogin;
+  bool isLogin;
+  String? avatarUrl;
+  List<GuildMember>? joinedGuilds;
+  List<BeFriend>? friends;
+
   User(
-      {required this.account,
+      {required this.id,
+      this.name,
+      required this.account,
       required this.password,
-      required this.id,
-      this.avatar,
-      this.username});
+      this.email,
+      required this.lastLogin,
+      required this.isLogin,
+      this.avatarUrl,
+      this.joinedGuilds});
+
   factory User.fromJson(Map<String, dynamic> data) {
     final id = data['id'] as String;
-    final username = data['username'] as String;
+    final name = data['name'] as String;
     final account = data['account'] as String;
     final password = data['password'] as String;
-    final avatar = data['avatar'] as String;
+    final email = data['email'] as String;
+    final avatarUrl = data['avatarUrl'] as String;
+    final lastLogin = data['lastLogin'] as String;
+    final isLogin = data['isLogin'];
+    var list1 = data['joinedGuilds'] as List;
+    List<GuildMember> joinedGuilds =
+        list1.map((i) => GuildMember.fromJson(i)).toList();
     return User(
         id: id,
         account: account,
+        name: name,
         password: password,
-        username: username,
-        avatar: avatar);
+        email: email,
+        isLogin: isLogin,
+        avatarUrl: avatarUrl,
+        lastLogin: lastLogin,
+        joinedGuilds: joinedGuilds);
   }
 }

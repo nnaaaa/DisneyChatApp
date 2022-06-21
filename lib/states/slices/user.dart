@@ -1,7 +1,7 @@
 import 'package:disneymobile/states/slices/slice.dart' show Slice;
 import 'package:redux_toolkit/redux_toolkit.dart'
     show createReducer, PayloadAction;
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 
 class AddUserAction extends PayloadAction<User,dynamic,dynamic> {
   const AddUserAction({required super.payload});
