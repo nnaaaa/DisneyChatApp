@@ -1,5 +1,5 @@
 import 'package:disneymobile/APIs/dio.dart' show API;
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 
 class UserAPI {
   static const baseRoute = '/user';

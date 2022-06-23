@@ -1,6 +1,6 @@
 
 
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/states/slices/user.dart';
 
 class RootState {

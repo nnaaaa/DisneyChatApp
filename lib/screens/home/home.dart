@@ -1,6 +1,6 @@
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
@@ -111,11 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
           user != null
               ? Center(
                   child: Column(children: [
-                    user.avatar != null
-                        ? Image.network(user.avatar!)
+                    user.avatarUrl != null
+                        ? Image.network(user.avatarUrl!)
                         : const Center(),
                     Text(user.account),
-                    Text(user.id),
+                    Text(user.userId),
                   ]),
                 )
               : const Text('Null user'),
