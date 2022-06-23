@@ -40,7 +40,7 @@ class AuthAPI {
   static Future<Response> register(
       String username, String email, String password) async {
     return await API().getPortal().post('$baseRoute/register',
-        data: {'username': username, 'account': email, 'password': password});
+        data: {'name': username, 'account': email, 'password': password});
   }
 
   static Future<Response> refreshToken(String refreshToken) async {

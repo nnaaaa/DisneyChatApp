@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
           if (value == null) {
             return;
           }
-          final userFromJson = User.fromJson(value as Map<String, dynamic>);
-          dispatch(AddUserAction(payload: userFromJson));
+        //   print('value ${value}');
+          dispatch(AddUserAction(payload: value));
           setState(() {
             isLoading = false;
           });
@@ -113,11 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
           user != null
               ? Center(
                   child: Column(children: [
-                    user.avatar != null
-                        ? Image.network(user.avatar!)
+                    user.avatarUrl != null
+                        ? Image.network(user.avatarUrl!)
                         : const Center(),
                     Text(user.account),
-                    Text(user.id),
+                    Text(user.userId),
                   ]),
                 )
               : const Text('Null user'),
