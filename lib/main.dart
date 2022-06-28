@@ -36,13 +36,15 @@ class App extends HookWidget {
         locale: DevicePreview.locale(context),
         useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
-        routes: {
-          HomeScreen.route: (context) => const HomeScreen(),
-          AuthScreen.route: (context) => const AuthScreen(),
-          RegisterScreen.route: (context) => const RegisterScreen(),
-          LoginScreen.route: (context) => const LoginScreen(),
-          // '/register':(context) => const HomeScreen(),
-        });
+        home: const HomeScreen(),
+        // routes: {
+        //   HomeScreen.route: (context) => const HomeScreen(),
+        //   AuthScreen.route: (context) => const AuthScreen(),
+        //   RegisterScreen.route: (context) => const RegisterScreen(),
+        //   LoginScreen.route: (context) => const LoginScreen(),
+        //   // '/register':(context) => const HomeScreen(),
+        // }
+        );
     // home: FutureBuilder(
     //     future: UserAPI.getProfile(),
     //     builder: (context, snapshot) {

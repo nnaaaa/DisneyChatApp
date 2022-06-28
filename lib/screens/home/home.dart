@@ -5,12 +5,11 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
-import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulHookWidget {
   static const route = '/';
@@ -24,9 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late bool isLoading;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    isLoading = true;
+    isLoading = false;
   }
 
   @override
@@ -40,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (value == null) {
             return;
           }
-        //   print('value ${value}');
+          //   print('value ${value}');
           dispatch(AddUserAction(payload: value));
           setState(() {
             isLoading = false;
@@ -55,58 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
       return () {};
     }, []);
 
-    if (isLoading) return const LoadingScreen();
+    //if (isLoading) return const LoadingScreen();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        leading: Builder(
-            builder: (context) => IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                )),
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () => Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      Scaffold(
-                          appBar: AppBar(
-                            title: const Text('Search'),
-                          ),
-                          body: const Center(
-                            child: Text('Search'),
-                          )),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(0.0, 1.0);
-                    const end = Offset.zero;
-                    const curve = Curves.ease;
-                    final tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: curve));
-                    return SlideTransition(
-                      position: animation.drive(tween),
-                      child: child,
-                    );
-                  })),
-            ),
-          ),
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.people),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-            ),
-          ),
-        ],
-      ),
+      appBar: buildAppbar(user?.avatarUrl),
       drawer: const Drawer(
           child: Center(
         child: Text('Guilds'),
       )),
       endDrawer: const Drawer(
           child: Center(
-        child: Text('Members'),
+        child: Text('Friends'),
       )),
       body: Column(
         children: [
@@ -121,17 +78,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   ]),
                 )
               : const Text('Null user'),
-          Container(
-            margin: const EdgeInsets.only(top: 50),
-            child: ElevatedButton(
-                onPressed: () {
-                  Token.removeToken();
-                  Navigator.of(context).pushNamed(AuthScreen.route);
-                },
-                child: const Text('Logout')),
-          )
         ],
       ),
+    );
+  }
+
+  AppBar buildAppbar(profileUrl) {
+    return AppBar(
+      centerTitle: true,
+      title: const Text('Chats'),
+      leading: Builder(
+          builder: (context) => IconButton(
+                icon: CircleAvatar(
+                  radius: 48, // Image radius
+                  backgroundImage: NetworkImage(
+                      profileUrl ?? 'https://i.stack.imgur.com/l60Hf.png'),
+                ),
+                onPressed: () => print("personal profile"),
+              )),
+      actions: [
+        Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.people),
+            onPressed: () => Scaffold.of(context).openEndDrawer(),
+          ),
+        ),
+      ],
     );
   }
 }
