@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: secondaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text('Register',
             style: TextStyle(
                 fontFamily: 'Poppins',

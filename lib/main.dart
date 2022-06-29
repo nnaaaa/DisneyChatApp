@@ -3,7 +3,10 @@ import 'package:disneymobile/screens/authenticate/login/login.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;
+import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
+import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
 import 'package:sizer/sizer.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
@@ -19,21 +22,29 @@ void main() async {
       builder.withPreloadedState(RootState.initState());
     },
   );
-  runApp(DevicePreview(
+  runApp(ChangeNotifierProvider<ThemeNotifier>(
+    child: DevicePreview(
       enabled: true,
-      builder: (context) =>
-          StoreProvider<RootState>(store: store, child: const App())));
+      builder: (context) => StoreProvider<RootState>(
+        store: store,
+        child: const DisneyChat(),
+      ),
+    ),
+    create: (_) => ThemeNotifier(mainTheme),
+  ));
 }
 
-class App extends HookWidget {
-  const App({Key? key}) : super(key: key);
+class DisneyChat extends HookWidget {
+  const DisneyChat({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
           title: 'Disney',
+          theme: themeNotifier.getTheme(),
           builder: DevicePreview.appBuilder,
           locale: DevicePreview.locale(context),
           useInheritedMediaQuery: true,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:disneymobile/styles/responsive.dart';
-import 'package:disneymobile/styles/color.dart';
+import './CustomTheme/theme_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,6 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text.toUpperCase(),
             style: TextStyle(
-                fontFamily: 'Poppins',
                 color: textColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 16),

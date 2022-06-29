@@ -27,7 +27,7 @@ class ResponsiveUtil {
     return (100.w * w);
   }
 
-  static double responsiveHeight(double h) {
+  static double setResponsiveHeight(double h) {
     return h * 100.h;
   }
 

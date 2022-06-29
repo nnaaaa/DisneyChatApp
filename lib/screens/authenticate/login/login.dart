@@ -9,8 +9,9 @@ import 'package:disneymobile/utilities/validator.dart' show Validator;
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
-import 'package:disneymobile/styles/color.dart' show CustomColor;
 import '../register/register.dart' show RegisterScreen;
+import 'package:provider/provider.dart';
+import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
 
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: ResponsiveUtil.getResponsiveFontSize(15),
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),
@@ -185,9 +186,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   margin: EdgeInsets.only(top: ResponsiveUtil.height(25)),
                   child: CustomButton(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: Theme.of(context).primaryColor,
                     text: 'Sign Up',
-                    // textColor: CustomColor.mainPrimary,
                     onPress: () {
                       Navigator.pushNamed(context, RegisterScreen.route);
                     },
