@@ -5,6 +5,8 @@ import 'package:disneymobile/widgets/icon.dart';
 import 'package:flutter/material.dart';
 import 'package:disneymobile/widgets/button.dart';
 
+import './verifier/verify.dart';
+
 class AuthScreen extends StatelessWidget {
   static const route = '/auth';
 
@@ -40,18 +42,6 @@ class AuthScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // Container(
-              //   margin: const EdgeInsets.only(top: 18),
-              //   child: CustomButton(
-              //     text: 'Choose color',
-              //     onPress: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => const CustomTheme()));
-              //     },
-              //   ),
-              // )
             ],
           ),
         ),
