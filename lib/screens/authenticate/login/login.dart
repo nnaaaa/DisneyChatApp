@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/screens/authenticate/login/google.dart';
 import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
 import 'package:disneymobile/states/rootState.dart' show RootState;
 import 'package:disneymobile/states/slices/user.dart' show AddUserAction;
@@ -159,11 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                           margin:
                               EdgeInsets.only(right: ResponsiveUtil.width(10)),
-                          child: Image.asset(
-                            'assets/images/icon_gmail.png',
-                            width: ResponsiveUtil.width(50),
-                            height: ResponsiveUtil.height(50),
-                          )),
+                          child: GoogleAuth()),
                       Container(
                           margin:
                               EdgeInsets.only(right: ResponsiveUtil.width(10)),
