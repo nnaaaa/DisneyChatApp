@@ -8,14 +8,17 @@ class AuthAPI {
     return await API().getPortal().post('$baseRoute/login',
         data: {'account': email, 'password': password});
   }
+
   static Future<Response> registerOAuth(UserRegisterDto user) async {
-    return await API().getPortal().post('$baseRoute/register-oauth',
-        data: user.toJson());
+    return await API()
+        .getPortal()
+        .post('$baseRoute/register-oauth', data: user.toJson());
   }
 
   static Future<Response> register(UserRegisterDto user) async {
-    return await API().getPortal().post('$baseRoute/register',
-        data: user.toJson());
+    return await API()
+        .getPortal()
+        .post('$baseRoute/register', data: user.toJson());
   }
 
   static Future<Response> refreshToken(String refreshToken) async {
@@ -37,10 +40,17 @@ class UserRegisterDto {
       required this.password,
       this.avatarUrl});
 
-  toJson() => {
-        'name': name,
-        'account': account,
-        'password': password,
-        'avatarUrl': avatarUrl,
-      };
+  toJson() {
+    final Map<String, String> object = {
+      'name': name,
+      'account': account,
+      'password': password,
+    };
+
+    if (avatarUrl != null) {
+      object['avatarUrl'] = avatarUrl as String;
+    }
+
+    return object;
+  }
 }

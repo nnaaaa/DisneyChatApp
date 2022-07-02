@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart' show DioError;
 
@@ -32,8 +33,9 @@ class GoogleAuth extends StatelessWidget {
         if (registerRes.statusCode != 201) {
           throw Exception('Register failed');
         }
-      }
-      finally {
+      } catch (e) {
+        print('other error');
+      } finally {
         await AuthAPI.localLogin(user.email, user.id);
 
         navigator.pushReplacementNamed(HomeScreen.route);

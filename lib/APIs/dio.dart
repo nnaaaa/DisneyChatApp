@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart' show Dio, BaseOptions, InterceptorsWrapper;
 import 'package:disneymobile/apis/auth.dart' show AuthAPI;
+import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
 class API {
-  final BaseOptions options = BaseOptions(baseUrl: 'http://10.0.2.2:5000');
+  final BaseOptions options = BaseOptions(baseUrl: dotenv.env['SERVER_HOST']);
   late final Dio _dio;
 
   API() {

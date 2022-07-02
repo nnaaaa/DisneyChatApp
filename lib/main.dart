@@ -7,6 +7,7 @@ import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
@@ -16,6 +17,7 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
 import 'package:flutter_hooks/flutter_hooks.dart' show HookWidget;
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   final store = await configureStore<RootState>(
     (builder) {
       builder.withReducer(RootState.reducer);
