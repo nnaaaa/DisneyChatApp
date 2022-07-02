@@ -13,8 +13,8 @@ class User {
 
   User(
       {required this.userId,
-      required this.name,
       required this.account,
+      required this.name,
       required this.lastLogin,
       required this.isOnline,
       this.avatarUrl,
@@ -23,11 +23,11 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> data) {
     final userId = data['userId'] as String;
-    final name = data['name'] as String;
     final account = data['account'] as String;
-    final avatarUrl = data['avatarUrl'] as String;
+    final name = data['name'] as String;
     final lastLogin = data['lastLogin'] as String;
     final isOnline = data['isOnline'];
+    final avatarUrl = data['avatarUrl'] as String;
     List<dynamic>? joinedGuildsJson = data['joinedGuilds'];
     List<dynamic>? friendsJson = data['friends'];
 
@@ -45,9 +45,9 @@ class User {
         userId: userId,
         account: account,
         name: name,
+        lastLogin: lastLogin,
         isOnline: isOnline,
         avatarUrl: avatarUrl,
-        lastLogin: lastLogin,
         joinedGuilds: joinedGuilds,
         friends: friends);
   }

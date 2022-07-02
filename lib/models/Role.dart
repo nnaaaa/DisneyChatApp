@@ -5,10 +5,9 @@ import 'package:disneymobile/models/Member.dart';
 class Role {
   final String roleID;
   final Guild guild;
-  String name;
-  String color;
+  final String name;
+  final String color;
   String? icon;
-  String? permission;
   final List<Member> members;
   final List<Channel> channels;
 
@@ -18,12 +17,11 @@ class Role {
       required this.name,
       required this.color,
       this.icon,
-      this.permission,
       required this.members,
       required this.channels});
 
   factory Role.fromJson(Map<String, dynamic> data) {
-    List<dynamic>? membersJson = data['friends'];
+    List<dynamic>? membersJson = data['members'];
     List<dynamic>? channelsJson = data['channels'];
 
     List<Member> members = [];
@@ -38,11 +36,10 @@ class Role {
 
     return Role(
         roleID: data['roleID'],
-        name: data['name'],
-        icon: data['icon'],
-        color: data['color'],
-        permission: data['permission'],
         guild: Guild.fromJson(data['guild']),
+        name: data['name'],
+        color: data['color'],
+        icon: data['icon'],
         members: members,
         channels: channels);
   }
