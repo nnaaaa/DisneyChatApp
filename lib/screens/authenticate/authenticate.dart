@@ -1,4 +1,4 @@
-import 'package:disneymobile/screens/authenticate/login/login.dart';
+import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/icon.dart';

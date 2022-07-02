@@ -1,24 +1,16 @@
-import 'dart:developer';
 
-import 'package:disneymobile/APIs/auth.dart';
-import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/apis/auth.dart';
 import 'package:disneymobile/screens/authenticate/login/google.dart';
 import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
-import 'package:disneymobile/states/rootState.dart' show RootState;
-import 'package:disneymobile/states/slices/user.dart' show AddUserAction;
+import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/utilities/validator.dart' show Validator;
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
-import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
-import '../register/register.dart' show RegisterScreen;
-import 'package:provider/provider.dart';
-import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
-
-import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
-import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulHookWidget {
+import '../register/register.dart' show RegisterScreen;
+
+class LoginScreen extends StatefulWidget {
   static const route = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -50,10 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = Theme.of(context).colorScheme.primary;
-
-    final dispatch = useDispatch<RootState>();
-
     Future<void> onSubmit() async {
       try {
         if (_formKey.currentState!.validate()) {
@@ -62,9 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
           });
           await AuthAPI.localLogin(_emailController.text.toString(),
               _passwordController.text.toString());
-
-          final user = await UserAPI.getProfile();
-          dispatch(AddUserAction(payload: user));
 
           if (!mounted) return;
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);
@@ -148,7 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onTap: () {
-                        log('forgot');
                       },
                     )),
                 //list login by gmail, facebook, twitter

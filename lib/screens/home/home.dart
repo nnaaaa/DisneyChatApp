@@ -1,5 +1,5 @@
-import 'package:disneymobile/APIs/auth.dart';
-import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/apis/dio.dart' show Token;
+import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';

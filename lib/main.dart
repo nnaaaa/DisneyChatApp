@@ -1,5 +1,5 @@
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
-import 'package:disneymobile/screens/authenticate/login/login.dart';
+import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;

@@ -1,5 +1,5 @@
-import 'package:disneymobile/APIs/auth.dart';
-import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/apis/auth.dart';
+import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -7,11 +7,9 @@ import 'package:disneymobile/utilities/validator.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
 
-import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
-import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulHookWidget {
+class RegisterScreen extends StatefulWidget {
   static const route = '/register';
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -49,23 +47,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Color secondaryColor = Theme.of(context).colorScheme.secondary;
-
-    final dispatch = useDispatch<RootState>();
-
     Future<void> onSubmit() async {
       try {
         if (_formKey.currentState!.validate()) {
           setState(() {
             isLoading = true;
           });
-          await AuthAPI.register(
-              _usernameController.text.toString(),
-              _emailController.text.toString(),
-              _passwordController.text.toString());
-
-          final user = await UserAPI.getProfile();
-          dispatch(AddUserAction(payload: user));
+          await AuthAPI.register(UserRegisterDto(
+              name: _usernameController.text.toString(),
+              account: _emailController.text.toString(),
+              password: _passwordController.text.toString()));
 
           if (!mounted) return;
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);

@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart' show Dio, BaseOptions, InterceptorsWrapper;
-import 'package:disneymobile/APIs/auth.dart' show AuthAPI, Token;
+import 'package:disneymobile/apis/auth.dart' show AuthAPI;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 
 class API {
-  final BaseOptions options = BaseOptions(baseUrl: 'http://localhost:5000');
+  final BaseOptions options = BaseOptions(baseUrl: 'http://10.0.2.2:5000');
   late final Dio _dio;
 
   API() {
@@ -52,3 +54,32 @@ class API {
     return _dio;
   }
 }
+
+
+class Token {
+  static getAccessToken() async {
+    final session = await SharedPreferences.getInstance();
+    return session.getString('accessToken');
+  }
+
+  static setAccessToken(String token) async {
+    final session = await SharedPreferences.getInstance();
+    await session.setString('accessToken', token);
+  }
+
+  static getRefreshToken() async {
+    final session = await SharedPreferences.getInstance();
+    return session.getString('refreshToken');
+  }
+
+  static setRefreshToken(String token) async {
+    final session = await SharedPreferences.getInstance();
+    await session.setString('refreshToken', token);
+  }
+
+  static removeToken() async {
+    final session = await SharedPreferences.getInstance();
+    await session.clear();
+  }
+}
+
