@@ -9,3 +9,6 @@ class BeFriend {
     return BeFriend(id: json['id'], status: json['status']);
   }
 }
+
+
+// sua status thanh string 

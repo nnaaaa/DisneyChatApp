@@ -1,15 +1,17 @@
 import 'package:disneymobile/models/Channel.dart';
 
+import 'Guild.dart';
+
 class Category {
   final String categoryID;
   final String name;
-  final String guildID;
+  final Guild guild;
   List<Channel> channels;
   
   Category({
     required this.categoryID, 
     required this.name,
-    required this.guildID,
+    required this.guild,
     required this.channels
   });
 
@@ -19,8 +21,10 @@ class Category {
     return Category(
       categoryID: json['categoryID'], 
       name: json['name'],
-      guildID: json['guildID'],
+      guild: Guild.fromJson(json['guild']),
       channels: channels
     );
   }
 }
+
+// list channel

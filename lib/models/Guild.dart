@@ -1,4 +1,4 @@
-import 'package:disneymobile/models/GuildMember.dart';
+import 'package:disneymobile/models/Member.dart';
 import 'package:disneymobile/models/Category.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/models/Emoji.dart';
@@ -8,7 +8,7 @@ class Guild {
   String name;
   String? avatarUrl;
   List<Category>? categories;
-  List<GuildMember> members;
+  List<Member> members;
   List<Emoji>? emojis;
   Guild(
       {required this.guildID,
@@ -21,8 +21,7 @@ class Guild {
     var list1 = json['Categories'] as List;
     List<Category> categories = list1.map((i) => Category.fromJson(i)).toList();
     var list2 = json['members'] as List;
-    List<GuildMember> members =
-        list2.map((i) => GuildMember.fromJson(i)).toList();
+    List<Member> members = list2.map((i) => Member.fromJson(i)).toList();
     var list3 = json['emojis'] as List;
     List<Emoji> emojis = list3.map((i) => Emoji.fromJson(i)).toList();
     return Guild(
