@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/home/components/body.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import 'components/searchBar.dart';
 
@@ -21,13 +24,30 @@ class HomeScreen extends StatefulHookWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final controller = FloatingSearchBarController();
   late bool isLoading;
-  late int selectedIndex;
+  late bool isSearching;
+  int _index = 0;
+  int get index => _index;
+
+  set index(int value) {
+    _index = min(value, 1);
+    _index == 1 ? controller.hide() : controller.show();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     isLoading = false;
-    selectedIndex = 1;
+    isSearching = false;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -62,7 +82,16 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: buildAppbar(user?.avatarUrl),
       body: Stack(
         fit: StackFit.expand,
-        children: [const Body(), buildFloatingSearchBar(context)],
+        children: [
+          GestureDetector(
+            onTap: () {
+              controller.hide();
+            },
+            child: const Body(),
+          ),
+          // put your reaction bar here
+          buildFloatingSearchBar(context, controller)
+        ],
       ),
       bottomNavigationBar: buildBottomNavigationBar(),
     );
@@ -70,13 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
+      onTap: (value) => index = value,
+      currentIndex: index,
+      elevation: 16,
       type: BottomNavigationBarType.fixed,
-      currentIndex: selectedIndex,
-      onTap: (value) {
-        setState(() {
-          selectedIndex = value;
-        });
-      },
+      showUnselectedLabels: true,
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.blue,
+      selectedFontSize: 11.5,
+      unselectedFontSize: 11.5,
+      unselectedItemColor: const Color(0xFF4d4d4d),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
         BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
@@ -98,6 +130,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => print("personal profile"),
               )),
       actions: [
+        Builder(
+          builder: (context) => IconButton(
+              icon: isSearching
+                  ? Icon(Icons.search)
+                  : Icon(
+                      Icons.cancel,
+                    ),
+              onPressed: () {
+                (controller.isVisible) ? controller.hide() : controller.show();
+                setState(() {
+                  isSearching = !isSearching;
+                });
+              }),
+        ),
         Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.settings),

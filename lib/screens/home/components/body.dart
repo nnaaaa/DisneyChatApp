@@ -1,7 +1,8 @@
 import 'package:disneymobile/screens/home/components/chatCard.dart';
+import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import '../../message/message.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -10,13 +11,20 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
         padding: const EdgeInsets.only(top: 20.0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 5, crossAxisSpacing: 5),
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) {
-          return ChatCard(
-            press: () => print('$index'),
-          );
-        });
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: dumpChat.length,
+        itemBuilder: (context, index) => ChatCard(
+            chat: dumpChat[index],
+            press: () => [
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MessagesScreen(chat: dumpChat[index]),
+                    ),
+                  ),
+                  print('$context')
+                ]));
   }
 }
