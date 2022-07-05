@@ -1,4 +1,5 @@
 import 'package:disneymobile/models/BeFriend.dart';
+import 'package:disneymobile/models/Bot.dart';
 import 'package:disneymobile/models/Member.dart';
 
 class User {
@@ -10,7 +11,8 @@ class User {
   String? avatarUrl;
   final List<Member> joinedGuilds;
   final List<BeFriend> friends;
-
+  final List<Bot> createBots;
+  
   User(
       {required this.userId,
       required this.account,
@@ -19,7 +21,9 @@ class User {
       required this.isOnline,
       this.avatarUrl,
       required this.joinedGuilds,
-      required this.friends});
+      required this.friends,
+      required this.createBots,
+      });
 
   factory User.fromJson(Map<String, dynamic> data) {
     final userId = data['userId'] as String;
@@ -30,6 +34,7 @@ class User {
     final avatarUrl = data['avatarUrl'] as String;
     List<dynamic>? joinedGuildsJson = data['joinedGuilds'];
     List<dynamic>? friendsJson = data['friends'];
+    List<dynamic>? createBotsJson = data['createBots'];
 
     List<Member> joinedGuilds = [];
     if (joinedGuildsJson != null) {
@@ -41,6 +46,11 @@ class User {
       friends = friendsJson.map((i) => BeFriend.fromJson(i)).toList();
     }
 
+    List<Bot> createBots = [];
+    if (createBotsJson != null) {
+      createBots = createBotsJson.map((i) => Bot.fromJson(i)).toList();
+    }
+
     return User(
         userId: userId,
         account: account,
@@ -49,6 +59,7 @@ class User {
         isOnline: isOnline,
         avatarUrl: avatarUrl,
         joinedGuilds: joinedGuilds,
-        friends: friends);
+        friends: friends,
+        createBots: createBots);
   }
 }

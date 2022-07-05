@@ -1,12 +1,11 @@
 import 'package:disneymobile/models/Channel.dart';
-
 import 'Guild.dart';
 
 class Category {
   final String categoryID;
   final String name;
   final Guild guild;
-  List<Channel> channels;
+  final List<Channel> channels;
   
   Category({
     required this.categoryID, 
@@ -16,8 +15,13 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    var channelsJson = json['channels'] as List;
-    List<Channel> channels = channelsJson.map((i)=>Channel.fromJson(i)).toList();
+    List<dynamic>? channelsJson = json['channels'];
+
+    List<Channel> channels = [];
+    if (channelsJson != null) {
+      channels = channelsJson.map((i) => Channel.fromJson(i)).toList();
+    }
+
     return Category(
       categoryID: json['categoryID'], 
       name: json['name'],
@@ -26,5 +30,3 @@ class Category {
     );
   }
 }
-
-// list channel

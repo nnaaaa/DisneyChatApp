@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
 class API {
+  //final BaseOptions options = BaseOptions(baseUrl: 'http://10.0.2.2:5000');
   final BaseOptions options = BaseOptions(baseUrl: dotenv.env['SERVER_HOST']);
   late final Dio _dio;
-
   API() {
     _dio = Dio(options);
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options) async {
@@ -56,7 +56,6 @@ class API {
   }
 }
 
-
 class Token {
   static getAccessToken() async {
     final session = await SharedPreferences.getInstance();
@@ -83,4 +82,3 @@ class Token {
     await session.clear();
   }
 }
-
