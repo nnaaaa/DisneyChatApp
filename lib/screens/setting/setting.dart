@@ -4,7 +4,8 @@ import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
-import 'package:disneymobile/screens/setting/myaccount.dart';
+import 'package:disneymobile/screens/setting/component/buildMenuItem.dart';
+import 'package:disneymobile/screens/setting/component/myaccount.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/styles/color.dart';
@@ -33,11 +34,13 @@ class _SettingScreenState extends State<SettingScreen> {
     isLoading = true;
   }
 
+  void selectedItem(BuildContext context, int index){}
+  
   final name = 'phatpham';
   final email = 'phatpham0406@gmail.com';
   final urlImagee =
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80';
-  final padding = EdgeInsets.symmetric(horizontal: 0);
+  static const padding = EdgeInsets.symmetric(horizontal: 0);
   //final padding = const EdgeInsets.all(20);
   @override
   Widget build(BuildContext context) {
@@ -50,10 +53,10 @@ class _SettingScreenState extends State<SettingScreen> {
         child: ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(20, 16, 0, 0),
+              padding: const EdgeInsets.fromLTRB(20, 16, 0, 0),
               height: 50,
               color: CustomColor.bluemagenta,
-              child: Text(
+              child: const Text(
                 'USER SETTINGS',
                 style: TextStyle(
                   fontSize: 15,
@@ -69,14 +72,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: Colors.black12,
                 ),
                 Container(
-                  // profile color
                   height: 70,
                   alignment: Alignment.bottomCenter,
                   color: CustomColor.darkblue,
                 ),
                 Container(
                   padding: padding
-                      .add(EdgeInsets.symmetric(vertical: 40, horizontal: 20)),
+                      .add(const EdgeInsets.symmetric(vertical: 40, horizontal: 20)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -89,7 +91,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Text(
                         textAlign: TextAlign.justify,
                         name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -101,7 +103,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ],
             ),
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding:const EdgeInsets.only(left: 20),
               child: const Text(
                 'USER SETTINGS',
                 style: TextStyle(
@@ -151,103 +153,5 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       ),
     );
-  }
-
-  Widget buildHeader({
-    required String urlImage,
-    required String name,
-    required String email,
-    required VoidCallback onClicked,
-  }) =>
-      InkWell(
-        onTap: onClicked,
-        child: Container(
-          padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
-          child: Row(
-            children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    email,
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ],
-              ),
-              Spacer(),
-              CircleAvatar(
-                radius: 24,
-                backgroundColor: Color.fromRGBO(30, 60, 168, 1),
-                child: Icon(Icons.add_comment_outlined, color: Colors.white),
-              )
-            ],
-          ),
-        ),
-      );
-
-  Widget buildMenuItem({
-    required String text,
-    required IconData icon,
-    VoidCallback? onClicked,
-  }) {
-    final color = Colors.white;
-    return ListTile(
-      leading: Icon(icon, color: color),
-      title: Text(text, style: TextStyle(fontSize: 20, color: color)),
-      onTap: onClicked,
-    );
-  }
-
-  void selectedItem(BuildContext context, int index) {
-    Navigator.of(context).pop();
-    switch (index) {
-      case 0: // Dark mode
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImagee,
-          ),
-        ));
-        break;
-      case 1: // Set status(online, idle, do not disturb,..)
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImagee,
-          ),
-        ));
-        break;
-      case 2: // my account
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImagee,
-          ),
-        ));
-        break;
-      case 3: // user profile
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImagee,
-          ),
-        ));
-        break;
-      case 4: // log out
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImagee,
-          ),
-        ));
-        break;
-    }
   }
 }
