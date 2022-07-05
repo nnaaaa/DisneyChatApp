@@ -2,6 +2,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;
 import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
@@ -51,12 +52,14 @@ class DisneyChat extends HookWidget {
           locale: DevicePreview.locale(context),
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-          routes: {
+          /* routes: {
             HomeScreen.route: (context) => const HomeScreen(),
             AuthScreen.route: (context) => const AuthScreen(),
             RegisterScreen.route: (context) => const RegisterScreen(),
             LoginScreen.route: (context) => const LoginScreen(),
-          });
+          } */
+          home: const SettingScreen(),
+          );
     });
   }
 }

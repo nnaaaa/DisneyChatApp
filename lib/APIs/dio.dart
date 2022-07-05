@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
 class API {
-  //final BaseOptions options = BaseOptions(baseUrl: 'http://10.0.2.2:5000');
+  // final BaseOptions options = BaseOptions(baseUrl: 'http://10.0.2.2:5000');
   final BaseOptions options = BaseOptions(baseUrl: dotenv.env['SERVER_HOST']);
   late final Dio _dio;
   API() {
