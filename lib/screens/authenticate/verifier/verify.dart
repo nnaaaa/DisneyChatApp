@@ -3,8 +3,12 @@ import './component/input_digit_code.dart';
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/widgets/icon.dart';
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 
-class VerifyScreen extends StatefulWidget {
+class VerifyScreen extends StatefulHookWidget {
+  static const route = '/verify';
+
   VerifyScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +24,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
   final TextEditingController _codeSix = TextEditingController();
 
   String? _digitCode;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

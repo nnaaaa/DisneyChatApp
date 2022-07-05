@@ -43,6 +43,11 @@ class AuthAPI {
         data: {'name': username, 'account': email, 'password': password});
   }
 
+  static Future<Response> verify(String email, String digit) async {
+    return await API().getPortal().post('$baseRoute/verify',
+        data: {'account': email, 'digitCode': digit});
+  }
+
   static Future<Response> refreshToken(String refreshToken) async {
     return await API()
         .getPortal()

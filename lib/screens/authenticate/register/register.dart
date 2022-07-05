@@ -1,5 +1,6 @@
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
+import '../verifier/verify.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -49,8 +50,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Color secondaryColor = Theme.of(context).colorScheme.secondary;
-
     final dispatch = useDispatch<RootState>();
 
     Future<void> onSubmit() async {
@@ -102,7 +101,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     placeholder: 'Name',
                     controller: _usernameController,
                     onValidate: Validator.getTextValidator(),
-                    autofocus: true,
                   ),
                 ),
                 Container(
@@ -134,6 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                       return null;
                     },
+                    textinputaction: false,
                     placeholder: 'Confirm',
                     controller: _confirmController,
                     obscure: true,
