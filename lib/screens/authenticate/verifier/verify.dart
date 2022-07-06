@@ -11,7 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 class VerifyScreen extends StatefulHookWidget {
   static const route = '/verify';
 
-  VerifyScreen({Key? key}) : super(key: key);
+  const VerifyScreen({Key? key}) : super(key: key);
 
   @override
   State<VerifyScreen> createState() => _VerifyScreenState();
@@ -35,7 +35,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
     Future<void> onSubmit() async {
       try {
         await AuthAPI.verify(email, _digitCode as String);
-
         if (!mounted) return;
         Navigator.of(context).pushReplacementNamed(HomeScreen.route);
       } catch (e) {
@@ -69,10 +68,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
               bottom: ResponsiveUtil.height(40),
             ),
             child: Text(
-              'Enter the 6-digit code sent to your gmail: \n .... help: get profile and add',
+              'Enter the 6-digit code sent to your gmail: $email',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: ResponsiveUtil.getResponsiveFontSize(14),
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -94,8 +93,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
             text: 'Verify',
             width: ResponsiveUtil.width(300),
             onPress: () {
-              _digitCode =
-                  '${_codeOne.text}${_codeTwo.text}${_codeThree.text}${_codeFour.text}${_codeFive.text}${_codeSix.text}';
+              setState(() {
+                _digitCode = _codeOne.text +
+                    _codeTwo.text +
+                    _codeThree.text +
+                    _codeFour.text +
+                    _codeFive.text +
+                    _codeSix.text;
+              });
               onSubmit();
               print(_digitCode);
             },
