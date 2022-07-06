@@ -40,18 +40,6 @@ class AuthScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // Container(
-              //   margin: const EdgeInsets.only(top: 18),
-              //   child: CustomButton(
-              //     text: 'Choose color',
-              //     onPress: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => const CustomTheme()));
-              //     },
-              //   ),
-              // )
             ],
           ),
         ),

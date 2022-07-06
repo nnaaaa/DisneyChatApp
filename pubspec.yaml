@@ -57,9 +57,6 @@ dependencies:
   form_validator: ^1.0.2
 
 dev_dependencies:
-  # responsive
-  device_preview: ^1.0.0
-
   flutter_test:
     sdk: flutter
 

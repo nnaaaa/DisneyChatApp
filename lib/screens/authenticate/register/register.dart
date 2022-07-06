@@ -1,5 +1,6 @@
-import 'package:disneymobile/apis/auth.dart';
-import 'package:disneymobile/apis/user.dart';
+import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/APIs/user.dart';
+import '../verifier/verify.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -59,7 +60,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               password: _passwordController.text.toString()));
 
           if (!mounted) return;
-          Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+          Navigator.of(context).pushReplacementNamed(VerifyScreen.route,
+              arguments: _emailController.text.toString());
         }
       } catch (e) {
         print('$e');
@@ -93,7 +95,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     placeholder: 'Name',
                     controller: _usernameController,
                     onValidate: Validator.getTextValidator(),
-                    autofocus: true,
                   ),
                 ),
                 Container(
@@ -125,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                       return null;
                     },
+                    textinputaction: false,
                     placeholder: 'Confirm',
                     controller: _confirmController,
                     obscure: true,

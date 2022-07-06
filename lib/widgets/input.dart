@@ -9,6 +9,7 @@ class CustomTextInput extends StatelessWidget {
   String? errorText;
   final TextInputType keyboardType;
   final bool autofocus;
+  final bool textinputaction;
   late String? Function(String?)? onValidate;
 
   CustomTextInput(
@@ -18,6 +19,7 @@ class CustomTextInput extends StatelessWidget {
       this.obscure = false,
       this.keyboardType = TextInputType.text,
       this.autofocus = false,
+      this.textinputaction = true,
       this.onValidate}) {
     onValidate ??= (value) {
       if (value == null || value.isEmpty) {
@@ -32,7 +34,7 @@ class CustomTextInput extends StatelessWidget {
       validator: onValidate,
       controller: controller,
       obscureText: obscure,
-      autofocus: autofocus,
+      // autofocus: autofocus,
       keyboardType: keyboardType,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 10),
@@ -40,7 +42,8 @@ class CustomTextInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8)),
           hintText: placeholder,
           hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-          errorText: errorText),
+          errorText: errorText), 
+      textInputAction: textinputaction ? TextInputAction.next : TextInputAction.done,
     );
   }
 }

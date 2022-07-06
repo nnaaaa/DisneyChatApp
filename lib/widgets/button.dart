@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   Color? textColor;
   final Function onPress;
+  final width;
 
   CustomButton({
     Key? key,
@@ -16,6 +17,7 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     required this.onPress,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class CustomButton extends StatelessWidget {
       onPressed: () => onPress(),
       child: Container(
         padding: const EdgeInsets.all(16),
+        width: width ?? ResponsiveUtil.width(400),
         child: Center(
           child: Text(
             text.toUpperCase(),

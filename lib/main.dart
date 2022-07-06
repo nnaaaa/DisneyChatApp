@@ -2,6 +2,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/screens/authenticate/verifier/verify.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;
 import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
@@ -10,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:redux_toolkit/redux_toolkit.dart' show configureStore;
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show StoreProvider, useDispatch;
@@ -25,12 +25,9 @@ void main() async {
     },
   );
   runApp(ChangeNotifierProvider<ThemeNotifier>(
-    child: DevicePreview(
-      enabled: true,
-      builder: (context) => StoreProvider<RootState>(
-        store: store,
-        child: const DisneyChat(),
-      ),
+    child: StoreProvider<RootState>(
+      store: store,
+      child: const DisneyChat(),
     ),
     create: (_) => ThemeNotifier(mainTheme),
   ));
@@ -47,8 +44,6 @@ class DisneyChat extends HookWidget {
       return MaterialApp(
           title: 'Disney',
           theme: themeNotifier.getTheme(),
-          builder: DevicePreview.appBuilder,
-          locale: DevicePreview.locale(context),
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           routes: {
@@ -56,6 +51,7 @@ class DisneyChat extends HookWidget {
             AuthScreen.route: (context) => const AuthScreen(),
             RegisterScreen.route: (context) => const RegisterScreen(),
             LoginScreen.route: (context) => const LoginScreen(),
+            VerifyScreen.route:(context) => VerifyScreen(),
           });
     });
   }
