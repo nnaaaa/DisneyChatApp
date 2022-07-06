@@ -1,4 +1,3 @@
-
 import 'package:disneymobile/apis/auth.dart';
 import 'package:disneymobile/screens/authenticate/login/google.dart';
 import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
@@ -132,8 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      onTap: () {
-                      },
+                      onTap: () {},
                     )),
                 //list login by gmail, facebook, twitter
                 Container(
@@ -142,8 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          margin:
-                              EdgeInsets.only(right: ResponsiveUtil.width(10)),
+                          margin: EdgeInsets.only(right: ResponsiveUtil.width(5)),
                           child: GoogleAuth()),
                       Container(
                           margin:
