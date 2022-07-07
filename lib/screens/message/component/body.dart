@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
     return Column(children: [
       Expanded(
         child: ListView.builder(
-          itemCount: chat.messages?.length,
+          itemCount: chat.messages?.length ?? 0,
           itemBuilder: (context, index) =>
               Message(avatarUrl: chat.imageUrl, message: chat.messages![index]),
         ),

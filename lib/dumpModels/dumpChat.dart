@@ -49,7 +49,7 @@ List dumpChat = [
       ),
     ],
     name: "Emma Waston",
-    lastMessage: "Hello Duc! I am...",
+    lastMessage: "I love you my bae",
     imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/7/71/Emma_Watson_in_the_Bag.jpg",
     time: "8m ago",

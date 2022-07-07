@@ -1,4 +1,5 @@
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'component/body.dart';
@@ -22,20 +23,20 @@ class MessagesScreen extends StatelessWidget {
       automaticallyImplyLeading: false,
       title: Row(
         children: [
-          BackButton(),
-          CircleAvatar(
-            backgroundImage: NetworkImage(chat.imageUrl),
-          ),
+          const BackButton(),
+          Avatar(profile: chat),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 chat.name,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 chat.time,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               )
             ],
           )
@@ -43,11 +44,11 @@ class MessagesScreen extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.local_phone),
+          icon: const Icon(Icons.local_phone),
           onPressed: () {},
         ),
         IconButton(
-          icon: Icon(Icons.videocam),
+          icon: const Icon(Icons.videocam),
           onPressed: () {},
         ),
       ],

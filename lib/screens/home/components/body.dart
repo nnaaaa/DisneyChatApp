@@ -24,7 +24,6 @@ class Body extends StatelessWidget {
                           MessagesScreen(chat: dumpChat[index]),
                     ),
                   ),
-                  print('$context')
                 ]));
   }
 }

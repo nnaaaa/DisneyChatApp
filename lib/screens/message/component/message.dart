@@ -24,22 +24,25 @@ class Message extends StatelessWidget {
       }
     }
 
-    return Row(
-        mainAxisAlignment: message?.isSender == true
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
-        children: [
-          // ignore: unnecessary_null_comparison
-          if (message?.isSender != true) ...[
-            CircleAvatar(
-              radius: 12,
-              backgroundImage: NetworkImage(avatarUrl),
-            ),
-          ],
-          messageContaint(message!),
-          if (message!.isSender)
-            MessageStatusDot(status: message?.messageStatus)
-        ]);
+    return Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: Row(
+            mainAxisAlignment: message?.isSender == true
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
+            children: [
+              // ignore: unnecessary_null_comparison
+              if (message?.isSender != true) ...[
+                CircleAvatar(
+                  radius: 12,
+                  backgroundImage: NetworkImage(avatarUrl),
+                ),
+                SizedBox(width: 20.0 / 2),
+              ],
+              messageContaint(message!),
+              if (message!.isSender)
+                MessageStatusDot(status: message?.messageStatus)
+            ]));
   }
 }
 
@@ -63,6 +66,7 @@ class MessageStatusDot extends StatelessWidget {
     }
 
     return Container(
+      margin: EdgeInsets.only(left: 20.0 / 2),
       height: 12,
       width: 12,
       decoration: BoxDecoration(

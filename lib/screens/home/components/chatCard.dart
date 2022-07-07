@@ -1,4 +1,5 @@
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
 class ChatCard extends StatelessWidget {
@@ -17,30 +18,7 @@ class ChatCard extends StatelessWidget {
       onTap: press,
       child: Column(
         children: [
-          Stack(
-            children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(chat.imageUrl),
-              ),
-              if (chat.isActive)
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    height: 16,
-                    width: 16,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF00BF6D),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          width: 3),
-                    ),
-                  ),
-                )
-            ],
-          ),
+          Avatar(profile: chat),
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Column(

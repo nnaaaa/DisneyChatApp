@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/home/components/body.dart';
+import 'package:disneymobile/screens/home/components/chats.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'components/searchBar.dart';
 
@@ -24,23 +26,22 @@ class HomeScreen extends StatefulHookWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final controller = FloatingSearchBarController();
+  late Widget _myChats;
+  late Widget _myFriends;
+  late final controller;
   late bool isLoading;
   late bool isSearching;
-  int _index = 0;
-  int get index => _index;
-
-  set index(int value) {
-    _index = min(value, 1);
-    _index == 1 ? controller.hide() : controller.show();
-    setState(() {});
-  }
+  late int _page;
 
   @override
   void initState() {
     super.initState();
+    controller = FloatingSearchBarController();
     isLoading = false;
     isSearching = false;
+    _page = 0;
+    _myChats = Chats(controller: controller);
+    _myFriends = Chats(controller: controller);
   }
 
   @override
@@ -80,39 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: buildAppbar(user?.avatarUrl),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          GestureDetector(
-            onTap: () {
-              controller.hide();
-            },
-            child: const Body(),
-          ),
-          // put your reaction bar here
-          buildFloatingSearchBar(context, controller)
-        ],
-      ),
+      body: getBody(),
       bottomNavigationBar: buildBottomNavigationBar(),
+      extendBody: true,
     );
   }
 
-  BottomNavigationBar buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      onTap: (value) => index = value,
-      currentIndex: index,
-      elevation: 16,
-      type: BottomNavigationBarType.fixed,
-      showUnselectedLabels: true,
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.blue,
-      selectedFontSize: 11.5,
-      unselectedFontSize: 11.5,
-      unselectedItemColor: const Color(0xFF4d4d4d),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
-        BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
+  CurvedNavigationBar buildBottomNavigationBar() {
+    return CurvedNavigationBar(
+      index: _page,
+      height: 60.0,
+      items: const <Widget>[
+        Icon(Icons.messenger, size: 30),
+        Icon(Icons.people, size: 30),
       ],
+      color: Color.fromARGB(255, 68, 162, 255),
+      buttonBackgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
+      animationCurve: Curves.easeInOut,
+      animationDuration: Duration(milliseconds: 600),
+      onTap: (index) {
+        setState(() {
+          _page = index;
+        });
+      },
     );
   }
 
@@ -133,8 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
         Builder(
           builder: (context) => IconButton(
               icon: isSearching
-                  ? Icon(Icons.search)
-                  : Icon(
+                  ? const Icon(Icons.search)
+                  : const Icon(
                       Icons.cancel,
                     ),
               onPressed: () {
@@ -152,5 +144,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
+  }
+
+  Widget getBody() {
+    if (_page == 0) {
+      return _myChats;
+    } else {
+      return Container();
+    }
   }
 }

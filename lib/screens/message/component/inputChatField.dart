@@ -38,7 +38,7 @@ class ChatInputField extends StatelessWidget {
                           .color!
                           .withOpacity(0.64),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: "Type message",
@@ -62,6 +62,10 @@ class ChatInputField extends StatelessWidget {
                           .color!
                           .withOpacity(0.64),
                     ),
+                    Icon(
+                      Icons.send,
+                      color: Color(0xFF00BF6D).withOpacity(0.64),
+                    )
                   ],
                 ),
               ),
