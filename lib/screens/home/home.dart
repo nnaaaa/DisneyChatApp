@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/home/components/body.dart';
-import 'package:disneymobile/screens/home/components/chats.dart';
+import 'package:disneymobile/screens/home/components/friends.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
     isLoading = false;
     isSearching = false;
     _page = 0;
-    _myChats = Chats(controller: controller);
-    _myFriends = Chats(controller: controller);
+    _myChats = const Body();
+    _myFriends = const Friends();
   }
 
   @override
@@ -81,7 +81,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: buildAppbar(user?.avatarUrl),
-      body: getBody(),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          GestureDetector(
+            onTap: () {
+              controller.hide();
+            },
+            child: getBody(),
+          ),
+          buildFloatingSearchBar(context, controller)
+        ],
+      ),
       bottomNavigationBar: buildBottomNavigationBar(),
       extendBody: true,
     );
@@ -124,11 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         Builder(
           builder: (context) => IconButton(
-              icon: isSearching
-                  ? const Icon(Icons.search)
-                  : const Icon(
-                      Icons.cancel,
-                    ),
+              icon: getIcon(),
               onPressed: () {
                 (controller.isVisible) ? controller.hide() : controller.show();
                 setState(() {
@@ -146,11 +153,22 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget getIcon() {
+    if (_page == 0) {
+      return isSearching
+          ? const Icon(Icons.search)
+          : const Icon(
+              Icons.cancel,
+            );
+    }
+    return const Icon(Icons.contacts);
+  }
+
   Widget getBody() {
     if (_page == 0) {
       return _myChats;
     } else {
-      return Container();
+      return _myFriends;
     }
   }
 }
