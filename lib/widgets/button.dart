@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/responsive.dart';
+import './CustomTheme/theme_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 class CustomButton extends StatelessWidget {
   Color? backgroundColor;
   final String text;
   Color? textColor;
   final Function onPress;
+  final width;
 
   CustomButton({
     Key? key,
@@ -11,25 +17,20 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     required this.onPress,
+    this.width,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        
       onPressed: () => onPress(),
-      style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(backgroundColor ?? Theme.of(context).colorScheme.secondary),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)))),
       child: Container(
         padding: const EdgeInsets.all(16),
+        width: width ?? ResponsiveUtil.width(400),
         child: Center(
           child: Text(
             text.toUpperCase(),
             style: TextStyle(
-                fontFamily: 'Poppins',
                 color: textColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 16),

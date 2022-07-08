@@ -1,5 +1,5 @@
 import 'package:disneymobile/models/Guild.dart';
-import 'package:disneymobile/screens/home/components/body.dart';
+import 'package:disneymobile/screens/home/components/chatBody.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 

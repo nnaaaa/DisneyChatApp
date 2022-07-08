@@ -17,3 +17,4 @@ class Emoji {
         guildID: json['guildID']);
   }
 }
+// sua guild 

@@ -1,5 +1,6 @@
-import 'package:disneymobile/screens/authenticate/login/login.dart';
+import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/icon.dart';
 import 'package:flutter/material.dart';
 import 'package:disneymobile/widgets/button.dart';
@@ -11,37 +12,36 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = Theme.of(context).colorScheme.primary;
-
     return Scaffold(
       //add row here to make it responsive to screen size and orientation change
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const IconWidget(),
-            Container(
-              margin: const EdgeInsets.only(top: 18),
-              child: CustomButton(
-                backgroundColor: primaryColor,
-                text: 'Login',
-                onPress: () {
-                  Navigator.of(context).pushNamed(LoginScreen.route);
-                },
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const IconWidget(),
+              Container(
+                margin: EdgeInsets.only(top: ResponsiveUtil.height(15)),
+                child: CustomButton(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  text: 'Login',
+                  onPress: () {
+                    Navigator.pushNamed(context, LoginScreen.route);
+                  },
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 18),
-              child: CustomButton(
-                text: 'Register',
-                onPress: () {
-                  Navigator.of(context)
-                      .pushNamed(RegisterScreen.route);
-                },
+              Container(
+                margin: EdgeInsets.only(top: ResponsiveUtil.height(15)),
+                child: CustomButton(
+                  text: 'Register',
+                  onPress: () {
+                    Navigator.pushNamed(context, RegisterScreen.route);
+                  },
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

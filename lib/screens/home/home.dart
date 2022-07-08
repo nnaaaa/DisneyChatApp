@@ -1,12 +1,13 @@
-import 'dart:math';
-
+import 'package:disneymobile/apis/dio.dart' show Token;
+import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
-import 'package:disneymobile/screens/home/components/body.dart';
-import 'package:disneymobile/screens/home/components/friends.dart';
+import 'package:disneymobile/screens/home/components/chatBody.dart';
+import 'package:disneymobile/screens/home/components/friendBody.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
+import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
@@ -28,7 +29,7 @@ class HomeScreen extends StatefulHookWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late Widget _myChats;
   late Widget _myFriends;
-  late final controller;
+  final controller = FloatingSearchBarController();
   late bool isLoading;
   late bool isSearching;
   late int _page;
@@ -36,12 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    controller = FloatingSearchBarController();
     isLoading = false;
     isSearching = false;
     _page = 0;
-    _myChats = const Body();
-    _myFriends = const Friends();
+    _myChats = const ChatBody();
+    _myFriends = const FriendBody();
   }
 
   @override
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Icon(Icons.messenger, size: 30),
         Icon(Icons.people, size: 30),
       ],
-      color: Color.fromARGB(255, 68, 162, 255),
+      color: mainPrimary,
       buttonBackgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       animationCurve: Curves.easeInOut,
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar buildAppbar(profileUrl) {
     return AppBar(
       centerTitle: true,
-      title: const Text('Chats'),
+      title: _page == 0 ? const Text('Chats') : const Text('Online Friends'),
       leading: Builder(
           builder: (context) => IconButton(
                 icon: CircleAvatar(
@@ -156,9 +156,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getIcon() {
     if (_page == 0) {
       return isSearching
-          ? const Icon(Icons.search)
+          ? const Icon(Icons.cancel)
           : const Icon(
-              Icons.cancel,
+              Icons.search,
             );
     }
     return const Icon(Icons.contacts);
