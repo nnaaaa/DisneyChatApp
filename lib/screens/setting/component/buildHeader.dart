@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:disneymobile/screens/setting/component/myaccount.dart';
+import 'package:disneymobile/screens/setting/component/myAccount.dart';
+import 'package:disneymobile/screens/setting/component/setStatus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -53,49 +54,4 @@ class buildHeader extends StatelessWidget {
     );
   }
 
-  void selectedItem(BuildContext context, int index) {
-    Navigator.of(context).pop();
-    switch (index) {
-      case 0: // Dark mode
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        ));
-        break;
-      case 1: // Set status(online, idle, do not disturb,..)
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        ));
-        break;
-      case 2: // My account
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        ));
-        break;
-      case 3: // user profile
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        ));
-        break;
-      case 4: // log out
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        ));
-        break;
-    }
-  }
 }

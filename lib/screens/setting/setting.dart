@@ -1,11 +1,13 @@
 import 'dart:ui';
+import 'package:bottom_drawer/bottom_drawer.dart';
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/screens/setting/component/buildMenuItem.dart';
-import 'package:disneymobile/screens/setting/component/myaccount.dart';
+import 'package:disneymobile/screens/setting/component/myAccount.dart';
+import 'package:disneymobile/screens/setting/component/setStatus.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/styles/color.dart';
@@ -34,12 +36,10 @@ class _SettingScreenState extends State<SettingScreen> {
     isLoading = true;
   }
 
-  void selectedItem(BuildContext context, int index){}
-  
-  final name = 'phatpham';
+  final name = 'phatphammm';
   final email = 'phatpham0406@gmail.com';
-  final urlImagee =
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80';
+  final urlImage =
+      'https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2021/03/d2ea8e0b-cho-husky-sibir.jpg';
   static const padding = EdgeInsets.symmetric(horizontal: 0);
   //final padding = const EdgeInsets.all(20);
   @override
@@ -47,6 +47,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final user = useSelector<RootState, User?>((state) => state.user);
     final dispatch = useDispatch<RootState>();
 
+    Color colorIcon = Colors.white;
     return Drawer(
       child: Material(
         color: CustomColor.mainPrimary,
@@ -77,15 +78,15 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: CustomColor.darkblue,
                 ),
                 Container(
-                  padding: padding
-                      .add(const EdgeInsets.symmetric(vertical: 40, horizontal: 20)),
+                  padding: padding.add(
+                      const EdgeInsets.symmetric(vertical: 40, horizontal: 20)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircleAvatar(
                         radius: 39,
                         backgroundColor: CustomColor.bluemagenta,
-                        child: Avatar(profile: urlImagee),
+                        child: Avatar(profile: urlImage),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -103,7 +104,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ],
             ),
             Container(
-              padding:const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: const Text(
                 'USER SETTINGS',
                 style: TextStyle(
@@ -113,45 +114,73 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  const SizedBox(height: 12),
-                  buildMenuItem(
-                    text: 'Dark mode',
-                    icon: Icons.dark_mode,
-                    onClicked: () => selectedItem(context, 0),
-                  ),
-                  const SizedBox(height: 12),
-                  buildMenuItem(
-                    text: 'Set status',
-                    icon: Icons.nights_stay_sharp,
-                    onClicked: () => selectedItem(context, 1),
-                  ),
-                  const SizedBox(height: 12),
-                  buildMenuItem(
-                    text: 'My account',
-                    icon: Icons.account_circle,
-                    onClicked: () => selectedItem(context, 2),
-                  ),
-                  const SizedBox(height: 12),
-                  buildMenuItem(
-                    text: 'User profile',
-                    icon: Icons.edit_rounded,
-                    onClicked: () => selectedItem(context, 3),
-                  ),
-                  const SizedBox(height: 12),
-                  buildMenuItem(
-                    text: 'Log out',
-                    icon: Icons.logout,
-                    onClicked: () => selectedItem(context, 4),
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                const SizedBox(height: 12),
+                buildMenuItem(
+                  text: 'Dark mode',
+                  color: colorIcon,
+                  fontSize: 20,
+                  icon: Icons.dark_mode,
+                  onClicked: () => selectedItem(context, 0),
+                ),
+                const SizedBox(height: 12),
+                const SetStatus(),
+                const SizedBox(height: 12),
+                buildMenuItem(
+                  text: 'My account',
+                  fontSize: 20,
+                  color: colorIcon,
+                  icon: Icons.account_circle,
+                  onClicked: () => selectedItem(context, 2),
+                ),
+                const SizedBox(height: 12),
+                buildMenuItem(
+                  text: 'User profile',
+                  fontSize: 20,
+                  color: colorIcon,
+                  icon: Icons.edit_rounded,
+                  onClicked: () => selectedItem(context, 3),
+                ),
+                const SizedBox(height: 12),
+                buildMenuItem(
+                  text: 'Log out',
+                  fontSize: 20,
+                  color: colorIcon,
+                  icon: Icons.logout,
+                  onClicked: () => selectedItem(context, 4),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  void selectedItem(BuildContext context, int index) {
+    // Navigator.of(context).pop();
+    switch (index) {
+      case 0: // Dark mode
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => MyAccount(
+            name: name,
+            urlImage: urlImage,
+          ),
+        ));
+        break;
+      case 1: // Set status(online, idle, do not disturb,..)
+
+        break;
+      case 2: // My account
+
+        break;
+      case 3: // User profile
+
+        break;
+      case 4: // log out
+
+        break;
+    }
   }
 }

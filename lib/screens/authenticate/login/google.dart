@@ -1,13 +1,10 @@
 import 'package:disneymobile/apis/auth.dart';
-import 'package:disneymobile/models/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/styles/responsive.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:google_sign_in/google_sign_in.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:dio/dio.dart' show DioError;
 
 class GoogleAuth extends StatelessWidget {
