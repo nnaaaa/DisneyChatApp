@@ -4,7 +4,6 @@ import 'buildMenuItem.dart';
 
 class SetStatus extends StatelessWidget {
   const SetStatus({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Future<void> showmenu() async {
