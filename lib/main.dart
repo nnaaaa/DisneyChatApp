@@ -42,17 +42,18 @@ class DisneyChat extends HookWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-          title: 'Disney',
-          theme: themeNotifier.getTheme(),
-          useInheritedMediaQuery: true,
-          debugShowCheckedModeBanner: false,
-          routes: {
-            HomeScreen.route: (context) => const HomeScreen(),
-            AuthScreen.route: (context) => const AuthScreen(),
-            RegisterScreen.route: (context) => const RegisterScreen(),
-            LoginScreen.route: (context) => const LoginScreen(),
-            VerifyScreen.route:(context) => VerifyScreen(),
-          });
+        title: 'Disney',
+        theme: themeNotifier.getTheme(),
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        routes: {
+          AuthScreen.route: (context) => const AuthScreen(),
+          LoginScreen.route: (context) => const LoginScreen(),
+          RegisterScreen.route: (context) => const RegisterScreen(),
+          VerifyScreen.route: (context) => const VerifyScreen(),
+          HomeScreen.route: (context) => const HomeScreen(),
+        }
+      );
     });
   }
 }
