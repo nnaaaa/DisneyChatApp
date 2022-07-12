@@ -2,9 +2,11 @@ import 'package:disneymobile/apis/dio.dart' show Token;
 import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
+import 'package:disneymobile/screens/listChannel/list_channel.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
+import 'package:disneymobile/screens/listChannel/list_channel.dart';
 
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
@@ -99,9 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: const Drawer(
-          child: Center(
-        child: Text('Guilds'),
-      )),
+        child: ListChannel(),
+      ),
       endDrawer: const Drawer(
           child: Center(
         child: Text('Members'),

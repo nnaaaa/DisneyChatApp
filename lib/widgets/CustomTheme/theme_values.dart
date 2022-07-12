@@ -3,7 +3,7 @@ import 'package:disneymobile/styles/responsive.dart';
 
 /// ----  main Theme  ----
 final mainPrimary = Color(0xFF6768AB);
-final mainAccent = Color.fromARGB(127, 241, 239, 239);
+final mainAccent = Color.fromARGB(42, 241, 239, 239);
 final mainBackground = Color.fromRGBO(255, 255, 255, 1);
 final mainTheme = ThemeData(
     primaryColor: mainPrimary,

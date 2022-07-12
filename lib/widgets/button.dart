@@ -24,6 +24,10 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () => onPress(),
+      style: ElevatedButton.styleFrom(
+        primary: backgroundColor ?? Theme.of(context).primaryColor,
+        animationDuration: const Duration(milliseconds: 500),
+      ),
       child: Container(
         padding: const EdgeInsets.all(16),
         width: width ?? ResponsiveUtil.width(400),
