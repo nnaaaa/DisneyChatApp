@@ -1,4 +1,5 @@
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +15,12 @@ class FriendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const kDefaultPadding = 20.0;
-
     return InkWell(
       onTap: press,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPadding, vertical: kDefaultPadding * 0.75),
+            horizontal: ResponsiveUtil.height(20),
+            vertical: ResponsiveUtil.width(20 * 0.75)),
         child: Row(
           children: [
             Stack(
@@ -28,14 +28,16 @@ class FriendCard extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                padding:
+                    EdgeInsets.symmetric(horizontal: ResponsiveUtil.height(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       chat.name,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: ResponsiveUtil.getResponsiveFontSize(16),
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),

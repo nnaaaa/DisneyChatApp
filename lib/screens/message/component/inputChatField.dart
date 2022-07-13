@@ -21,7 +21,6 @@ class ChatInputField extends StatelessWidget {
       child: SafeArea(
         child: Row(
           children: [
-            Icon(Icons.mic, color: Color(0xFF00BF6D)),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
