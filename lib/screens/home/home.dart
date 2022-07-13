@@ -15,7 +15,6 @@ import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-
 import 'components/searchBar.dart';
 
 class HomeScreen extends StatefulHookWidget {
@@ -46,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controller.dispose();
   }
@@ -110,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
       buttonBackgroundColor: Colors.white,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       animationCurve: Curves.easeInOut,
-      animationDuration: Duration(milliseconds: 600),
+      animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {
         setState(() {
           _page = index;

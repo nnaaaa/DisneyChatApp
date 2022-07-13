@@ -3,7 +3,7 @@ import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
-import 'component/body.dart';
+import 'components/body.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({Key? key, required this.chat}) : super(key: key);

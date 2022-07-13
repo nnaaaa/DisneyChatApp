@@ -1,4 +1,4 @@
-import 'package:disneymobile/screens/message/component/textMessage.dart';
+import 'package:disneymobile/screens/message/components/textMessage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../dumpModels/chatMessages.dart';
