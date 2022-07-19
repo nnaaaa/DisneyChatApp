@@ -16,17 +16,16 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-        child: Container(
-      decoration:
-          BoxDecoration(border: Border.all(color: Colors.black, width: 0.25)),
-      child: InkWell(
-        onTap: press,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveUtil.width(10),
-              vertical: ResponsiveUtil.height(30.0 * 0.75)),
+    return InkWell(
+      onTap: press,
+      child: Card(
+        elevation: 10,
+        child: Center(
           child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.center, //Center Row contents horizontally,
+            crossAxisAlignment:
+                CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
               Avatar(profile: chat),
               Column(
@@ -36,7 +35,7 @@ class ChatCard extends StatelessWidget {
                       child: Text(chat.name,
                           style: TextStyle(
                               fontSize:
-                                  ResponsiveUtil.getResponsiveFontSize(13),
+                                  ResponsiveUtil.getResponsiveFontSize(12),
                               fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
                           maxLines: 1,
@@ -70,6 +69,6 @@ class ChatCard extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 }

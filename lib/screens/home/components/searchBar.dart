@@ -31,13 +31,13 @@ Widget buildFloatingSearchBar(context, controller) {
     clearQueryOnClose: true,
     hint: 'Search...',
     iconColor: Colors.grey,
-    transitionDuration: const Duration(milliseconds: 800),
+    transitionDuration: const Duration(milliseconds: 400),
     transitionCurve: Curves.easeInOutCubic,
     physics: const BouncingScrollPhysics(),
     axisAlignment: isPortrait ? 0.0 : -1.0,
     openAxisAlignment: 0.0,
     actions: actions,
-    debounceDelay: const Duration(milliseconds: 500),
+    debounceDelay: const Duration(milliseconds: 200),
     //onQueryChanged: onQueryChanged(),
     onKeyEvent: (KeyEvent keyEvent) {
       if (keyEvent.logicalKey == LogicalKeyboardKey.escape) {

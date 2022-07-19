@@ -47,6 +47,12 @@ List dumpChat = [
         messageStatus: MessageStatus.viewed,
         isSender: false,
       ),
+      ChatMessage(
+        text: "I love you too <3",
+        messageType: ChatMessageType.text,
+        messageStatus: MessageStatus.viewed,
+        isSender: true,
+      ),
     ],
     name: "Emma Waston",
     lastMessage: "I love you my bae",
@@ -55,14 +61,14 @@ List dumpChat = [
     time: "8m ago",
     isActive: true,
   ),
-  Chat(
-    name: "Melody Marks",
-    lastMessage: "Do you have update...",
-    imageUrl:
-        "https://i.pinimg.com/736x/52/81/71/52817168f255a475afae309616e697f0.jpg",
-    time: "5d ago",
-    isActive: false,
-  ),
+  // Chat(
+  //   name: "Melody Marks",
+  //   lastMessage: "Do you have update...",
+  //   imageUrl:
+  //       "https://i.pinimg.com/736x/52/81/71/52817168f255a475afae309616e697f0.jpg",
+  //   time: "5d ago",
+  //   isActive: false,
+  // ),
   Chat(
     name: "Leuleu Messi",
     lastMessage: "You’re welcome :)",
@@ -72,7 +78,7 @@ List dumpChat = [
     isActive: true,
   ),
   Chat(
-    name: "Thắng Ngu",
+    name: "Thắng Thông Minh",
     lastMessage: "Thanks",
     imageUrl:
         "https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/203707619_970775803715028_5401410019197328519_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=3uE9gwlb3BYAX-HnHng&_nc_ht=scontent.fsgn6-1.fna&oh=03_AVIhksIBYBq3mnl3nW9D3nvZth3iZCQWsQprYQyheU9P0w&oe=62E96240",
