@@ -2,11 +2,13 @@ import 'package:disneymobile/dumpModels/chatMessages.dart';
 import 'package:flutter/material.dart';
 
 class Chat {
+  final int id;
   final String name, lastMessage, imageUrl, time;
   final List<ChatMessage>? messages;
   final bool isActive;
 
   Chat({
+    required this.id,
     this.messages,
     this.name = '',
     this.lastMessage = '',
@@ -16,8 +18,9 @@ class Chat {
   });
 }
 
-List dumpChat = [
+List<Chat> dumpChat = [
   Chat(
+    id: 1,
     messages: [
       ChatMessage(
         text: "Hi ",
@@ -40,6 +43,7 @@ List dumpChat = [
     isActive: false,
   ),
   Chat(
+    id: 2,
     messages: [
       ChatMessage(
         text: "I love you my bae",
@@ -70,6 +74,7 @@ List dumpChat = [
   //   isActive: false,
   // ),
   Chat(
+    id: 3,
     name: "Leuleu Messi",
     lastMessage: "You’re welcome :)",
     imageUrl:
@@ -78,6 +83,7 @@ List dumpChat = [
     isActive: true,
   ),
   Chat(
+    id: 4,
     name: "Thắng Thông Minh",
     lastMessage: "Thanks",
     imageUrl:

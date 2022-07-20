@@ -25,7 +25,10 @@ class MessagesScreen extends StatelessWidget {
       title: Row(
         children: [
           const BackButton(),
-          Avatar(profile: chat),
+          Avatar(
+            profile: chat,
+            avatarRadius: 20,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
