@@ -11,4 +11,6 @@ class CustomColor {
   
   static Color bluemagenta = Color(0xFF5956a3);
   static Color darkblue = Color.fromRGBO(9, 97, 145, 1);
+
+  
 }

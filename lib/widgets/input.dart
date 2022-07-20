@@ -35,11 +35,11 @@ class CustomTextInput extends StatelessWidget {
       autofocus: autofocus,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 10),
+          contentPadding: EdgeInsets.only(left: ResponsiveUtil.width(10)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8)),
           hintText: placeholder,
-          hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+          hintStyle: TextStyle(color: Colors.grey, fontSize: ResponsiveUtil.getResponsiveFontSize(14)),
           errorText: errorText),
     );
   }

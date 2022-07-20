@@ -3,6 +3,7 @@ import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/utilities/validator.dart';
 import 'package:disneymobile/widgets/button.dart';
 import 'package:disneymobile/widgets/input.dart';
@@ -75,11 +76,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('Register',
+        title: Text('Register',
             style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                fontSize: 25)),
+                fontSize: ResponsiveUtil.getResponsiveFontSize(25))),
       ),
       body: Container(
           padding: const EdgeInsets.all(20),
@@ -88,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 16),
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(16)),
                   child: CustomTextInput(
                     placeholder: 'Name',
                     controller: _usernameController,
@@ -97,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 16),
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(16)),
                   child: CustomTextInput(
                     placeholder: 'Email',
                     controller: _emailController,
@@ -105,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 16),
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(16)),
                   child: CustomTextInput(
                     placeholder: 'Password',
                     controller: _passwordController,
@@ -114,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 16),
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(16)),
                   child: CustomTextInput(
                     onValidate: (value) {
                       if (value == null || value.isEmpty) {
@@ -131,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: ResponsiveUtil.height(30)),
                   child: CustomButton(
                     text: 'Submit',
                     onPress: onSubmit,

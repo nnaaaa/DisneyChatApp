@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:disneymobile/screens/setting/component/myAccount.dart';
 import 'package:disneymobile/screens/setting/component/setStatus.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,28 +18,28 @@ class buildHeader extends StatelessWidget {
   final String name;
   final String email;
   final VoidCallback onClicked;
-  static const padding = EdgeInsets.symmetric(horizontal: 0);
+  static EdgeInsets padding = EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(0));
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onClicked,
       child: Container(
-        padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
+        padding: padding.add(EdgeInsets.symmetric(vertical: ResponsiveUtil.height(40))),
         child: Row(
           children: [
             CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
-            const SizedBox(width: 20),
+            SizedBox(width: ResponsiveUtil.width(20)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   name,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: ResponsiveUtil.getResponsiveFontSize(20), color: Colors.white),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: ResponsiveUtil.height(4)),
                 Text(
                   email,
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                  style:TextStyle(fontSize: ResponsiveUtil.getResponsiveFontSize(14), color: Colors.white),
                 ),
               ],
             ),

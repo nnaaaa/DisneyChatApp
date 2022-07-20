@@ -1,4 +1,5 @@
 //import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
@@ -16,10 +17,10 @@ class Avatar extends StatelessWidget {
           right: 0,
           bottom: 0,
           child: Container(
-            height: 16,
-            width: 16,
+            height:  ResponsiveUtil.height(16),
+            width:  ResponsiveUtil.width(12),
             decoration: BoxDecoration(
-              color: Color(0xFF00BF6D),
+              color: const Color(0xFF00BF6D),
               shape: BoxShape.circle,
               border: Border.all(
                   color: Theme.of(context).scaffoldBackgroundColor, width: 3),

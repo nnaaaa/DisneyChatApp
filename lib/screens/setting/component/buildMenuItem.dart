@@ -14,7 +14,7 @@ class buildMenuItem extends StatelessWidget {
       required this.text,
       required this.icon,
       this.onClicked,
-      this.fontSize,
+      this.fontSize = 20,
       this.color})
       : super(key: key);
   final String text;
