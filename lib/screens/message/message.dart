@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'components/body.dart';
 
 class MessagesScreen extends StatelessWidget {
+  final Chat chat;
   const MessagesScreen({Key? key, required this.chat}) : super(key: key);
 
   @override
@@ -18,7 +19,6 @@ class MessagesScreen extends StatelessWidget {
     );
   }
 
-  final Chat chat;
   AppBar buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,

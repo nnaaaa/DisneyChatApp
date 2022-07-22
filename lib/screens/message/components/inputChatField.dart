@@ -1,12 +1,32 @@
+import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/states/slices/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 
-class ChatInputField extends StatelessWidget {
+import '../../../dumpModels/chatMessages.dart';
+
+import 'package:flutter_hooks/flutter_hooks.dart'
+    show useEffect, StatefulHookWidget;
+
+class ChatInputField extends StatefulHookWidget {
+  final int id;
+  final Function() notifyParent;
+
   const ChatInputField({
     Key? key,
+    required this.id,
+    required this.notifyParent,
   }) : super(key: key);
 
   @override
+  State<ChatInputField> createState() => _ChatInputFieldState();
+}
+
+class _ChatInputFieldState extends State<ChatInputField> {
+  @override
   Widget build(BuildContext context) {
+    final TextEditingController textController = TextEditingController();
+    final dispatch = useDispatch<RootState>();
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -37,9 +57,10 @@ class ChatInputField extends StatelessWidget {
                           .color!
                           .withOpacity(0.64),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: textController,
+                        decoration: const InputDecoration(
                           hintText: "Type message",
                           border: InputBorder.none,
                         ),
@@ -61,10 +82,21 @@ class ChatInputField extends StatelessWidget {
                           .color!
                           .withOpacity(0.64),
                     ),
-                    Icon(
-                      Icons.send,
-                      color: Color(0xFF00BF6D).withOpacity(0.64),
-                    )
+                    IconButton(
+                        onPressed: () {
+                          if (textController.text != '') {
+                            dispatch(SendMessageAction(
+                              payload: convertToMessage(
+                                  widget.id, textController.text.toString()),
+                            ));
+                          }
+                          widget.notifyParent();
+                          textController.clear();
+                        },
+                        icon: Icon(
+                          Icons.send,
+                          color: Color(0xFF00BF6D).withOpacity(0.64),
+                        ))
                   ],
                 ),
               ),
