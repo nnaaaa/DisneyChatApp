@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import '../../../dumpModels/chatMessages.dart';
 
 class Message extends StatelessWidget {
-  const Message({Key? key, this.message, required this.avatarUrl})
+  const Message(
+      {Key? key, this.message, required this.avatarUrl, this.isLast = false})
       : super(key: key);
 
   final ChatMessage? message;
   final String avatarUrl;
+  final bool isLast;
   @override
   Widget build(BuildContext context) {
     Widget messageContaint(ChatMessage message) {
@@ -25,7 +27,7 @@ class Message extends StatelessWidget {
     }
 
     return Padding(
-        padding: const EdgeInsets.only(top: 20.0),
+        padding: const EdgeInsets.only(top: 2.0),
         child: Row(
             mainAxisAlignment: message?.isSender == true
                 ? MainAxisAlignment.end
@@ -34,14 +36,17 @@ class Message extends StatelessWidget {
               // ignore: unnecessary_null_comparison
               if (message?.isSender != true) ...[
                 CircleAvatar(
-                  radius: 12,
+                  radius: 14,
                   backgroundImage: NetworkImage(avatarUrl),
                 ),
-                SizedBox(width: 20.0 / 2),
+                const SizedBox(width: 20.0 / 2),
+                messageContaint(message!),
               ],
-              messageContaint(message!),
               if (message!.isSender)
-                MessageStatusDot(status: message?.messageStatus)
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  messageContaint(message!),
+                  if (isLast) MessageStatusDot(status: message?.messageStatus)
+                ]),
             ]));
   }
 }
@@ -55,18 +60,18 @@ class MessageStatusDot extends StatelessWidget {
     Color dotColor(MessageStatus status) {
       switch (status) {
         case MessageStatus.not_sent:
-          return Color(0xFFF03738);
+          return const Color(0xFFF03738);
         case MessageStatus.not_view:
           return Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.1);
         case MessageStatus.viewed:
-          return Color(0xFF00BF6D);
+          return const Color(0xFF00BF6D);
         default:
           return Colors.transparent;
       }
     }
 
     return Container(
-      margin: EdgeInsets.only(left: 20.0 / 2),
+      margin: const EdgeInsets.only(left: 20.0 / 2),
       height: 12,
       width: 12,
       decoration: BoxDecoration(

@@ -20,8 +20,8 @@ class Avatar extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: Container(
-              height: 16,
-              width: 16,
+              height: avatarRadius / 2 + 1,
+              width: avatarRadius / 2 + 1,
               decoration: BoxDecoration(
                 color: CustomColor.isActive,
                 shape: BoxShape.circle,
