@@ -18,6 +18,7 @@ class ChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: press,
+      radius: 10,
       child: Card(
         elevation: 10,
         child: Center(
@@ -44,7 +45,7 @@ class ChatCard extends StatelessWidget {
                       padding: EdgeInsets.only(top: ResponsiveUtil.height(8)),
                       child: Opacity(
                         opacity: 0.64,
-                        child: chat.messages?.last != null
+                        child: chat.messages?.length != 0
                             ? Text(chat.messages!.last.getText,
                                 style: TextStyle(
                                     fontSize:

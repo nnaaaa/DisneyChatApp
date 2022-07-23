@@ -101,6 +101,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                             ));
                           }
                           widget.notifyParent();
+                          //print(textController.text.toString());
                           textController.clear();
                         },
                         icon: Icon(Icons.arrow_upward,

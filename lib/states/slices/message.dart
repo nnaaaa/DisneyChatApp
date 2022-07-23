@@ -3,7 +3,6 @@ import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/states/slices/slice.dart' show Slice;
 import 'package:redux_toolkit/redux_toolkit.dart'
     show createReducer, PayloadAction;
-import 'package:disneymobile/models/User.dart';
 
 convertToMessage(int id, message) {
   return MessageSend(
