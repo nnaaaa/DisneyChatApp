@@ -1,10 +1,17 @@
-//import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
-  const Avatar({Key? key, required this.profile}) : super(key: key);
+  const Avatar(
+      {Key? key,
+      required this.profile,
+      this.colorStatus = const Color(0xFF00BF6D),
+      this.iconStatus = Icons.circle })
+      : super(key: key);
   final String profile;
+  final Color? colorStatus;
+  final IconData? iconStatus;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,17 +21,21 @@ class Avatar extends StatelessWidget {
           backgroundImage: NetworkImage(profile),
         ),
         Positioned(
-          right: 0,
-          bottom: 0,
+          right: -4.5,
+          bottom: -3.5,
           child: Container(
-            height:  ResponsiveUtil.height(16),
-            width:  ResponsiveUtil.width(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFF00BF6D),
+            decoration:  BoxDecoration(
+              color:  CustomColor.bluemagenta,
               shape: BoxShape.circle,
               border: Border.all(
-                  color: Theme.of(context).scaffoldBackgroundColor, width: 3),
+                  color: CustomColor.bluemagenta,
+                  width: ResponsiveUtil.width(2)),
             ),
+            child: Icon(
+                iconStatus,
+                size: 20,
+                color: colorStatus
+              ),
           ),
         )
       ],

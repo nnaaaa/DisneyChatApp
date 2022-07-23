@@ -55,9 +55,6 @@ dependencies:
   
   # validation
   form_validator: ^1.0.2
-  settings_ui: ^2.0.2
-  flutter_settings_screens: ^0.3.3-null-safety+1
-  bottom_drawer: ^0.0.5
 
 dev_dependencies:
   # responsive

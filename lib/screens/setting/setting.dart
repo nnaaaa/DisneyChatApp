@@ -1,15 +1,14 @@
 import 'package:disneymobile/models/User.dart';
-import 'package:disneymobile/screens/setting/component/buildMenuItem.dart';
-import 'package:disneymobile/screens/setting/component/myAccount.dart';
-import 'package:disneymobile/screens/setting/component/setStatus.dart';
+import 'package:disneymobile/screens/setting/components/buildMenuItem.dart';
+import 'package:disneymobile/screens/setting/components/myAccount.dart';
+import 'package:disneymobile/screens/setting/components/menuStatus.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
-import 'package:disneymobile/widgets/avatar.dart';
+import 'package:disneymobile/widgets/ava2.dart';
 
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
 import 'package:flutter/material.dart';
@@ -30,15 +29,29 @@ class _SettingScreenState extends State<SettingScreen> {
     isLoading = true;
   }
 
-  final name = 'phatphammm';
-  final email = 'phatpham0406@gmail.com';
-  final urlImage =
-      'https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2021/03/d2ea8e0b-cho-husky-sibir.jpg';
+  IconData icon = Icons.circle;
+  Color color = Colors.green;
+
+  callback(nIcon, nColor) {
+    setState(() {
+      icon = nIcon;
+      color = nColor;
+    });
+  }
+
   static const padding = EdgeInsets.symmetric(horizontal: 0);
   @override
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
     final dispatch = useDispatch<RootState>();
+
+    String name = 'phatpham';
+    String urlImage = 
+        'https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2021/03/d2ea8e0b-cho-husky-sibir.jpg';
+    if (user != null) {
+      name = user.name;
+      user.avatarUrl != null ? urlImage = user.avatarUrl! : urlImage = urlImage;
+    }
 
     Color colorIcon = Colors.white;
     return Drawer(
@@ -50,7 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
               padding: const EdgeInsets.fromLTRB(20, 16, 0, 0),
               height: ResponsiveUtil.height(50),
               color: CustomColor.bluemagenta,
-              child:  Text(
+              child: Text(
                 'USER SETTINGS',
                 style: TextStyle(
                   fontSize: ResponsiveUtil.getResponsiveFontSize(15),
@@ -71,22 +84,23 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: CustomColor.darkblue,
                 ),
                 Container(
-                  padding: padding.add(
-                      EdgeInsets.symmetric(vertical:  ResponsiveUtil.height(40), horizontal:  ResponsiveUtil.width(20))),
+                  padding: padding.add(EdgeInsets.symmetric(
+                      vertical: ResponsiveUtil.height(40),
+                      horizontal: ResponsiveUtil.width(20))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        radius: 39,
-                        backgroundColor: CustomColor.bluemagenta,
-                        child: Avatar(profile: urlImage),
+                      Ava2(
+                        profile: urlImage,
+                        iconStatus: icon,
+                        colorStatus: color,
                       ),
                       SizedBox(height: ResponsiveUtil.height(4)),
                       Text(
                         textAlign: TextAlign.justify,
                         name,
                         style: TextStyle(
-                            fontSize:  ResponsiveUtil.getResponsiveFontSize(17),
+                            fontSize: ResponsiveUtil.getResponsiveFontSize(17),
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             fontFamily: 'Poppins'),
@@ -117,7 +131,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   onClicked: () => selectedItem(context, 0),
                 ),
                 SizedBox(height: ResponsiveUtil.height(12)),
-                const SetStatus(),
+                MenuStatus(icon, color, callback),
                 SizedBox(height: ResponsiveUtil.height(12)),
                 buildMenuItem(
                   text: 'My account',
@@ -148,15 +162,15 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void selectedItem(BuildContext context, int index) {
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop();
     switch (index) {
       case 0: // Dark mode
-        Navigator.of(context).push(MaterialPageRoute(
+        /* Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => MyAccount(
             name: name,
             urlImage: urlImage,
           ),
-        ));
+        )); */
         break;
       case 1: // Set status(online, idle, do not disturb,..)
 

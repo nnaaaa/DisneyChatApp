@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:disneymobile/screens/setting/component/myAccount.dart';
-import 'package:disneymobile/screens/setting/component/setStatus.dart';
+import 'package:disneymobile/screens/setting/components/myAccount.dart';
+import 'package:disneymobile/screens/setting/components/menuStatus.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';

@@ -1,24 +1,28 @@
-
+import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 import 'buildMenuItem.dart';
 
-class SetStatus extends StatelessWidget {
-  const SetStatus({Key? key}) : super(key: key);
+class MenuStatus extends StatefulWidget {
+  IconData icon;
+  Color color;
+  Function(IconData, Color) callback;
 
+  MenuStatus(this.icon, this.color, this.callback, {Key? key})
+      : super(key: key);
+  @override
+  State<MenuStatus> createState() => _MenuStatusState();
+}
+
+class _MenuStatusState extends State<MenuStatus> {
   @override
   Widget build(BuildContext context) {
     Future<void> showmenu() async {
-      final navigator = Navigator.of(context);
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Container(
             decoration: const BoxDecoration(
-              /* borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
-              ), */
               color: Color(0xff232f34),
             ),
             child: Column(
@@ -50,7 +54,8 @@ class SetStatus extends StatelessWidget {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(50)),
                                 border: Border.all(
-                                    color: const Color(0xff232f34), width: ResponsiveUtil.width(10))),
+                                    color: const Color(0xff232f34),
+                                    width: ResponsiveUtil.width(10))),
                           ),
                         ),
                         Positioned(
@@ -58,31 +63,45 @@ class SetStatus extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             children: <Widget>[
                               buildMenuItem(
-                                text: 'Online',
-                                icon: Icons.circle,
-                                color: Colors.green,
-                                onClicked: () {},
-                              ),
+                                  text: 'Online',
+                                  icon: Icons.circle,
+                                  color: Colors.green,
+                                  onClicked: () {
+                                    Navigator.pop(context);
+                                    widget.callback(Icons.circle, Colors.green);
+                                  }),
                               SizedBox(height: ResponsiveUtil.height(12)),
                               buildMenuItem(
                                 text: 'Idle',
                                 icon: Icons.nightlight,
                                 color: const Color.fromARGB(255, 229, 210, 33),
-                                onClicked: () {},
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                  widget.callback(Icons.nightlight,
+                                      const Color.fromARGB(255, 229, 210, 33));
+                                },
                               ),
                               SizedBox(height: ResponsiveUtil.height(12)),
                               buildMenuItem(
                                 text: 'Do Not Disturb',
                                 icon: Icons.do_disturb_alt_sharp,
                                 color: Colors.red,
-                                onClicked: () {},
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                  widget.callback(
+                                      Icons.do_disturb_alt_sharp, Colors.red);
+                                },
                               ),
                               SizedBox(height: ResponsiveUtil.height(12)),
                               buildMenuItem(
                                 text: 'Invisible',
                                 icon: Icons.hide_source_sharp,
                                 color: Colors.grey,
-                                onClicked: () {},
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                  widget.callback(
+                                      Icons.hide_source_sharp, Colors.grey);
+                                },
                               ),
                               SizedBox(height: ResponsiveUtil.height(12)),
                               buildMenuItem(
@@ -103,10 +122,11 @@ class SetStatus extends StatelessWidget {
     }
 
     return buildMenuItem(
-      text: 'Set status',
-      color: Colors.white,
-      icon: Icons.nights_stay_sharp,
-      onClicked: () => showmenu(),
-    );
+        text: 'Set status',
+        color: Colors.white,
+        icon: Icons.nights_stay_sharp,
+        onClicked: () {
+          showmenu();
+        });
   }
 }
