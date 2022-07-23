@@ -21,6 +21,11 @@ class AuthAPI {
         .post('$baseRoute/register', data: user.toJson());
   }
 
+  static Future<Response> verify(String email, String digit) async {
+    return await API().getPortal().put('$baseRoute/verify',
+        data: {'account': email, 'digitCode': digit});
+  }
+
   static Future<Response> refreshToken(String refreshToken) async {
     return await API()
         .getPortal()

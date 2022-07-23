@@ -42,8 +42,7 @@ class GoogleAuth extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => onGoogleAuth(),
       style: ElevatedButton.styleFrom(
-          shape: const CircleBorder()
-        ),
+          shape: const CircleBorder()),
       child: Image.asset(
         'assets/images/icon_gmail.png',
         width: ResponsiveUtil.width(50),

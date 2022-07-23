@@ -2,15 +2,20 @@ import 'package:disneymobile/apis/dio.dart' show Token;
 import 'package:disneymobile/apis/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
+import 'package:disneymobile/screens/home/components/chatBody.dart';
+import 'package:disneymobile/screens/home/components/friendBody.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
-
+import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
-import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'components/searchBar.dart';
 
 class HomeScreen extends StatefulHookWidget {
   static const route = '/';
@@ -21,115 +26,147 @@ class HomeScreen extends StatefulHookWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Widget _myChats;
+  late Widget _myFriends;
+  final controller = FloatingSearchBarController();
   late bool isLoading;
+  late bool isSearching;
+  late int _page;
+
   @override
   void initState() {
     super.initState();
-    isLoading = true;
+    isLoading = false;
+    isSearching = false;
+    _page = 0;
+    _myChats = const ChatBody();
+    _myFriends = const FriendBody();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
-    final dispatch = useDispatch<RootState>();
+    //final dispatch = useDispatch<RootState>();
 
-    useEffect(() {
-      UserAPI.getProfile().then(
-        (user) {
-          if (user == null) {
-            return;
-          }
-          dispatch(AddUserAction(payload: user));
-          setState(() {
-            isLoading = false;
-          });
-        },
-      ).catchError((error) {
-        Navigator.of(context).pushReplacementNamed(AuthScreen.route);
-        setState(() {
-          isLoading = false;
-        });
-      });
-      return () {};
-    }, []);
+    // useEffect(() {
+    //   UserAPI.getProfile().then(
+    //     (value) {
+    //       if (value == null) {
+    //         return;
+    //       }
+    //       //   print('value ${value}');
+    //       dispatch(AddUserAction(payload: value));
+    //       setState(() {
+    //         isLoading = false;
+    //       });
+    //     },
+    //   ).catchError((error) {
+    //     Navigator.of(context).pushReplacementNamed(AuthScreen.route);
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   });
+    //   return () {};
+    // }, []);
 
-    if (isLoading) return const LoadingScreen();
+    //if (isLoading) return const LoadingScreen();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        leading: Builder(
-            builder: (context) => IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                )),
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () => Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      Scaffold(
-                          appBar: AppBar(
-                            title: const Text('Search'),
-                          ),
-                          body: const Center(
-                            child: Text('Search'),
-                          )),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(0.0, 1.0);
-                    const end = Offset.zero;
-                    const curve = Curves.ease;
-                    final tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: curve));
-                    return SlideTransition(
-                      position: animation.drive(tween),
-                      child: child,
-                    );
-                  })),
-            ),
-          ),
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.people),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-            ),
-          ),
-        ],
-      ),
-      drawer: const Drawer(
-          child: Center(
-        child: Text('Guilds'),
-      )),
-      endDrawer: const Drawer(
-          child: Center(
-        child: Text('Members'),
-      )),
-      body: Column(
+      appBar: buildAppbar(user?.avatarUrl),
+      body: Stack(
+        fit: StackFit.expand,
         children: [
-          user != null
-              ? Center(
-                  child: Column(children: [
-                    user.avatarUrl != null
-                        ? Image.network(user.avatarUrl!)
-                        : const Center(),
-                    Text(user.account),
-                    Text(user.userId),
-                  ]),
-                )
-              : const Text('Null user'),
-          Container(
-            margin: const EdgeInsets.only(top: 50),
-            child: ElevatedButton(
-                onPressed: () {
-                  Token.removeToken();
-                  Navigator.of(context).pushNamed(AuthScreen.route);
-                },
-                child: const Text('Logout')),
-          )
+          GestureDetector(
+            onTap: () {
+              controller.hide();
+            },
+            child: getBody(),
+          ),
+          buildFloatingSearchBar(context, controller)
         ],
       ),
+      bottomNavigationBar: buildBottomNavigationBar(),
+      extendBody: true,
     );
+  }
+
+  CurvedNavigationBar buildBottomNavigationBar() {
+    return CurvedNavigationBar(
+      index: _page,
+      height: 60.0,
+      items: const <Widget>[
+        Icon(Icons.messenger, size: 30),
+        Icon(Icons.people, size: 30),
+      ],
+      color: mainPrimary,
+      buttonBackgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 600),
+      onTap: (index) {
+        setState(() {
+          _page = index;
+        });
+      },
+    );
+  }
+
+  AppBar buildAppbar(profileUrl) {
+    return AppBar(
+      centerTitle: true,
+      title: _page == 0 ? const Text('Chats') : const Text('Online Friends'),
+      leading: Builder(
+          builder: (context) => IconButton(
+                icon: CircleAvatar(
+                  radius: 48, // Image radius
+                  backgroundImage: NetworkImage(
+                      profileUrl ?? 'https://i.stack.imgur.com/l60Hf.png'),
+                ),
+                onPressed: () => print("personal profile"),
+              )),
+      actions: [
+        Builder(
+          builder: (context) => IconButton(
+              icon: getIcon(),
+              onPressed: () {
+                (controller.isVisible) ? controller.hide() : controller.show();
+                setState(() {
+                  isSearching = !isSearching;
+                });
+              }),
+        ),
+        Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => print('setting'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget getIcon() {
+    if (_page == 0) {
+      return isSearching
+          ? const Icon(Icons.cancel)
+          : const Icon(
+              Icons.search,
+            );
+    }
+    return const Icon(Icons.contacts);
+  }
+
+  Widget getBody() {
+    if (_page == 0) {
+      return _myChats;
+    } else {
+      return _myFriends;
+    }
   }
 }
