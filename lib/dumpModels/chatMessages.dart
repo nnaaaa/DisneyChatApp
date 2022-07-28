@@ -9,9 +9,11 @@ class ChatMessage {
   final bool isSender;
 
   ChatMessage({
-    this.text = '',
+    required this.text,
     required this.messageType,
     required this.messageStatus,
     required this.isSender,
   });
+
+  String get getText => text;
 }

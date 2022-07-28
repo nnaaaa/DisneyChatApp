@@ -1,5 +1,6 @@
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/message.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 
@@ -34,7 +35,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
           BoxShadow(
             offset: Offset(0, 4),
             blurRadius: 32,
-            color: Color(0xFF087949).withOpacity(0.08),
+            color: Colors.grey.withOpacity(0.08),
           ),
         ],
       ),
@@ -44,44 +45,53 @@ class _ChatInputFieldState extends State<ChatInputField> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFF00BF6D).withOpacity(0.05),
+                  color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(40),
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.05),
+                    width: 1,
+                  ),
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.sentiment_satisfied_alt_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
+                    // Icon(
+                    //   Icons.sentiment_satisfied_alt_outlined,
+                    //   color: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText1!
+                    //       .color!
+                    //       .withOpacity(0.64),
+                    // ),
+                    const SizedBox(width: 15),
                     Expanded(
                       child: TextField(
                         controller: textController,
-                        decoration: const InputDecoration(
-                          hintText: "Type message",
+                        decoration: InputDecoration(
+                          hintText: "Message here...",
+                          hintStyle: TextStyle(
+                            color: Colors.grey.withOpacity(0.64),
+                            fontSize: ResponsiveUtil.getResponsiveFontSize(12),
+                          ),
                           border: InputBorder.none,
                         ),
                       ),
                     ),
-                    Icon(
-                      Icons.attach_file,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
-                    Icon(
-                      Icons.camera_alt_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
+                    // Icon(
+                    //   Icons.attach_file,
+                    //   color: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText1!
+                    //       .color!
+                    //       .withOpacity(0.64),
+                    // ),
+                    // Icon(
+                    //   Icons.camera_alt_outlined,
+                    //   color: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText1!
+                    //       .color!
+                    //       .withOpacity(0.64),
+                    // ),
                     IconButton(
                         onPressed: () {
                           if (textController.text != '') {
@@ -93,10 +103,8 @@ class _ChatInputFieldState extends State<ChatInputField> {
                           widget.notifyParent();
                           textController.clear();
                         },
-                        icon: Icon(
-                          Icons.send,
-                          color: Color(0xFF00BF6D).withOpacity(0.64),
-                        ))
+                        icon: Icon(Icons.arrow_upward,
+                            color: Theme.of(context).primaryColor))
                   ],
                 ),
               ),

@@ -101,12 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
       index: _page,
       height: 60.0,
       items: const <Widget>[
-        Icon(Icons.messenger, size: 30),
-        Icon(Icons.people, size: 30),
+        Icon(Icons.messenger, size: 20),
+        Icon(Icons.people, size: 20),
       ],
       color: Theme.of(context).primaryColor,
-      buttonBackgroundColor: Colors.white,
-      backgroundColor: Theme.of(context).primaryColor,
+      buttonBackgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {
