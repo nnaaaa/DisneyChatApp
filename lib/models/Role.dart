@@ -43,6 +43,4 @@ class Role {
         members: members,
         channels: channels);
   }
-  
-  get data => null;
 }

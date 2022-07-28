@@ -8,8 +8,8 @@ class User {
   final String lastLogin;
   final bool isOnline;
   String? avatarUrl;
-  final List<Member> joinedGuilds;
-  final List<BeFriend> friends;
+  List<Member>? joinedGuilds = [];
+  List<BeFriend>? friends = [];
 
   User(
       {required this.userId,
@@ -18,8 +18,8 @@ class User {
       required this.lastLogin,
       required this.isOnline,
       this.avatarUrl,
-      required this.joinedGuilds,
-      required this.friends});
+      this.joinedGuilds,
+      this.friends});
 
   factory User.fromJson(Map<String, dynamic> data) {
     final userId = data['userId'] as String;
