@@ -19,13 +19,18 @@ class _BodyState extends State<Body> {
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
       child: Column(children: [
         Expanded(
-            child: ListView.builder(
-          itemCount: widget.chat.messages?.length ?? 0,
-          itemBuilder: (context, index) => Message(
-              avatarUrl: widget.chat.imageUrl,
-              message: widget.chat.messages![index],
-              isLast:
-                  (index == widget.chat.messages!.length - 1) ? true : false),
+            child: SingleChildScrollView(
+          reverse: true,
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: widget.chat.messages?.length ?? 0,
+            itemBuilder: (context, index) => Message(
+                avatarUrl: widget.chat.imageUrl,
+                message: widget.chat.messages![index],
+                isLast:
+                    (index == widget.chat.messages!.length - 1) ? true : false),
+          ),
         )),
         ChatInputField(
             id: widget.chat.id,
