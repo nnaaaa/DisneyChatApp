@@ -5,7 +5,7 @@ import '../../../dumpModels/chatMessages.dart';
 
 class Message extends StatelessWidget {
   const Message(
-      {Key? key, this.message, required this.avatarUrl, this.isLast = false})
+      {Key? key, this.message, required this.avatarUrl, required this.isLast})
       : super(key: key);
 
   final ChatMessage? message;

@@ -20,7 +20,6 @@ class _BodyState extends State<Body> {
       child: Column(children: [
         Expanded(
             child: ListView.builder(
-          padding: EdgeInsets.zero,
           itemCount: widget.chat.messages?.length ?? 0,
           itemBuilder: (context, index) => Message(
               avatarUrl: widget.chat.imageUrl,
@@ -28,7 +27,11 @@ class _BodyState extends State<Body> {
               isLast:
                   (index == widget.chat.messages!.length - 1) ? true : false),
         )),
-        ChatInputField(id: widget.chat.id, notifyParent: () => setState(() {})),
+        ChatInputField(
+            id: widget.chat.id,
+            notifyParent: () => setState(() {
+                  print(widget.chat.messages?.length ?? 0);
+                })),
       ]),
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Chat {
   final int id;
   final String name, imageUrl, time;
-  final List<ChatMessage>? messages;
+  List<ChatMessage>? messages;
   final bool isActive;
 
   Chat({
@@ -63,6 +63,7 @@ List<Chat> dumpChat = [
     isActive: true,
   ),
   Chat(
+    messages: [],
     id: 5,
     name: "Melody Marks",
     imageUrl:
@@ -71,6 +72,7 @@ List<Chat> dumpChat = [
     isActive: false,
   ),
   Chat(
+    messages: [],
     id: 3,
     name: "Leuleu Messi",
     imageUrl:
@@ -84,6 +86,7 @@ List<Chat> dumpChat = [
     imageUrl:
         "https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/203707619_970775803715028_5401410019197328519_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=3uE9gwlb3BYAX-HnHng&_nc_ht=scontent.fsgn6-1.fna&oh=03_AVIhksIBYBq3mnl3nW9D3nvZth3iZCQWsQprYQyheU9P0w&oe=62E96240",
     time: "6d ago",
+    messages: [],
     isActive: false,
   ),
 ];
