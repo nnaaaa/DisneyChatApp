@@ -1,3 +1,6 @@
+import 'package:bottom_drawer/bottom_drawer.dart';
+import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/setting/components/buildMenuItem.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
@@ -8,9 +11,13 @@ import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/ava2.dart';
 
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
+import 'package:disneymobile/widgets/avatar.dart';
+import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
+import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
+import 'package:disneymobile/APIs/dio.dart' show Token;
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulHookWidget {
@@ -23,10 +30,11 @@ class SettingScreen extends StatefulHookWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   late bool isLoading;
+
   @override
   void initState() {
-    super.initState();
     isLoading = true;
+    super.initState();
   }
 
   IconData icon = Icons.circle;
@@ -40,6 +48,7 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   static const padding = EdgeInsets.symmetric(horizontal: 0);
+
   @override
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
@@ -60,8 +69,8 @@ class _SettingScreenState extends State<SettingScreen> {
         child: ListView(
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.fromLTRB(20, 16, 0, 0),
-              height: ResponsiveUtil.height(50),
+              padding: EdgeInsets.fromLTRB(ResponsiveUtil.width(20), ResponsiveUtil.height(16), 0, 0),
+              height: ResponsiveUtil.height(60),
               color: CustomColor.bluemagenta,
               child: Text(
                 'USER SETTINGS',
@@ -75,11 +84,19 @@ class _SettingScreenState extends State<SettingScreen> {
             Stack(
               children: <Widget>[
                 Container(
+<<<<<<< HEAD
                   height: ResponsiveUtil.height(150),
                   color: Colors.black12,
                 ),
                 Container(
                   height: ResponsiveUtil.height(70),
+=======
+                  height: ResponsiveUtil.height(185),
+                  color: Colors.black12,
+                ),
+                Container(
+                  height: ResponsiveUtil.height(90),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                   alignment: Alignment.bottomCenter,
                   color: CustomColor.darkblue,
                 ),
@@ -95,12 +112,20 @@ class _SettingScreenState extends State<SettingScreen> {
                         iconStatus: icon,
                         colorStatus: color,
                       ),
+<<<<<<< HEAD
                       SizedBox(height: ResponsiveUtil.height(4)),
+=======
+                      SizedBox(height: ResponsiveUtil.height(5)),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                       Text(
                         textAlign: TextAlign.justify,
                         name,
                         style: TextStyle(
+<<<<<<< HEAD
                             fontSize: ResponsiveUtil.getResponsiveFontSize(17),
+=======
+                            fontSize: ResponsiveUtil.getResponsiveFontSize(15),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             fontFamily: 'Poppins'),
@@ -115,7 +140,11 @@ class _SettingScreenState extends State<SettingScreen> {
               child: Text(
                 'USER SETTINGS',
                 style: TextStyle(
+<<<<<<< HEAD
                   fontSize: ResponsiveUtil.getResponsiveFontSize(13),
+=======
+                  fontSize: ResponsiveUtil.getResponsiveFontSize(15),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 ),
@@ -123,30 +152,48 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             Column(
               children: [
+<<<<<<< HEAD
                 SizedBox(height: ResponsiveUtil.height(12)),
+=======
+                SizedBox(height: ResponsiveUtil.height(13)),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                 buildMenuItem(
                   text: 'Dark mode',
                   color: colorIcon,
                   icon: Icons.dark_mode,
                   onClicked: () => selectedItem(context, 0),
                 ),
+<<<<<<< HEAD
                 SizedBox(height: ResponsiveUtil.height(12)),
                 MenuStatus(icon, color, callback),
                 SizedBox(height: ResponsiveUtil.height(12)),
+=======
+                SizedBox(height: ResponsiveUtil.height(13)),
+                const SetStatus(),
+                SizedBox(height: ResponsiveUtil.height(13)),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                 buildMenuItem(
                   text: 'My account',
                   color: colorIcon,
                   icon: Icons.account_circle,
                   onClicked: () => selectedItem(context, 2),
                 ),
+<<<<<<< HEAD
                 SizedBox(height: ResponsiveUtil.height(12)),
+=======
+                SizedBox(height: ResponsiveUtil.height(13)),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                 buildMenuItem(
                   text: 'User profile',
                   color: colorIcon,
                   icon: Icons.edit_rounded,
                   onClicked: () => selectedItem(context, 3),
                 ),
+<<<<<<< HEAD
                 SizedBox(height: ResponsiveUtil.height(12)),
+=======
+                SizedBox(height: ResponsiveUtil.height(13)),
+>>>>>>> d991440bbbf96dd28d73ce95788e1a942e35447a
                 buildMenuItem(
                   text: 'Log out',
                   color: colorIcon,
@@ -172,9 +219,6 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         )); */
         break;
-      case 1: // Set status(online, idle, do not disturb,..)
-
-        break;
       case 2: // My account
 
         break;
@@ -182,7 +226,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
         break;
       case 4: // log out
-
+        Token.removeToken();
+        Navigator.of(context).pushNamed(AuthScreen.route);
         break;
     }
   }

@@ -1,6 +1,8 @@
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
+
 
 class Avatar extends StatelessWidget {
   const Avatar(
@@ -24,12 +26,13 @@ class Avatar extends StatelessWidget {
           right: -4.5,
           bottom: -3.5,
           child: Container(
-            decoration:  BoxDecoration(
-              color:  CustomColor.bluemagenta,
+            height: ResponsiveUtil.height(20),
+            width:  ResponsiveUtil.width(20),
+            decoration: BoxDecoration(
+              color: Color(0xFF00BF6D),
               shape: BoxShape.circle,
               border: Border.all(
-                  color: CustomColor.bluemagenta,
-                  width: ResponsiveUtil.width(2)),
+                  color: Theme.of(context).scaffoldBackgroundColor, width: ResponsiveUtil.width(3)),
             ),
             child: Icon(
                 iconStatus,
