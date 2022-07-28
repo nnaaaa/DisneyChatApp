@@ -2,15 +2,24 @@ import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/screens/home/components/chatCard.dart';
 import 'package:disneymobile/screens/message/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 
+import '../../../states/rootState.dart';
 import 'friendCard.dart';
 
-class FriendBody extends StatelessWidget {
+class FriendBody extends StatefulHookWidget {
   const FriendBody({Key? key}) : super(key: key);
 
   @override
+  State<FriendBody> createState() => _FriendBodyState();
+}
+
+class _FriendBodyState extends State<FriendBody> {
+  @override
   Widget build(BuildContext context) {
-    List<Chat> friendsOnline = onlineFriends(dumpChat);
+    final chats = useSelector<RootState, List<Chat>>((state) => state.chats);
+    List<Chat> friendsOnline = onlineFriends(chats);
     return ListView.separated(
         itemCount: friendsOnline.length,
         separatorBuilder: (BuildContext context, int index) => const Divider(

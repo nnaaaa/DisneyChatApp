@@ -1,3 +1,4 @@
+import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/models/Guild.dart';
 import 'package:disneymobile/screens/home/components/chatBody.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
@@ -30,14 +31,14 @@ Widget buildFloatingSearchBar(context, controller) {
     clearQueryOnClose: true,
     hint: 'Search...',
     iconColor: Colors.grey,
-    transitionDuration: const Duration(milliseconds: 800),
+    transitionDuration: const Duration(milliseconds: 400),
     transitionCurve: Curves.easeInOutCubic,
     physics: const BouncingScrollPhysics(),
     axisAlignment: isPortrait ? 0.0 : -1.0,
     openAxisAlignment: 0.0,
     actions: actions,
-    debounceDelay: const Duration(milliseconds: 500),
-    //onQueryChanged: model.onQueryChanged,
+    debounceDelay: const Duration(milliseconds: 200),
+    //onQueryChanged: onQueryChanged(),
     onKeyEvent: (KeyEvent keyEvent) {
       if (keyEvent.logicalKey == LogicalKeyboardKey.escape) {
         controller.query = "";
@@ -46,22 +47,8 @@ Widget buildFloatingSearchBar(context, controller) {
     },
     scrollPadding: EdgeInsets.zero,
     transition: CircularFloatingSearchBarTransition(spacing: 16),
-    //builder: (context, _) => buildExpandableBody(model),
     builder: (context, transition) {
-      print('$context');
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Material(
-          color: Colors.white,
-          elevation: 4.0,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: Colors.accents.map((color) {
-              return Container(height: 112, color: color);
-            }).toList(),
-          ),
-        ),
-      );
+      return Container();
     },
     //body: const Body(),
     initiallyHidden: true,

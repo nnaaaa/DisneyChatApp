@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,30 +16,32 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-        child: Container(
-      decoration:
-          BoxDecoration(border: Border.all(color: Colors.black, width: 0.25)),
-      child: InkWell(
-        onTap: press,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 10.0, vertical: 30.0 * 0.75),
+    return InkWell(
+      onTap: press,
+      child: Card(
+        elevation: 10,
+        child: Center(
           child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.center, //Center Row contents horizontally,
+            crossAxisAlignment:
+                CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
               Avatar(profile: chat),
               Column(
                 children: [
                   Padding(
-                      padding: const EdgeInsets.only(top: 3),
+                      padding: EdgeInsets.only(top: ResponsiveUtil.height(3)),
                       child: Text(chat.name,
-                          style: const TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize:
+                                  ResponsiveUtil.getResponsiveFontSize(12),
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis)),
                   Padding(
-                      padding: const EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: ResponsiveUtil.height(8)),
                       child: Opacity(
                         opacity: 0.64,
                         child: Text(
@@ -48,13 +52,15 @@ class ChatCard extends StatelessWidget {
                         ),
                       )),
                   Padding(
-                      padding: const EdgeInsets.only(top: 3),
+                      padding: EdgeInsets.only(top: ResponsiveUtil.height(3)),
                       child: Opacity(
                         opacity: 0.64,
                         child: Text(
                           chat.time,
-                          style: const TextStyle(
-                              fontSize: 10, fontStyle: FontStyle.italic),
+                          style: TextStyle(
+                              fontSize:
+                                  ResponsiveUtil.getResponsiveFontSize(10),
+                              fontStyle: FontStyle.italic),
                         ),
                       ))
                 ],
@@ -63,6 +69,6 @@ class ChatCard extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    );
   }
 }

@@ -104,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
         Icon(Icons.messenger, size: 30),
         Icon(Icons.people, size: 30),
       ],
-      color: mainPrimary,
-      buttonBackgroundColor: Colors.transparent,
-      backgroundColor: Colors.transparent,
+      color: Theme.of(context).primaryColor,
+      buttonBackgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {

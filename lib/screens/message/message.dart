@@ -1,10 +1,12 @@
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'components/body.dart';
 
 class MessagesScreen extends StatelessWidget {
+  final Chat chat;
   const MessagesScreen({Key? key, required this.chat}) : super(key: key);
 
   @override
@@ -17,41 +19,35 @@ class MessagesScreen extends StatelessWidget {
     );
   }
 
-  final Chat chat;
   AppBar buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
         children: [
           const BackButton(),
-          Avatar(profile: chat),
+          Avatar(
+            profile: chat,
+            avatarRadius: 20,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 chat.name,
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(
+                    fontSize: ResponsiveUtil.getResponsiveFontSize(16)),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
                 chat.time,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(
+                    fontSize: ResponsiveUtil.getResponsiveFontSize(12)),
               )
             ],
           )
         ],
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.local_phone),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.videocam),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
