@@ -10,7 +10,7 @@ class Message {
   final String? content;
   final String? images;
   final String createdAt;
-  final List<React> reacts;
+  List<React>? reacts = [];
 
   Message(
       {required this.messageID,
@@ -20,7 +20,7 @@ class Message {
       this.content,
       this.images,
       required this.createdAt,
-      required this.reacts});
+      this.reacts});
 
   factory Message.fromJson(Map<String, dynamic> json) {
     List<dynamic>? reactsJson = json['reacts'];
@@ -30,7 +30,8 @@ class Message {
       reacts = reactsJson.map((i) => React.fromJson(i)).toList();
     }
 
-    Message? replyTo = json['replyTo'] ? Message.fromJson(json['replyTo']) : null;
+    Message? replyTo =
+        json['replyTo'] ? Message.fromJson(json['replyTo']) : null;
     return Message(
         messageID: json['messageID'],
         channel: Channel.fromJson(json['channel']),

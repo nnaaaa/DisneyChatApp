@@ -16,7 +16,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 15),
       child: Column(children: [
         Expanded(
             child: SingleChildScrollView(
@@ -32,11 +32,7 @@ class _BodyState extends State<Body> {
                     (index == widget.chat.messages!.length - 1) ? true : false),
           ),
         )),
-        ChatInputField(
-            id: widget.chat.id,
-            notifyParent: () => setState(() {
-                  print(widget.chat.messages?.length ?? 0);
-                })),
+        ChatInputField(id: widget.chat.id, notifyParent: () => setState(() {})),
       ]),
     );
   }

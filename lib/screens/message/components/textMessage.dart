@@ -23,7 +23,7 @@ class TextMessage extends StatelessWidget {
         color: Theme.of(context)
             .primaryColor
             .withOpacity(message!.isSender ? 1 : 0.1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(8),
       child: Text(message!.text,
