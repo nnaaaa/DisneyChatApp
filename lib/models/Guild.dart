@@ -7,9 +7,9 @@ class Guild {
   final String guildID;
   String name;
   String? avatarUrl;
-  List<Category>? categories;
+  List<Category>? categories = [];
   List<Member> members;
-  List<Emoji>? emojis;
+  List<Emoji>? emojis = [];
   Guild(
       {required this.guildID,
       required this.name,
