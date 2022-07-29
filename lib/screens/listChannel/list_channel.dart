@@ -4,6 +4,7 @@ import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/screens/listChannel/components/category.dart';
 
 class ListChannel extends StatelessWidget {
+  static const route = '/listChannel';
   const ListChannel({Key? key}) : super(key: key);
 
   @override
