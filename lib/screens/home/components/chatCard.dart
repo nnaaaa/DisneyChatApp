@@ -18,6 +18,7 @@ class ChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: press,
+      radius: 10,
       child: Card(
         elevation: 10,
         child: Center(
@@ -44,12 +45,31 @@ class ChatCard extends StatelessWidget {
                       padding: EdgeInsets.only(top: ResponsiveUtil.height(8)),
                       child: Opacity(
                         opacity: 0.64,
-                        child: Text(
-                          chat.lastMessage,
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                        child: chat.messages?.length != 0
+                            ? Text(chat.messages!.last.getText,
+                                style: TextStyle(
+                                    fontSize:
+                                        ResponsiveUtil.getResponsiveFontSize(
+                                            11),
+                                    fontWeight: FontWeight.w500),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis)
+                            : Text('No messages',
+                                style: TextStyle(
+                                    fontSize:
+                                        ResponsiveUtil.getResponsiveFontSize(
+                                            11),
+                                    fontWeight: FontWeight.w500),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis),
+                        // child: Text(
+                        //   chat.messages?.last.getText,
+                        //   maxLines: 1,
+                        //   textAlign: TextAlign.center,
+                        //   overflow: TextOverflow.ellipsis,
+                        // ),
                       )),
                   Padding(
                       padding: EdgeInsets.only(top: ResponsiveUtil.height(3)),

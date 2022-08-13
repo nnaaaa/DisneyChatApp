@@ -5,9 +5,10 @@ import 'package:redux_toolkit/redux_toolkit.dart'
     show createReducer, PayloadAction;
 import 'package:disneymobile/models/User.dart';
 
-convertToMessage(int id, message) {
+convertToMessage(String id, message) {
   return MessageSend(
       ChatMessage(
+          messageID: id,
           text: message,
           messageType: ChatMessageType.text,
           messageStatus: MessageStatus.not_view,
@@ -17,7 +18,7 @@ convertToMessage(int id, message) {
 
 class MessageSend {
   final ChatMessage message;
-  final int chatId;
+  final String chatId;
 
   MessageSend(this.message, this.chatId);
 }

@@ -1,7 +1,6 @@
 import 'package:disneymobile/models/User.dart' show User;
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
-import 'package:disneymobile/screens/setting/components/buildMenuItem.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
 import 'package:disneymobile/screens/setting/components/menuStatus.dart';
 import 'package:disneymobile/states/rootState.dart';
@@ -10,6 +9,7 @@ import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatarStatus.dart';
 
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
+import 'package:disneymobile/widgets/buildMenuItem.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
@@ -157,7 +157,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     color: CustomColor.divider,
                     endIndent: 7),
                 buildMenuItem(
-                  text: 'User profile',
+                  text: 'Edit profile',
                   color: colorIcon,
                   icon: Icons.edit_rounded,
                   onClicked: () => selectedItem(context, 3),

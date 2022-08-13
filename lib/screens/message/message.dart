@@ -27,22 +27,23 @@ class MessagesScreen extends StatelessWidget {
           const BackButton(),
           Avatar(
             url: chat.imageUrl,
-            radius: 20,
+            radius: 25,
           ),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 chat.name,
                 style: TextStyle(
-                    fontSize: ResponsiveUtil.getResponsiveFontSize(16)),
+                    fontSize: ResponsiveUtil.getResponsiveFontSize(13)),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
                 chat.time,
                 style: TextStyle(
-                    fontSize: ResponsiveUtil.getResponsiveFontSize(12)),
+                    fontSize: ResponsiveUtil.getResponsiveFontSize(11)),
               )
             ],
           )

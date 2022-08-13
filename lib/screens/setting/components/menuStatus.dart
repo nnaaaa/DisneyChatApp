@@ -1,8 +1,8 @@
 import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
+import 'package:disneymobile/widgets/buildMenuItem.dart';
 import 'package:flutter/material.dart';
-import 'buildMenuItem.dart';
 
 class MenuStatus extends StatefulWidget {
   IconData icon;

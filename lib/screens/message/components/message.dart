@@ -1,14 +1,18 @@
+import 'package:disneymobile/dumpModels/myReact.dart';
+import 'package:disneymobile/screens/message/components/messageStatusDot.dart';
 import 'package:disneymobile/screens/message/components/textMessage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../dumpModels/chatMessages.dart';
 
 class Message extends StatelessWidget {
-  const Message({Key? key, this.message, required this.avatarUrl})
+  const Message(
+      {Key? key, this.message, required this.avatarUrl, required this.isLast})
       : super(key: key);
 
   final ChatMessage? message;
   final String avatarUrl;
+  final bool isLast;
   @override
   Widget build(BuildContext context) {
     Widget messageContaint(ChatMessage message) {
@@ -25,59 +29,43 @@ class Message extends StatelessWidget {
     }
 
     return Padding(
-        padding: const EdgeInsets.only(top: 20.0),
-        child: Row(
-            mainAxisAlignment: message?.isSender == true
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.start,
-            children: [
-              // ignore: unnecessary_null_comparison
-              if (message?.isSender != true) ...[
-                CircleAvatar(
-                  radius: 12,
-                  backgroundImage: NetworkImage(avatarUrl),
+        padding: const EdgeInsets.only(top: 2.0),
+        child: Stack(children: [
+          Row(
+              mainAxisAlignment: message?.isSender == true
+                  ? MainAxisAlignment.end
+                  : MainAxisAlignment.start,
+              children: [
+                if (message?.isSender != true) ...[
+                  CircleAvatar(
+                    radius: 14,
+                    backgroundImage: NetworkImage(avatarUrl),
+                  ),
+                  const SizedBox(width: 20.0 / 2),
+                  messageContaint(message!),
+                ],
+                if (message!.isSender)
+                  Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    messageContaint(message!),
+                    if (isLast) MessageStatusDot(status: message?.messageStatus)
+                  ]),
+              ]),
+          if (message?.reacts?.length != 0)
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 16,
+                width: 16,
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      width: 3),
                 ),
-                SizedBox(width: 20.0 / 2),
-              ],
-              messageContaint(message!),
-              if (message!.isSender)
-                MessageStatusDot(status: message?.messageStatus)
-            ]));
-  }
-}
-
-class MessageStatusDot extends StatelessWidget {
-  final MessageStatus? status;
-
-  const MessageStatusDot({Key? key, this.status}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    Color dotColor(MessageStatus status) {
-      switch (status) {
-        case MessageStatus.not_sent:
-          return Color(0xFFF03738);
-        case MessageStatus.not_view:
-          return Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.1);
-        case MessageStatus.viewed:
-          return Color(0xFF00BF6D);
-        default:
-          return Colors.transparent;
-      }
-    }
-
-    return Container(
-      margin: EdgeInsets.only(left: 20.0 / 2),
-      height: 12,
-      width: 12,
-      decoration: BoxDecoration(
-        color: dotColor(status!),
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        status == MessageStatus.not_sent ? Icons.close : Icons.done,
-        size: 8,
-        color: Theme.of(context).scaffoldBackgroundColor,
-      ),
-    );
+              ),
+            ),
+        ]));
   }
 }
