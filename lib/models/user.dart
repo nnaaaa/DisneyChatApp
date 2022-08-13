@@ -9,6 +9,7 @@ class User {
   final String lastLogin;
   final bool isOnline;
   final String avatarUrl;
+  String? status = "Online";
   List<Member>? joinedGuilds = [];
   List<BeFriend>? friends = [];
 
@@ -20,6 +21,7 @@ class User {
       required this.lastLogin,
       required this.isOnline,
       required this.avatarUrl,
+      this.status,
       this.joinedGuilds,
       this.friends});
 
