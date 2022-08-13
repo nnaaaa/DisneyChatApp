@@ -3,6 +3,7 @@ import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/screens/authenticate/verifier/verify.dart';
+import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/states/rootState.dart' show RootState;
 import 'package:disneymobile/widgets/CustomTheme/theme_notifier.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
@@ -46,14 +47,14 @@ class DisneyChat extends HookWidget {
           theme: themeNotifier.getTheme(),
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-          // routes: {
-          //   AuthScreen.route: (context) => const AuthScreen(),
-          //   LoginScreen.route: (context) => const LoginScreen(),
-          //   RegisterScreen.route: (context) => const RegisterScreen(),
-          //   VerifyScreen.route: (context) => const VerifyScreen(),
-          //   HomeScreen.route: (context) => const HomeScreen(),
-          // }
-          home: const HomeScreen());
+          routes: {
+            AuthScreen.route: (context) => const AuthScreen(),
+            LoginScreen.route: (context) => const LoginScreen(),
+            RegisterScreen.route: (context) => const RegisterScreen(),
+            VerifyScreen.route: (context) => const VerifyScreen(),
+            HomeScreen.route: (context) => const HomeScreen(),
+            SettingScreen.route: (context) => const SettingScreen(),
+          });
     });
   }
 }

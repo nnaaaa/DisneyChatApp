@@ -24,7 +24,7 @@ class FriendCard extends StatelessWidget {
         child: Row(
           children: [
             Stack(
-              children: [Avatar(profile: chat)],
+              children: [Avatar(url: chat.imageUrl)],
             ),
             Expanded(
               child: Padding(

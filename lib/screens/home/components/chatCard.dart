@@ -27,7 +27,7 @@ class ChatCard extends StatelessWidget {
             crossAxisAlignment:
                 CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
-              Avatar(profile: chat),
+              Avatar(url: chat.imageUrl),
               Column(
                 children: [
                   Padding(

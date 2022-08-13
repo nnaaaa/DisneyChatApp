@@ -5,6 +5,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/home/components/chatBody.dart';
 import 'package:disneymobile/screens/home/components/friendBody.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
+import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
@@ -52,30 +53,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
-    //final dispatch = useDispatch<RootState>();
+    final dispatch = useDispatch<RootState>();
+    useEffect(() {
+      UserAPI.getProfile().then(
+        (value) {
+          if (value == null) {
+            return;
+          }
+          //   print('value ${value}');
+          dispatch(AddUserAction(payload: value));
+          setState(() {
+            isLoading = false;
+          });
+        },
+      ).catchError((error) {
+        Navigator.of(context).pushReplacementNamed(AuthScreen.route);
+        setState(() {
+          isLoading = false;
+        });
+      });
+      return () {};
+    }, []);
 
-    // useEffect(() {
-    //   UserAPI.getProfile().then(
-    //     (value) {
-    //       if (value == null) {
-    //         return;
-    //       }
-    //       //   print('value ${value}');
-    //       dispatch(AddUserAction(payload: value));
-    //       setState(() {
-    //         isLoading = false;
-    //       });
-    //     },
-    //   ).catchError((error) {
-    //     Navigator.of(context).pushReplacementNamed(AuthScreen.route);
-    //     setState(() {
-    //       isLoading = false;
-    //     });
-    //   });
-    //   return () {};
-    // }, []);
-
-    //if (isLoading) return const LoadingScreen();
+    if (isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: buildAppbar(user?.avatarUrl),
@@ -101,12 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
       index: _page,
       height: 60.0,
       items: const <Widget>[
-        Icon(Icons.messenger, size: 30),
-        Icon(Icons.people, size: 30),
+        Icon(Icons.messenger, size: 20),
+        Icon(Icons.people, size: 20),
       ],
       color: Theme.of(context).primaryColor,
-      buttonBackgroundColor: Colors.white,
-      backgroundColor: Theme.of(context).primaryColor,
+      buttonBackgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {
@@ -144,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
         Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => print('setting'),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SettingScreen.route),
           ),
         ),
       ],

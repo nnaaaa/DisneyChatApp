@@ -7,7 +7,7 @@ class User {
   final String name;
   final String lastLogin;
   final bool isOnline;
-  String? avatarUrl;
+  final String avatarUrl;
   final List<Member> joinedGuilds;
   final List<BeFriend> friends;
 
@@ -17,7 +17,7 @@ class User {
       required this.name,
       required this.lastLogin,
       required this.isOnline,
-      this.avatarUrl,
+      required this.avatarUrl,
       required this.joinedGuilds,
       required this.friends});
 

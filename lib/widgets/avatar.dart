@@ -1,35 +1,41 @@
-import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/styles/color.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
-  const Avatar({Key? key, required this.profile, this.avatarRadius = 30})
+  const Avatar(
+      {Key? key,
+      required this.url,
+      this.colorStatus = const Color(0xFF00BF6D),
+      this.iconStatus = Icons.circle,
+      this.radius = 30
+      })
       : super(key: key);
-  final Chat profile;
-  final double avatarRadius;
+  final String url;
+  final Color? colorStatus;
+  final IconData? iconStatus;
+  final double radius;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CircleAvatar(
-          radius: avatarRadius,
-          backgroundImage: NetworkImage(profile.imageUrl),
+          radius: radius,
+          backgroundImage: NetworkImage(url),
         ),
-        if (profile.isActive)
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Container(
-              height: 16,
-              width: 16,
-              decoration: BoxDecoration(
-                color: CustomColor.isActive,
-                shape: BoxShape.circle,
-                border: Border.all(
-                    color: Theme.of(context).scaffoldBackgroundColor, width: 3),
-              ),
+        Positioned(
+          right: -4.5,
+          bottom: -3.5,
+          child: Container(
+            decoration: BoxDecoration(
+              color: CustomColor.gray,
+              shape: BoxShape.circle,
+              border: Border.all(
+                  color: CustomColor.gray, width: ResponsiveUtil.width(2)),
             ),
-          )
+            child: Icon(iconStatus, size: 20, color: colorStatus),
+          ),
+        )
       ],
     );
   }
