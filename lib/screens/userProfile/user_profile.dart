@@ -38,6 +38,8 @@ class _UserProfileState extends State<UserProfile> {
           buildAbout(user),
           const SizedBox(height:12),
           buildBio(user),
+          const SizedBox(height:12),
+          buildStatus(user),
         ],
       ),
     );
@@ -78,7 +80,7 @@ class _UserProfileState extends State<UserProfile> {
     padding: EdgeInsets.symmetric(horizontal: 16, vertical:16),
     margin: EdgeInsets.symmetric(horizontal: 20),
     decoration: BoxDecoration(
-      border: Border.all(),
+      border: Border.all(color: Colors.black54),
       borderRadius: BorderRadius.all(Radius.circular(24)),
       color: Theme.of(context).colorScheme.primary,
       boxShadow: [
@@ -101,5 +103,12 @@ class _UserProfileState extends State<UserProfile> {
   )
   );
 
-  Widget buildStatus(User user) =>
+  Widget buildStatus(User user) => Container(
+    margin: EdgeInsets.symmetric(horizontal: 20),
+    child:
+      Text(
+        "8m ago",
+        style: TextStyle(fontSize: 14, height: 1.4, color: Colors.grey),
+      ),
+    );
 }
