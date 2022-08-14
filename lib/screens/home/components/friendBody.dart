@@ -40,7 +40,7 @@ class _FriendBodyState extends State<FriendBody> {
 
 List<Chat> onlineFriends(dumpChat) {
   List<Chat> res = [];
-  for (var user in dumpChat) {
+  for (final user in dumpChat) {
     if (user.isActive) {
       res.add(user);
     }

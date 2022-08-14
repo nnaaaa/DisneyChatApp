@@ -1,6 +1,7 @@
 import 'package:disneymobile/dumpModels/myReact.dart';
 import 'package:disneymobile/screens/message/components/messageStatusDot.dart';
 import 'package:disneymobile/screens/message/components/textMessage.dart';
+import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -42,31 +43,56 @@ class Message extends StatelessWidget {
                     url: avatarUrl,
                     radius: 14,
                   ),
-                  const SizedBox(width: 20.0 / 2),
-                  messageContaint(message!),
+                  const SizedBox(width: 10),
+                  Column(children: [
+                    messageContaint(message!),
+                    if (message?.reacts?.length != 0)
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.5),
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            children: [
+                              for (final react in message?.reacts ?? [])
+                                Image.network(
+                                  react.emoji.imageUrl,
+                                  height: 10,
+                                ),
+                              const SizedBox(width: 3),
+                              Text(
+                                '${message?.reacts?.length}',
+                                style: const TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w500),
+                              ),
+                              // message?.reacts != null? message.reacts.map((react) => MessageStatusDot(react: react)).toList(): const [],
+                            ],
+                          ),
+                        ),
+                      ),
+                  ])
                 ],
                 if (message!.isSender)
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    messageContaint(message!),
+                    Column(
+                      children: [
+                        messageContaint(message!),
+                        if (message?.reacts?.length != 0)
+                          Container(
+                            height: 16,
+                            width: 16,
+                            decoration: const BoxDecoration(
+                              color: Colors.amber,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                      ],
+                    ),
                     if (isLast) MessageStatusDot(status: message?.messageStatus)
                   ]),
               ]),
-          if (message?.reacts?.length != 0)
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      width: 3),
-                ),
-              ),
-            ),
         ]));
   }
 }
