@@ -18,10 +18,9 @@ class buildMenuItem extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    const colorText = Colors.black;
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: TextStyle(fontSize: fontSize, color: colorText)),
+      title: Text(text, style: TextStyle(fontSize: fontSize)),
       onTap: onClicked,
     );
   }

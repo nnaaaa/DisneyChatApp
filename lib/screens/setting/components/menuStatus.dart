@@ -114,7 +114,6 @@ class _MenuStatusState extends State<MenuStatus> {
 
     return buildMenuItem(
         text: 'Set status',
-        color: Colors.black,
         icon: Icons.nights_stay_sharp,
         onClicked: () {
           showmenu();
