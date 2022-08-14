@@ -1,6 +1,7 @@
 import 'package:disneymobile/dumpModels/myReact.dart';
 import 'package:disneymobile/screens/message/components/messageStatusDot.dart';
 import 'package:disneymobile/screens/message/components/textMessage.dart';
+import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../dumpModels/chatMessages.dart';
@@ -37,9 +38,9 @@ class Message extends StatelessWidget {
                   : MainAxisAlignment.start,
               children: [
                 if (message?.isSender != true) ...[
-                  CircleAvatar(
+                  Avatar(
+                    url: avatarUrl,
                     radius: 14,
-                    backgroundImage: NetworkImage(avatarUrl),
                   ),
                   const SizedBox(width: 20.0 / 2),
                   messageContaint(message!),

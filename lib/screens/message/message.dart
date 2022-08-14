@@ -25,9 +25,9 @@ class MessagesScreen extends StatelessWidget {
       title: Row(
         children: [
           const BackButton(),
-          Avatar(
-            url: chat.imageUrl,
-            radius: 25,
+          CircleAvatar(
+            radius: 24,
+            backgroundImage: NetworkImage(chat.imageUrl),
           ),
           const SizedBox(width: 10),
           Column(
@@ -49,6 +49,14 @@ class MessagesScreen extends StatelessWidget {
           )
         ],
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.more_vert),
+          onPressed: () {
+            print("More");
+          },
+        )
+      ],
     );
   }
 }
