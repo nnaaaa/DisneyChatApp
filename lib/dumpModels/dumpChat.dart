@@ -30,7 +30,7 @@ List<Chat> dumpChat = [
           messageType: ChatMessageType.text,
           messageStatus: MessageStatus.viewed,
           isSender: false,
-          reacts: [React(author: cr7, emoji: emojiList[4])]),
+          reacts: [React(author: cr7, emoji: emojiList[0])]),
       ChatMessage(
           messageID: '2',
           text: "Can I have your signature ",
