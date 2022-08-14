@@ -54,8 +54,8 @@ class DisneyChat extends HookWidget {
           //   VerifyScreen.route: (context) => const VerifyScreen(),
           //   HomeScreen.route: (context) => const HomeScreen(),
           //   SettingScreen.route: (context) => const SettingScreen(),
-          // }
-          home: const HomeScreen());
+          // });
+      home: const HomeScreen());
     });
   }
 }
