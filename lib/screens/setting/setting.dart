@@ -58,7 +58,6 @@ class _SettingScreenState extends State<SettingScreen> {
     return Drawer(
       backgroundColor: CustomColor.gray,
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
             title: Row(children: const [
           Text('User Setting'),
@@ -134,7 +133,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   text: 'Custom Themes',
                   color: colorIcon,
                   icon: Icons.dark_mode,
-                  onClicked: () => Navigator.of(context).pushNamed(ThemeScreen.route),
+                  onClicked: () =>
+                      Navigator.of(context).pushNamed(ThemeScreen.route),
                 ),
                 Divider(
                     indent: 7,
@@ -200,7 +200,7 @@ class _SettingScreenState extends State<SettingScreen> {
     Navigator.of(context).pop();
     switch (index) {
       case 0: // Dark mode
-        
+
         break;
       case 1: // Set status(online, idle, do not disturb,..)
 
