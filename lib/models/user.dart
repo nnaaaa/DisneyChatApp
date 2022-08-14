@@ -1,17 +1,14 @@
 import 'package:disneymobile/models/BeFriend.dart';
 import 'package:disneymobile/models/Member.dart';
 
-enum Status { online, idle, doNotDisturb, invisible }
-
 class User {
   final String userId;
   final String account;
   final String password;
   final String name;
   final String lastLogin;
-  final bool isOnline;
   final String avatarUrl;
-  final Status status;
+  final String status;
   List<Member>? joinedGuilds = [];
   List<BeFriend>? friends = [];
 
@@ -21,7 +18,6 @@ class User {
       required this.name,
       required this.password,
       required this.lastLogin,
-      required this.isOnline,
       required this.avatarUrl,
       required this.status,
       this.joinedGuilds,
@@ -33,9 +29,8 @@ class User {
     final password = data['password'] as String;
     final name = data['name'] as String;
     final lastLogin = data['lastLogin'] as String;
-    final isOnline = data['isOnline'];
     final avatarUrl = data['avatarUrl'] as String;
-    final status = data['status'] as Status;
+    final status = data['status'] as String;
 
     List<dynamic>? joinedGuildsJson = data['joinedGuilds'];
     List<dynamic>? friendsJson = data['friends'];
@@ -60,7 +55,6 @@ class User {
         name: name,
         password: password,
         lastLogin: lastLogin,
-        isOnline: isOnline,
         avatarUrl: avatarUrl,
         status: status,
         joinedGuilds: joinedGuilds,

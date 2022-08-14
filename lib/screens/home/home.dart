@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ).catchError((error) {
+        print(error);
         Navigator.of(context).pushReplacementNamed(AuthScreen.route);
         setState(() {
           isLoading = false;
