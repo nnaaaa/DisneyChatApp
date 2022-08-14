@@ -55,6 +55,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
     Color colorIcon = Colors.black;
     return Drawer(
+      backgroundColor: CustomColor.gray,
       child: Scaffold(
         appBar: AppBar(
           title: Row(
