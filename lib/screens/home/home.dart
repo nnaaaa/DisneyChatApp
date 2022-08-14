@@ -105,8 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
         Icon(Icons.people, size: 20),
       ],
       color: Theme.of(context).primaryColor,
-      buttonBackgroundColor: Colors.grey[200],
-      backgroundColor: Colors.white,
+      buttonBackgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: const Color.fromARGB(0, 140, 35, 35),
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 600),
       onTap: (index) {

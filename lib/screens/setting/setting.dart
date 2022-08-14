@@ -54,7 +54,6 @@ class _SettingScreenState extends State<SettingScreen> {
 
     if (user == null) return const LoadingScreen();
 
-    Color colorIcon = Colors.black;
     return Drawer(
       backgroundColor: CustomColor.gray,
       child: Scaffold(
@@ -80,10 +79,6 @@ class _SettingScreenState extends State<SettingScreen> {
             Stack(
               children: <Widget>[
                 Container(
-                  height: ResponsiveUtil.height(150),
-                  color: CustomColor.gray,
-                ),
-                Container(
                   height: ResponsiveUtil.height(70),
                   alignment: Alignment.bottomCenter,
                   color: CustomColor.brown,
@@ -107,7 +102,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         style: TextStyle(
                             fontSize: ResponsiveUtil.getResponsiveFontSize(17),
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
                             fontFamily: 'Poppins'),
                       ),
                     ],
@@ -122,7 +116,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: TextStyle(
                   fontSize: ResponsiveUtil.getResponsiveFontSize(15),
                   fontWeight: FontWeight.w900,
-                  color: CustomColor.bluemagenta,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -131,7 +125,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 SizedBox(height: ResponsiveUtil.height(12)),
                 buildMenuItem(
                   text: 'Custom Themes',
-                  color: colorIcon,
                   icon: Icons.dark_mode,
                   onClicked: () =>
                       Navigator.of(context).pushNamed(ThemeScreen.route),
@@ -149,7 +142,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     endIndent: 7),
                 buildMenuItem(
                   text: 'My account',
-                  color: colorIcon,
                   icon: Icons.account_circle,
                   onClicked: () => selectedItem(context, 2),
                 ),
@@ -160,7 +152,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     endIndent: 7),
                 buildMenuItem(
                   text: 'Edit profile',
-                  color: colorIcon,
                   icon: Icons.edit_rounded,
                   onClicked: () => selectedItem(context, 3),
                 ),
@@ -171,7 +162,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     endIndent: 7),
                 buildMenuItem(
                   text: 'Log out',
-                  color: colorIcon,
                   icon: Icons.logout,
                   onClicked: () async {
                     final ConfirmAction? action =

@@ -37,8 +37,9 @@ final darkTheme = ThemeData(
   primarySwatch: Colors.grey,
   primaryColor: Colors.black,
   brightness: Brightness.dark,
-  backgroundColor: Color.fromARGB(255, 174, 41, 41),
+  colorScheme: darkColorScheme,
+  backgroundColor: const Color.fromARGB(255, 174, 41, 41),
   accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: Colors.black),
+  accentIconTheme: const IconThemeData(color: Colors.black),
   dividerColor: Colors.black12,
 );

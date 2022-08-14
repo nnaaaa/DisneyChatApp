@@ -68,7 +68,8 @@ class _MenuStatusState extends State<MenuStatus> {
                                   color: CustomColor.green,
                                   onClicked: () {
                                     Navigator.pop(context);
-                                    widget.callback(Icons.circle,CustomColor.green);
+                                    widget.callback(
+                                        Icons.circle, CustomColor.green);
                                   }),
                               buildMenuItem(
                                 text: 'Idle',
@@ -76,8 +77,8 @@ class _MenuStatusState extends State<MenuStatus> {
                                 color: CustomColor.yellow,
                                 onClicked: () {
                                   Navigator.pop(context);
-                                  widget.callback(Icons.nightlight,
-                                      CustomColor.yellow);
+                                  widget.callback(
+                                      Icons.nightlight, CustomColor.yellow);
                                 },
                               ),
                               buildMenuItem(
@@ -114,7 +115,6 @@ class _MenuStatusState extends State<MenuStatus> {
 
     return buildMenuItem(
         text: 'Set status',
-        color: Colors.black,
         icon: Icons.nights_stay_sharp,
         onClicked: () {
           showmenu();

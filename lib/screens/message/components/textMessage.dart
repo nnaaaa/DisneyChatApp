@@ -158,9 +158,8 @@ class _TextMessageState extends State<TextMessage> {
             minWidth: 10, maxWidth: MediaQuery.of(context).size.width * 0.5),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 0.5),
-            color: widget.message!.isSender
-                ? Theme.of(context).primaryColor
-                : Colors.white70,
+            // color: widget.message!.isSender
+            //     ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondary),
 
             // boxShadow: [
             //   BoxShadow(
@@ -171,7 +170,7 @@ class _TextMessageState extends State<TextMessage> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3), // changes position of shadow
