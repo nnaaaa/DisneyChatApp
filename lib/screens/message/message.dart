@@ -26,7 +26,7 @@ class MessagesScreen extends StatelessWidget {
         children: [
           const BackButton(),
           CircleAvatar(
-            radius: 24,
+            radius: 19,
             backgroundImage: NetworkImage(chat.imageUrl),
           ),
           const SizedBox(width: 10),
