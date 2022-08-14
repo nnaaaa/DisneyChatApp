@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './components/user.dart';
 import './components/user_preference.dart';
 import './components/appbar.dart';
 import './components/button.dart';
-import './components/social.dart';
 import './components/profile_widget.dart';
+import 'package:disneymobile/styles/responsive.dart';
+import 'package:disneymobile/styles/color.dart';
 
 class UserProfile extends StatefulWidget {
   static const route = "/profile";
@@ -25,23 +25,38 @@ class _UserProfileState extends State<UserProfile> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 160,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage("https://scontent.fhan1-1.fna.fbcdn.net/v/t1.6435-9/107613650_2738764246361066_8823221354465021168_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=PWZK-JSlsr0AX_egh6C&_nc_ht=scontent.fhan1-1.fna&oh=00_AT9PKIgfSJmCLOrJqO43ceaas36-FVYPt0ol-YLN2xLv9g&oe=631C677C"),
+          // Padding(padding: const EdgeInsets.only(top:60),
+          //     child: ProfileWidget(
+          //       imagePath: user.imagePath,
+          //       onClicked: () async {},
+          //     ),
+          // ),
+          Stack(
+            children: <Widget>[
+              Container(
+                height: ResponsiveUtil.height(140),
+                alignment: Alignment.bottomCenter,
+                color: CustomColor.brown,
               ),
-            ),
-          ),
-          Padding(padding: const EdgeInsets.only(top:60),
-              child: ProfileWidget(
-                imagePath: user.imagePath,
-                onClicked: () async {},
+              Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: ResponsiveUtil.height(30),
+                    horizontal: ResponsiveUtil.width(20)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(padding: const EdgeInsets.only(top:40),
+                      child: ProfileWidget(
+                        imagePath: user.imagePath,
+                        onClicked: () async {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ],
           ),
-          const SizedBox(height: 16),
+          // const SizedBox(height: 4),
           buildName(user),
           const SizedBox(height: 12),
           Center(child: buildEditProfileButton()),

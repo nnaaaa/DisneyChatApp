@@ -80,10 +80,6 @@ class _SettingScreenState extends State<SettingScreen> {
             Stack(
               children: <Widget>[
                 Container(
-                  height: ResponsiveUtil.height(150),
-                  color: CustomColor.gray,
-                ),
-                Container(
                   height: ResponsiveUtil.height(70),
                   alignment: Alignment.bottomCenter,
                   color: CustomColor.brown,
