@@ -1,7 +1,6 @@
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/screens/listChannel/components/channel.dart';
 import 'package:flutter/material.dart';
-import 'package:disneymobile/screens/listChannel/components/alert_input_name.dart';
 
 class Category extends StatefulWidget {
   final String nameCategory;

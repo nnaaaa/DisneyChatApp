@@ -22,8 +22,15 @@ class AuthAPI {
   }
 
   static Future<Response> verify(String email, String digit) async {
-    return await API().getPortal().put('$baseRoute/verify',
-        data: {'account': email, 'digitCode': digit});
+    return await API()
+        .getPortal()
+        .put('$baseRoute/verify', data: {'account': email, 'digitCode': digit});
+  }
+
+  static Future<Response> forgetPassword(String email) async {
+    return await API()
+        .getPortal()
+        .post('$baseRoute/forgetPassword', data: {'account': email});
   }
 
   static Future<Response> refreshToken(String refreshToken) async {

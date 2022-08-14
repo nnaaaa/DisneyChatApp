@@ -36,7 +36,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
       try {
         await AuthAPI.verify(email, _digitCode as String);
         if (!mounted) return;
-        Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+        Navigator.of(context).pushNamed(HomeScreen.route);
       } catch (e) {
         print('$e');
       } finally {
@@ -102,7 +102,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     _codeSix.text;
               });
               onSubmit();
-              print(_digitCode);
             },
           ),
           SizedBox(

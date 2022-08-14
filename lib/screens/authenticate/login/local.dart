@@ -1,15 +1,18 @@
-import 'package:disneymobile/apis/auth.dart';
+import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/screens/authenticate/login/google.dart';
+import 'package:disneymobile/screens/authenticate/verifier/verify.dart';
 import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/utilities/validator.dart' show Validator;
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
 import 'package:flutter/material.dart';
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 
 import '../register/register.dart' show RegisterScreen;
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatefulHookWidget {
   static const route = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -39,6 +42,61 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
   }
 
+  final TextEditingController _emailControllerForget = TextEditingController();
+
+  Future<void> onSubmitForget() async {
+    try {
+      await AuthAPI.forgetPassword(_emailControllerForget.text);
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed(VerifyScreen.route,
+          arguments: _emailControllerForget.text.toString());
+    } catch (e) {
+      print('$e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  _displayDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Input your email'),
+            content: TextField(
+              controller: _emailControllerForget,
+              decoration: const InputDecoration(hintText: "Enter email"),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.red,
+                textColor: Colors.white,
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                child: const Text('OK'),
+                onPressed: () {
+                  print(_emailControllerForget.text);
+                  onSubmitForget();
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Future<void> onSubmit() async {
@@ -51,7 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
               _passwordController.text.toString());
 
           if (!mounted) return;
-          Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+          Navigator.of(context).pushReplacementNamed(HomeScreen.route,
+              arguments: _emailController.text.toString());
         }
       } catch (e) {
         print('$e');
@@ -131,7 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        _displayDialog(context);
+                      },
                     )),
                 //list login by gmail, facebook, twitter
                 Container(
@@ -140,7 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(right: ResponsiveUtil.width(5)),
+                          margin:
+                              EdgeInsets.only(right: ResponsiveUtil.width(5)),
                           child: GoogleAuth()),
                       Container(
                           margin:

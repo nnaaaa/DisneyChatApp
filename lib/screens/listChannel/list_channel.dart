@@ -35,7 +35,9 @@ class ListChannel extends StatelessWidget {
                 child: CustomButton(
                   width: ResponsiveUtil.width(200),
                   text: 'Invite Members',
-                  onPress: () {},
+                  onPress: () {
+                    print('Invite Members');
+                  },
                 ),
               ),
               //category and channel
