@@ -25,11 +25,22 @@ class _UserProfileState extends State<UserProfile> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 160,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: NetworkImage("https://scontent.fhan1-1.fna.fbcdn.net/v/t1.6435-9/107613650_2738764246361066_8823221354465021168_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=PWZK-JSlsr0AX_egh6C&_nc_ht=scontent.fhan1-1.fna&oh=00_AT9PKIgfSJmCLOrJqO43ceaas36-FVYPt0ol-YLN2xLv9g&oe=631C677C"),
+              ),
+            ),
+          ),
           Padding(padding: const EdgeInsets.only(top:60),
               child: ProfileWidget(
                 imagePath: user.imagePath,
                 onClicked: () async {},
-              ),),
+              ),
+          ),
           const SizedBox(height: 16),
           buildName(user),
           const SizedBox(height: 12),
