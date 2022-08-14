@@ -2,6 +2,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/authenticate/login/local.dart';
 import 'package:disneymobile/screens/authenticate/register/register.dart';
 import 'package:disneymobile/screens/home/home.dart';
+import 'package:disneymobile/screens/listChannel/list_channel.dart';
 import 'package:disneymobile/screens/theme/theme_screen.dart';
 import 'package:disneymobile/screens/authenticate/verifier/verify.dart';
 import 'package:disneymobile/screens/setting/setting.dart';
@@ -56,6 +57,7 @@ class DisneyChat extends HookWidget {
             HomeScreen.route: (context) => const HomeScreen(),
             SettingScreen.route: (context) => const SettingScreen(),
             ThemeScreen.route: (context) => const ThemeScreen(),
+            ListChannel.route: (context) => const ListChannel(),
           });
     });
   }

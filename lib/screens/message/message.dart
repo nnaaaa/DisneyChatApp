@@ -1,4 +1,5 @@
 import 'package:disneymobile/dumpModels/dumpChat.dart';
+import 'package:disneymobile/screens/listChannel/list_channel.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,17 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
+      endDrawer: const Drawer(
+        child: ListChannel(),
+      ),
       body: Body(
         chat: chat,
       ),
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(context) {
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
@@ -49,14 +53,6 @@ class MessagesScreen extends StatelessWidget {
           )
         ],
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {
-            print("More");
-          },
-        )
-      ],
     );
   }
 }

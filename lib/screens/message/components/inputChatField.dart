@@ -90,19 +90,29 @@ class _ChatInputFieldState extends State<ChatInputField> {
                     //       .withOpacity(0.64),
                     // ),
                     IconButton(
-                        onPressed: () {
-                          if (textController.text != '') {
-                            dispatch(SendMessageAction(
-                              payload: convertToMessage(
-                                  widget.id.toString(), textController.text.toString()),
-                            ));
-                          }
-                          widget.notifyParent();
-                          //print(textController.text.toString());
-                          textController.clear();
-                        },
-                        icon: Icon(Icons.arrow_upward,
-                            color: Theme.of(context).primaryColor))
+                      onPressed: () {
+                        if (textController.text != '') {
+                          dispatch(SendMessageAction(
+                            payload: convertToMessage(widget.id.toString(),
+                                textController.text.toString()),
+                          ));
+                        }
+                        widget.notifyParent();
+                        //print(textController.text.toString());
+                        textController.clear();
+                      },
+                      icon: ClipOval(
+                        child: Material(
+                          color: Theme.of(context).primaryColor, // Button color
+                          child: InkWell(
+                            splashColor: Colors.green, // Splash color
+                            onTap: () {},
+                            child: SizedBox(
+                                width: ResponsiveUtil.width(55), height: ResponsiveUtil.height(55), child: const Icon(Icons.send, color: Colors.white70,)),
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

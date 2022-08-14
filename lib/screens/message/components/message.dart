@@ -20,22 +20,7 @@ class Message extends StatelessWidget {
     Widget messageContaint(ChatMessage message) {
       switch (message.messageType) {
         case ChatMessageType.text:
-          return
-              // Container(
-              //     decoration: BoxDecoration(
-
-              //       border: Border.all(color: Colors.black, width: 0.5),
-              //       borderRadius: BorderRadius.circular(10),
-              //       boxShadow: [
-              //         BoxShadow(
-              //           color: Colors.black.withOpacity(0.3),
-              //           blurRadius: 10,
-              //           offset: Offset(0, 1),
-              //         ),
-              //       ],
-              //     ),
-              //     child:
-              TextMessage(message: message);
+          return TextMessage(message: message);
         // case ChatMessageType.audio:
         //   return AudioMessage(message: message);
         // case ChatMessageType.video:
