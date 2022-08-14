@@ -3,6 +3,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
 import 'package:disneymobile/screens/setting/components/menuStatus.dart';
+import 'package:disneymobile/screens/theme/theme_screen.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
@@ -57,11 +58,11 @@ class _SettingScreenState extends State<SettingScreen> {
     return Drawer(
       backgroundColor: CustomColor.gray,
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          title: Row(
-            children: const [
-              Text('User Setting'),
-            ])),
+            title: Row(children: const [
+          Text('User Setting'),
+        ])),
         body: ListView(
           children: <Widget>[
             // Container(
@@ -133,7 +134,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   text: 'Custom Themes',
                   color: colorIcon,
                   icon: Icons.dark_mode,
-                  onClicked: () => selectedItem(context, 0),
+                  onClicked: () => Navigator.of(context).pushNamed(ThemeScreen.route),
                 ),
                 Divider(
                     indent: 7,
@@ -199,12 +200,7 @@ class _SettingScreenState extends State<SettingScreen> {
     Navigator.of(context).pop();
     switch (index) {
       case 0: // Dark mode
-        /* Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MyAccount(
-            name: name,
-            urlImage: urlImage,
-          ),
-        )); */
+        
         break;
       case 1: // Set status(online, idle, do not disturb,..)
 
