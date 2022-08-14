@@ -24,7 +24,6 @@ class AuthScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: ResponsiveUtil.height(15)),
                 child: CustomButton(
-                  backgroundColor: Theme.of(context).primaryColor,
                   text: 'Login',
                   onPress: () {
                     Navigator.pushNamed(context, LoginScreen.route);

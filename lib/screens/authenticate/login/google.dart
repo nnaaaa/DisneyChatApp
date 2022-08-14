@@ -1,5 +1,5 @@
 import 'package:disneymobile/apis/auth.dart';
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/cupertino.dart';

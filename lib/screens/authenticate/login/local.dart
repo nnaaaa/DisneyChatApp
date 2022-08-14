@@ -164,7 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   margin: EdgeInsets.only(top: ResponsiveUtil.height(25)),
                   child: CustomButton(
-                    backgroundColor: Theme.of(context).primaryColor,
                     text: 'Sign Up',
                     onPress: () {
                       Navigator.pushNamed(context, RegisterScreen.route);

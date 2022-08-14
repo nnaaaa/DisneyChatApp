@@ -1,6 +1,6 @@
 import 'package:disneymobile/apis/dio.dart' show API;
 import 'package:dio/dio.dart' show Response;
-import 'package:disneymobile/models/user.dart';
+import 'package:disneymobile/models/User.dart';
 
 class AuthAPI {
   static const baseRoute = '/auth';
