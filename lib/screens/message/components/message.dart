@@ -5,7 +5,7 @@ import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../dumpModels/chatMessages.dart';
+import 'package:disneymobile/dumpModels/chatMessages.dart';
 
 class Message extends StatelessWidget {
   const Message(
