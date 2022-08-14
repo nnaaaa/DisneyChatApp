@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/responsive.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -30,27 +31,13 @@ class ProfileWidget extends StatelessWidget {
         child: Ink.image(
           image: image,
           fit: BoxFit.cover,
-          width: 136,
-          height: 136,
+          width: ResponsiveUtil.width(136),
+          height: ResponsiveUtil.height(136),
           child: InkWell(onTap: onClicked),
         ),
       ),
     );
   }
-
-  Widget buildEditIcon(Color color) => buildCircle(
-    color: Colors.white,
-    all: 3,
-    child: buildCircle(
-      color: color,
-      all: 8,
-      child: const Icon(
-        Icons.edit,
-        color: Colors.white,
-        size: 20,
-      ),
-    ),
-  );
 
   Widget buildCircle({
     required Widget child,

@@ -17,10 +17,13 @@ class ButtonWidget extends StatelessWidget {
       shape: StadiumBorder(),
       onPrimary: Colors.white,
       padding: EdgeInsets.symmetric(
-          horizontal: ResponsiveUtil.width(100),
+          horizontal: ResponsiveUtil.width(105),
           vertical: ResponsiveUtil.height(16)),
     ),
-    child: Text(text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+    child: Text(text, style: TextStyle(
+        fontSize: ResponsiveUtil.getResponsiveFontSize(14),
+        fontWeight: FontWeight.w500)
+    ),
     onPressed: onClicked,
   );
 }

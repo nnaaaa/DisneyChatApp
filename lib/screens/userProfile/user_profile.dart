@@ -46,7 +46,7 @@ class _UserProfileState extends State<UserProfile> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: EdgeInsets.only(top: ResponsiveUtil.height(40)),
                       child: ProfileWidget(
                         imagePath: user.avatarUrl,
                         onClicked: () async {},
@@ -57,15 +57,14 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ],
           ),
-          // const SizedBox(height: 4),
           buildName(user),
-          const SizedBox(height: 12),
+          SizedBox(height: ResponsiveUtil.height(12)),
           Center(child: buildEditProfileButton()),
           SizedBox(height: ResponsiveUtil.height(20)),
           buildAbout(user),
-          const SizedBox(height: 12),
+          SizedBox(height: ResponsiveUtil.height(12)),
           buildBio(user),
-          const SizedBox(height: 12),
+          SizedBox(height: ResponsiveUtil.height(12)),
           buildStatus(user),
         ],
       ),
@@ -76,9 +75,12 @@ class _UserProfileState extends State<UserProfile> {
         children: [
           Text(
             user.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: ResponsiveUtil.getResponsiveFontSize(20)
+            ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: ResponsiveUtil.height(4)),
         ],
       );
 
@@ -90,14 +92,16 @@ class _UserProfileState extends State<UserProfile> {
       );
 
   Widget buildAbout(User user) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(16)),
+        margin: EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children:  [
             Text(
               'ABOUT ME',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: ResponsiveUtil.getResponsiveFontSize(14),
+                  fontWeight: FontWeight.w900),
             ),
           ],
         ),
@@ -127,16 +131,22 @@ class _UserProfileState extends State<UserProfile> {
         children: [
           Text(
             user.account,
-            style: TextStyle(fontSize: 16, height: 1.4),
+            style: TextStyle(
+                fontSize: ResponsiveUtil.getResponsiveFontSize(13),
+                height: ResponsiveUtil.height(1.4)
+            ),
           ),
         ],
       ));
 
   Widget buildStatus(User user) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(20)),
         child: Text(
-          user.lastLogin,
-          style: const TextStyle(fontSize: 14, height: 1.4, color: Colors.grey),
+          "Last seen " + user.lastLogin.substring(0,10),
+          style: TextStyle(
+              fontSize: ResponsiveUtil.getResponsiveFontSize(12),
+              height: ResponsiveUtil.height(1.4),
+              color: Colors.grey),
         ),
       );
 }
