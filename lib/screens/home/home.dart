@@ -60,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
           if (value == null) {
             return;
           }
-          //   print('value ${value}');
           dispatch(AddUserAction(payload: value));
           setState(() {
             isLoading = false;
@@ -121,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar buildAppbar(profileUrl) {
     return AppBar(
       centerTitle: true,
-      title: _page == 0 ? const Text('Chats') : const Text('Online Friends'),
+      title: _page == 0 ? const Text('Guilds') : const Text('Online Friends'),
       leading: Builder(
           builder: (context) => IconButton(
                 icon: CircleAvatar(
@@ -129,39 +128,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundImage: NetworkImage(
                       profileUrl ?? 'https://i.stack.imgur.com/l60Hf.png'),
                 ),
-                onPressed: () => print("personal profile"),
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(SettingScreen.route),
               )),
-      actions: [
-        Builder(
-          builder: (context) => IconButton(
-              icon: getIcon(),
-              onPressed: () {
-                (controller.isVisible) ? controller.hide() : controller.show();
-                setState(() {
-                  isSearching = !isSearching;
-                });
-              }),
-        ),
-        Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () =>
-                Navigator.of(context).pushNamed(SettingScreen.route),
-          ),
-        ),
-      ],
+      actions: [Builder(builder: (_) => getIcon())],
     );
   }
 
-  Widget getIcon() {
+  IconButton getIcon() {
     if (_page == 0) {
-      return isSearching
-          ? const Icon(Icons.cancel)
-          : const Icon(
-              Icons.search,
-            );
+      return IconButton(
+          icon: const Icon(Icons.add), onPressed: () => print("add guild"));
+    } else {
+      return IconButton(
+          icon: isSearching
+              ? const Icon(Icons.cancel)
+              : const Icon(
+                  Icons.search,
+                ),
+          onPressed: () {
+            (controller.isVisible) ? controller.hide() : controller.show();
+            setState(() {
+              isSearching = !isSearching;
+            });
+          });
     }
-    return const Icon(Icons.contacts);
   }
 
   Widget getBody() {

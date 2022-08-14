@@ -8,8 +8,7 @@ class Avatar extends StatelessWidget {
       required this.url,
       this.colorStatus = const Color(0xFF00BF6D),
       this.iconStatus = Icons.circle,
-      this.radius = 30
-      })
+      this.radius = 30})
       : super(key: key);
   final String url;
   final Color? colorStatus;
@@ -33,7 +32,7 @@ class Avatar extends StatelessWidget {
               border: Border.all(
                   color: CustomColor.gray, width: ResponsiveUtil.width(2)),
             ),
-            child: Icon(iconStatus, size: 20, color: colorStatus),
+            child: Icon(iconStatus, size: radius / 2, color: colorStatus),
           ),
         )
       ],
