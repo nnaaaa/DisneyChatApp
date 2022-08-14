@@ -37,7 +37,7 @@ List<Chat> dumpChat = [
           messageType: ChatMessageType.text,
           messageStatus: MessageStatus.viewed,
           isSender: false,
-          reacts: [React(author: cr7, emoji: emojiList[5])]),
+          reacts: [React(author: cr7, emoji: emojiList[0])]),
     ],
     name: "Christiano Ronaldo",
     imageUrl:
