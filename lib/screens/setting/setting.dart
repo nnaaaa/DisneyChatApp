@@ -3,6 +3,7 @@ import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
 import 'package:disneymobile/screens/setting/components/menuStatus.dart';
+import 'package:disneymobile/screens/userProfile/user_profile.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
@@ -149,7 +150,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   text: 'My account',
                   color: colorIcon,
                   icon: Icons.account_circle,
-                  onClicked: () => selectedItem(context, 2),
+                  onClicked: () => Navigator.of(context).pushNamed(UserProfile.route),
                 ),
                 Divider(
                     indent: 7,
