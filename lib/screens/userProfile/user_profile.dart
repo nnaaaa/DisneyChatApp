@@ -45,7 +45,7 @@ class _UserProfileState extends State<UserProfile> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(padding: const EdgeInsets.only(top:40),
+                    Padding(padding: const EdgeInsets.only(top: 40),
                       child: ProfileWidget(
                         imagePath: user.imagePath,
                         onClicked: () async {},
@@ -82,7 +82,7 @@ class _UserProfileState extends State<UserProfile> {
   );
 
   Widget buildEditProfileButton() => ButtonWidget(
-    text: 'Edit Profile',
+    text: 'Edit User Profile',
     onClicked: () {print("edit profile");},
   );
 
@@ -101,10 +101,13 @@ class _UserProfileState extends State<UserProfile> {
   );
 
   Widget buildBio(User user) => Container(
-    width: 80,
-    height: 160,
-    padding: EdgeInsets.symmetric(horizontal: 16, vertical:16),
-    margin: EdgeInsets.symmetric(horizontal: 20),
+    width: ResponsiveUtil.width(80),
+    height: ResponsiveUtil.height(160),
+    padding: EdgeInsets.symmetric(
+        horizontal: ResponsiveUtil.width(16),
+        vertical:ResponsiveUtil.height(16)
+    ),
+    margin: EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(20)),
     decoration: BoxDecoration(
       border: Border.all(color: Colors.black54),
       borderRadius: BorderRadius.all(Radius.circular(24)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:disneymobile/styles/responsive.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -15,7 +16,9 @@ class ButtonWidget extends StatelessWidget {
     style: ElevatedButton.styleFrom(
       shape: StadiumBorder(),
       onPrimary: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 140, vertical: 16),
+      padding: EdgeInsets.symmetric(
+          horizontal: ResponsiveUtil.width(100),
+          vertical: ResponsiveUtil.height(16)),
     ),
     child: Text(text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
     onPressed: onClicked,
