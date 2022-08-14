@@ -54,27 +54,27 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final user = useSelector<RootState, User?>((state) => state.user);
     final dispatch = useDispatch<RootState>();
-    useEffect(() {
-      UserAPI.getProfile().then(
-        (value) {
-          if (value == null) {
-            return;
-          }
-          dispatch(AddUserAction(payload: value));
-          setState(() {
-            isLoading = false;
-          });
-        },
-      ).catchError((error) {
-        Navigator.of(context).pushReplacementNamed(AuthScreen.route);
-        setState(() {
-          isLoading = false;
-        });
-      });
-      return () {};
-    }, []);
+    // useEffect(() {
+    //   UserAPI.getProfile().then(
+    //     (value) {
+    //       if (value == null) {
+    //         return;
+    //       }
+    //       dispatch(AddUserAction(payload: value));
+    //       setState(() {
+    //         isLoading = false;
+    //       });
+    //     },
+    //   ).catchError((error) {
+    //     Navigator.of(context).pushReplacementNamed(AuthScreen.route);
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //   });
+    //   return () {};
+    // }, []);
 
-    if (isLoading) return const LoadingScreen();
+    // if (isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: buildAppbar(user?.avatarUrl),
