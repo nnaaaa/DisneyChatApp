@@ -8,12 +8,10 @@ import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatarStatus.dart';
-
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/widgets/buildMenuItem.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
-import 'package:flutter_hooks/flutter_hooks.dart'
-    show useEffect, StatefulHookWidget;
+import 'package:flutter_hooks/flutter_hooks.dart' show useEffect, StatefulHookWidget;
 import 'package:flutter/material.dart';
 import 'package:disneymobile/APIs/dio.dart' show Token;
 
@@ -145,8 +143,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 buildMenuItem(
                   text: 'My account',
                   color: colorIcon,
-                  icon: Icons.account_circle,
-                  onClicked: () => Navigator.of(context).pushNamed(UserProfile.route),
+                  icon: Icons.edit_rounded,
+                  onClicked: () => selectedItem(context, 3),
                 ),
                 Divider(
                     indent: 7,
@@ -154,10 +152,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     color: CustomColor.divider,
                     endIndent: 7),
                 buildMenuItem(
-                  text: 'Edit profile',
+                  text: 'User profile',
                   color: colorIcon,
-                  icon: Icons.edit_rounded,
-                  onClicked: () => selectedItem(context, 3),
+                  icon: Icons.account_circle,
+                  onClicked: () => Navigator.of(context).pushNamed(UserProfile.route),
                 ),
                 Divider(
                     indent: 7,
