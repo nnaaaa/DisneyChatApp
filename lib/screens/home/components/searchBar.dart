@@ -1,3 +1,5 @@
+import 'package:disneymobile/APIs/dio.dart';
+import 'package:disneymobile/APIs/user.dart';
 import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/models/Guild.dart';
 import 'package:disneymobile/screens/home/components/chatBody.dart';
@@ -44,6 +46,10 @@ Widget buildFloatingSearchBar(context, controller) {
         controller.query = "";
         controller.close();
       }
+    },
+    onQueryChanged: (String query)async {
+      print(query);
+      await UserAPI.findByName(query);
     },
     scrollPadding: EdgeInsets.zero,
     transition: CircularFloatingSearchBarTransition(spacing: 16),
