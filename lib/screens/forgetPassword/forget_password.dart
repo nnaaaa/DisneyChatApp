@@ -64,6 +64,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             child: Column(
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: ResponsiveUtil.height(10)),
+                  child: Image.asset(
+                    'assets/images/icon.png',
+                    height: ResponsiveUtil.height(200),
+                  ),
+                ),
+                Container(
                   margin: const EdgeInsets.only(top: 16),
                   child: CustomTextInput(
                     placeholder: 'Account',
