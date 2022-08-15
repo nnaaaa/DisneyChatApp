@@ -1,6 +1,7 @@
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/screens/authenticate/login/google.dart';
 import 'package:disneymobile/screens/authenticate/verifier/verify.dart';
+import 'package:disneymobile/screens/forgetPassword/forget_password.dart';
 import 'package:disneymobile/screens/home/home.dart' show HomeScreen;
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/utilities/validator.dart' show Validator;
@@ -48,8 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await AuthAPI.forgetPassword(_emailControllerForget.text);
       if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed(VerifyScreen.route,
-          arguments: _emailControllerForget.text.toString());
+      Navigator.of(context).pushNamed(ForgetPassword.route);
     } catch (e) {
       print('$e');
     } finally {
