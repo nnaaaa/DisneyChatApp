@@ -1,5 +1,6 @@
 import 'package:disneymobile/models/User.dart' show User;
 import 'package:disneymobile/screens/authenticate/authenticate.dart';
+import 'package:disneymobile/screens/changePassword/change_password.dart';
 import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
 import 'package:disneymobile/screens/setting/components/menuStatus.dart';
@@ -144,6 +145,18 @@ class _SettingScreenState extends State<SettingScreen> {
                   text: 'My account',
                   icon: Icons.account_circle,
                   onClicked: () => selectedItem(context, 2),
+                ),
+                Divider(
+                    indent: 7,
+                    thickness: 4,
+                    color: CustomColor.divider,
+                    endIndent: 7),
+                buildMenuItem(
+                  text: 'Change password',
+                  icon: Icons.lock,
+                  onClicked: () {
+                    Navigator.of(context).pushNamed(ChangePassword.route);
+                  },
                 ),
                 Divider(
                     indent: 7,

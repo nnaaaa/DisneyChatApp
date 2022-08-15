@@ -33,10 +33,22 @@ class AuthAPI {
         .post('$baseRoute/forgetPassword', data: {'account': email});
   }
 
-  static Future<Response> newPassword(String email, String newPassword, String digitCode) async {
-    return await API()
-        .getPortal()
-        .put('$baseRoute/newPassword', data: {'account': email, 'newPassword': newPassword, 'digitCode': digitCode});
+  static Future<Response> newPassword(
+      String email, String newPassword, String digitCode) async {
+    return await API().getPortal().put('$baseRoute/newPassword', data: {
+      'account': email,
+      'newPassword': newPassword,
+      'digitCode': digitCode
+    });
+  }
+
+  static Future<Response> changePassword(
+      String email, String oldPassword, String newPassword) async {
+    return await API().getPortal().put('$baseRoute/changePassword', data: {
+      'account': email,
+      'oldPassword': oldPassword,
+      'newPassword': newPassword
+    });
   }
 
   static Future<Response> refreshToken(String refreshToken) async {
