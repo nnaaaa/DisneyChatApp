@@ -1,8 +1,8 @@
+import 'package:disneymobile/screens/authenticate/authenticate.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:disneymobile/APIs/auth.dart';
 import 'package:disneymobile/APIs/user.dart';
-import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/utilities/validator.dart';
@@ -38,7 +38,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             _passwordController.text.toString(),
             _digitCodeController.text.toString());
         if (!mounted) return;
-        Navigator.of(context).pushNamed(HomeScreen.route);
+        Navigator.of(context).pushNamed(AuthScreen.route);
       } catch (e) {
         print('$e');
       } finally {
