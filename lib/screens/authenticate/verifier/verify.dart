@@ -1,4 +1,4 @@
-import 'package:disneymobile/APIs/auth.dart';
+import 'package:disneymobile/apis/rest/auth.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import './component/input_digit_code.dart';

@@ -1,4 +1,4 @@
-import 'package:disneymobile/apis/dio.dart' show API;
+import 'package:disneymobile/apis/rest/dio.dart' show API;
 import 'package:disneymobile/models/User.dart';
 
 class UserAPI {

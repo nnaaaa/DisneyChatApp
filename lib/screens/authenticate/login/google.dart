@@ -1,4 +1,4 @@
-import 'package:disneymobile/apis/auth.dart';
+import 'package:disneymobile/apis/rest/auth.dart';
 import 'package:disneymobile/models/User.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/styles/responsive.dart';

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart' show Dio, BaseOptions, InterceptorsWrapper;
-import 'package:disneymobile/apis/auth.dart' show AuthAPI;
+import 'package:disneymobile/apis/rest/auth.dart' show AuthAPI;
 import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;

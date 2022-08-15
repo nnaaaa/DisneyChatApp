@@ -1,5 +1,5 @@
-import 'package:disneymobile/APIs/auth.dart';
-import 'package:disneymobile/APIs/user.dart';
+import 'package:disneymobile/apis/rest/auth.dart';
+import 'package:disneymobile/APIs/rest/user.dart';
 import '../verifier/verify.dart';
 import 'package:disneymobile/screens/home/home.dart';
 import 'package:disneymobile/states/rootState.dart';

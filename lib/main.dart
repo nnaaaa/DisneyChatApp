@@ -49,16 +49,17 @@ class DisneyChat extends HookWidget {
           theme: themeNotifier.getTheme(),
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-          routes: {
-            AuthScreen.route: (context) => const AuthScreen(),
-            LoginScreen.route: (context) => const LoginScreen(),
-            RegisterScreen.route: (context) => const RegisterScreen(),
-            VerifyScreen.route: (context) => const VerifyScreen(),
-            HomeScreen.route: (context) => const HomeScreen(),
-            SettingScreen.route: (context) => const SettingScreen(),
-            ThemeScreen.route: (context) => const ThemeScreen(),
-            ListChannel.route: (context) => const ListChannel(),
-          });
+          // routes: {
+          //   AuthScreen.route: (context) => const AuthScreen(),
+          //   LoginScreen.route: (context) => const LoginScreen(),
+          //   RegisterScreen.route: (context) => const RegisterScreen(),
+          //   VerifyScreen.route: (context) => const VerifyScreen(),
+          //   HomeScreen.route: (context) => const HomeScreen(),
+          //   SettingScreen.route: (context) => const SettingScreen(),
+          //   ThemeScreen.route: (context) => const ThemeScreen(),
+          //   ListChannel.route: (context) => const ListChannel(),
+          // });
+          home: HomeScreen());
     });
   }
 }
