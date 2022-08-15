@@ -11,7 +11,7 @@ class CustomColor {
   
   static Color bluemagenta = const Color.fromARGB(255, 111, 109, 191);
   static Color darkblue = const Color.fromRGBO(9, 97, 145, 1);
-  static Color brown = const Color.fromARGB(255, 135, 67, 88);
+  static Color brown = const Color.fromARGB(255, 142, 80, 99);
   static Color gray = const Color(0xFFDFE0E3);
   static Color divider = const Color.fromARGB(68, 102, 102, 102);
   static Color red = const Color.fromARGB(255, 198, 55, 45);

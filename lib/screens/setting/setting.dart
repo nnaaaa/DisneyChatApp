@@ -5,16 +5,15 @@ import 'package:disneymobile/screens/loading/loading.dart';
 import 'package:disneymobile/screens/setting/components/myAccount.dart';
 import 'package:disneymobile/screens/setting/components/menuStatus.dart';
 import 'package:disneymobile/screens/theme/theme_screen.dart';
+import 'package:disneymobile/screens/userProfile/user_profile.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/styles/color.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/avatarStatus.dart';
-
 import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/widgets/buildMenuItem.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
-import 'package:flutter_hooks/flutter_hooks.dart'
-    show useEffect, StatefulHookWidget;
+import 'package:flutter_hooks/flutter_hooks.dart' show useEffect, StatefulHookWidget;
 import 'package:flutter/material.dart';
 import 'package:disneymobile/APIs/dio.dart' show Token;
 
