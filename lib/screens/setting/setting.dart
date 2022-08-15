@@ -143,7 +143,9 @@ class _SettingScreenState extends State<SettingScreen> {
                 buildMenuItem(
                   text: 'My account',
                   icon: Icons.account_circle,
-                  onClicked: () => selectedItem(context, 2),
+                  onClicked: () {
+                    Navigator.of(context).pushNamed(UserProfile.route);
+                  },
                 ),
                 Divider(
                     indent: 7,

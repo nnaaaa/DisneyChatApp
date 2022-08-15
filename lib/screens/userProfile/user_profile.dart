@@ -76,7 +76,7 @@ class _UserProfileState extends State<UserProfile> {
         children: [
           Text(
             user.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
         ],
@@ -90,8 +90,8 @@ class _UserProfileState extends State<UserProfile> {
       );
 
   Widget buildAbout(User user) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
@@ -112,14 +112,13 @@ class _UserProfileState extends State<UserProfile> {
       margin: EdgeInsets.symmetric(horizontal: ResponsiveUtil.width(20)),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black54),
-          borderRadius: BorderRadius.all(Radius.circular(24)),
-          color: Theme.of(context).colorScheme.primary,
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 10,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ]),
       child: Column(
@@ -127,13 +126,13 @@ class _UserProfileState extends State<UserProfile> {
         children: [
           Text(
             user.account,
-            style: TextStyle(fontSize: 16, height: 1.4),
+            style: const TextStyle(fontSize: 16, height: 1.4),
           ),
         ],
       ));
 
   Widget buildStatus(User user) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Text(
           user.lastLogin,
           style: const TextStyle(fontSize: 14, height: 1.4, color: Colors.grey),
