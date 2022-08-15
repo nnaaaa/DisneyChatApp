@@ -7,11 +7,16 @@ import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/utilities/validator.dart' show Validator;
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
+import 'package:disneymobile/widgets/push_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart' show useDispatch;
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 
-import '../register/register.dart' show RegisterScreen;
+import 'package:disneymobile/screens/authenticate/register/register.dart'
+    show RegisterScreen;
+
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class LoginScreen extends StatefulHookWidget {
   static const route = '/login';
@@ -34,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     isLoading = false;
     _emailController.addListener(() {});
     _passwordController.addListener(() {});
+    tz.initializeTimeZones();
   }
 
   @override
@@ -109,8 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
               _passwordController.text.toString());
 
           if (!mounted) return;
-          Navigator.of(context).pushReplacementNamed(HomeScreen.route,
-              arguments: _emailController.text.toString());
+          NotificationService().showNotification(1, "Login successful", "You have successfully logged in", 1);
+          Navigator.of(context).pushReplacementNamed(HomeScreen.route);
         }
       } catch (e) {
         print('$e');
