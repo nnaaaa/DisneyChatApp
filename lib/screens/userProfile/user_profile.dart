@@ -22,6 +22,7 @@ class UserProfile extends StatefulHookWidget {
 class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
+    // Take user data from server
     final user = useSelector<RootState, User?>((state) => state.user);
 
     if (user == null) return const LoadingScreen();
@@ -123,7 +124,7 @@ class _UserProfileState extends State<UserProfile> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 10,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0,3),// changes position of shadow
             ),
           ]),
       child: Column(

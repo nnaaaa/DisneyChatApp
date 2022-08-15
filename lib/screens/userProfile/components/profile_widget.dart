@@ -22,6 +22,7 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
+  // This widget is used to build Avatar Image
   Widget buildImage() {
     final image = NetworkImage(imagePath);
 
