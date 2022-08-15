@@ -19,6 +19,9 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'components/searchBar.dart';
 
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
+
 class HomeScreen extends StatefulHookWidget {
   static const route = '/';
   const HomeScreen({Key? key}) : super(key: key);
@@ -43,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _page = 0;
     _myChats = const ChatBody();
     _myFriends = const FriendBody();
+    tz.initializeTimeZones();
   }
 
   @override
@@ -142,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: const Icon(Icons.add),
           onPressed: () {
             print("add guild");
-            NotificationService().showNotification(1, "Add guild", "Đạt đẹp trai", 10);
+            NotificationService().showNotification(1, "Add guild", "Đạt đẹp trai", 1);
           });
     } else {
       return IconButton(

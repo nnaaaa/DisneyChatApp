@@ -5,9 +5,14 @@ import 'package:disneymobile/styles/responsive.dart' show ResponsiveUtil;
 import 'package:disneymobile/utilities/validator.dart' show Validator;
 import 'package:disneymobile/widgets/button.dart' show CustomButton;
 import 'package:disneymobile/widgets/input.dart' show CustomTextInput;
+import 'package:disneymobile/widgets/push_notification.dart';
 import 'package:flutter/material.dart';
 
-import '../register/register.dart' show RegisterScreen;
+import 'package:disneymobile/screens/authenticate/register/register.dart'
+    show RegisterScreen;
+
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
@@ -30,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     isLoading = false;
     _emailController.addListener(() {});
     _passwordController.addListener(() {});
+    tz.initializeTimeZones();
   }
 
   @override
@@ -51,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               _passwordController.text.toString());
 
           if (!mounted) return;
+          NotificationService().showNotification(1, "Login successful", "You have successfully logged in", 1);
           Navigator.of(context).pushReplacementNamed(HomeScreen.route);
         }
       } catch (e) {
@@ -140,7 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(right: ResponsiveUtil.width(5)),
+                          margin:
+                              EdgeInsets.only(right: ResponsiveUtil.width(5)),
                           child: GoogleAuth()),
                       Container(
                           margin:
