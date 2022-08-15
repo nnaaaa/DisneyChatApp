@@ -9,6 +9,7 @@ import 'package:disneymobile/screens/setting/setting.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/user.dart';
 import 'package:disneymobile/widgets/CustomTheme/theme_values.dart';
+import 'package:disneymobile/widgets/push_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux_hooks/flutter_redux_hooks.dart'
     show useSelector, useDispatch;
@@ -138,7 +139,11 @@ class _HomeScreenState extends State<HomeScreen> {
   IconButton getIcon() {
     if (_page == 0) {
       return IconButton(
-          icon: const Icon(Icons.add), onPressed: () => print("add guild"));
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            print("add guild");
+            NotificationService().showNotification(1, "Add guild", "Đạt đẹp trai", 10);
+          });
     } else {
       return IconButton(
           icon: isSearching
