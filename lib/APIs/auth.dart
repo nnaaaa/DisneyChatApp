@@ -55,7 +55,6 @@ class UserRegisterDto {
     if (avatarUrl != null) {
       object['avatarUrl'] = avatarUrl as String;
     }
-
     return object;
   }
 }
