@@ -15,7 +15,7 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart'
     show useEffect, StatefulHookWidget;
 import 'package:flutter/material.dart';
-import 'package:disneymobile/APIs/dio.dart' show Token;
+import 'package:disneymobile/APIs/rest/dio.dart' show Token;
 
 // temp---------------------------
 import 'package:disneymobile/styles/color.dart';

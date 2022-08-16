@@ -1,3 +1,4 @@
+import 'package:disneymobile/dumpModels/dumpChat.dart';
 import 'package:disneymobile/states/rootState.dart';
 import 'package:disneymobile/states/slices/message.dart';
 import 'package:disneymobile/styles/responsive.dart';
@@ -7,12 +8,12 @@ import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 
 class ChatInputField extends StatefulHookWidget {
-  final int id;
+  final Chat user;
   final Function() notifyParent;
 
   const ChatInputField({
     Key? key,
-    required this.id,
+    required this.user,
     required this.notifyParent,
   }) : super(key: key);
 
@@ -90,29 +91,38 @@ class _ChatInputFieldState extends State<ChatInputField> {
                     //       .withOpacity(0.64),
                     // ),
                     IconButton(
-                      onPressed: () {
-                        if (textController.text != '') {
-                          dispatch(SendMessageAction(
-                            payload: convertToMessage(widget.id.toString(),
-                                textController.text.toString()),
-                          ));
-                        }
-                        widget.notifyParent();
-                        //print(textController.text.toString());
-                        textController.clear();
-                      },
-                      icon: ClipOval(
-                        child: Material(
-                          color: Theme.of(context).primaryColor, // Button color
-                          child: InkWell(
-                            splashColor: Colors.green, // Splash color
-                            onTap: () {},
-                            child: SizedBox(
-                                width: ResponsiveUtil.width(55), height: ResponsiveUtil.height(55), child: const Icon(Icons.send, color: Colors.white70,)),
-                          ),
-                        ),
-                      ),
-                    )
+                        onPressed: () {
+                          if (textController.text != '') {
+                            print(textController.text.toString());
+                            dispatch(SendMessageAction(
+                                payload: convertToMessage(
+                                    widget.user.id,
+                                    textController.text.toString(),
+                                    (widget.user.messages!.length - 1)
+                                        .toString())));
+                          }
+                          widget.notifyParent();
+                          //print(textController.text.toString());
+                          textController.clear();
+                        },
+                        icon: const Icon(Icons.send)
+                        // ClipOval(
+                        //   child: Material(
+                        //     color: Theme.of(context).primaryColor, // Button color
+                        //     child: InkWell(
+                        //       splashColor: Colors.green, // Splash color
+                        //       onTap: () {},
+                        //       child: SizedBox(
+                        //           width: ResponsiveUtil.width(55),
+                        //           height: ResponsiveUtil.height(55),
+                        //           child: const Icon(
+                        //             Icons.send,
+                        //             color: Colors.white70,
+                        //           )),
+                        //     ),
+                        //   ),
+                        // ),
+                        )
                   ],
                 ),
               ),

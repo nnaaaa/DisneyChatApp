@@ -1,15 +1,26 @@
 import 'package:disneymobile/dumpModels/chatMessages.dart';
 import 'package:disneymobile/dumpModels/dumpEmojis.dart';
+import 'package:disneymobile/states/rootState.dart';
+import 'package:disneymobile/states/slices/message.dart';
 import 'package:disneymobile/styles/responsive.dart';
 import 'package:disneymobile/widgets/buildMenuItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_redux_hooks/flutter_redux_hooks.dart';
+import 'package:flutter_hooks/flutter_hooks.dart' show StatefulHookWidget;
 
-class TextMessage extends StatefulWidget {
+class TextMessage extends StatefulHookWidget {
   final ChatMessage? message;
+  final Function() notifyParent;
+  final int userID;
 
-  const TextMessage({Key? key, this.message}) : super(key: key);
+  const TextMessage({
+    required this.userID,
+    Key? key,
+    this.message,
+    required this.notifyParent,
+  }) : super(key: key);
 
   @override
   State<TextMessage> createState() => _TextMessageState();
@@ -18,6 +29,7 @@ class TextMessage extends StatefulWidget {
 class _TextMessageState extends State<TextMessage> {
   @override
   Widget build(BuildContext context) {
+    final dispatch = useDispatch<RootState>();
     Widget _buildReactionsIcon(String path, Function() onClick) {
       return IconButton(
         color: Colors.transparent,
@@ -36,7 +48,7 @@ class _TextMessageState extends State<TextMessage> {
           color: Colors.grey, icon: const Icon(Icons.add), onPressed: onClick);
     }
 
-    Future<void> showmenu() async {
+    Future<void> showmenu(dispatch) async {
       showModalBottomSheet(
           context: context,
           builder: (BuildContext context) {
@@ -57,6 +69,10 @@ class _TextMessageState extends State<TextMessage> {
                             SizedBox(width: ResponsiveUtil.width(20)),
                             for (final emoji in emojiList)
                               _buildReactionsIcon(emoji.imageUrl, () {
+                                print(widget.message!.messageID);
+                                dispatch(SendReactAction(
+                                    payload: ReactSend(widget.userID, emoji,
+                                        widget.message!.messageID)));
                                 Fluttertoast.showToast(
                                     msg: emoji.content,
                                     toastLength: Toast.LENGTH_SHORT,
@@ -65,6 +81,7 @@ class _TextMessageState extends State<TextMessage> {
                                     backgroundColor: Colors.black,
                                     textColor: Colors.white,
                                     fontSize: 16.0);
+                                widget.notifyParent();
                                 Navigator.pop(context);
                               }),
                             _buildAddIcon(() => Fluttertoast.showToast(
@@ -151,15 +168,16 @@ class _TextMessageState extends State<TextMessage> {
 
     return GestureDetector(
       onLongPress: () {
-        showmenu();
+        showmenu(dispatch);
       },
       child: Container(
         constraints: BoxConstraints(
             minWidth: 10, maxWidth: MediaQuery.of(context).size.width * 0.5),
         decoration: BoxDecoration(
+            color: widget.message!.isSender
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).colorScheme.secondary,
             border: Border.all(color: Colors.black, width: 0.5),
-            // color: widget.message!.isSender
-            //     ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondary),
 
             // boxShadow: [
             //   BoxShadow(

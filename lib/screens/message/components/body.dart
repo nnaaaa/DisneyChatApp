@@ -26,13 +26,14 @@ class _BodyState extends State<Body> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: widget.chat.messages?.length ?? 0,
             itemBuilder: (context, index) => Message(
+                userID: widget.chat.id,
                 avatarUrl: widget.chat.imageUrl,
                 message: widget.chat.messages![index],
                 isLast:
                     (index == widget.chat.messages!.length - 1) ? true : false),
           ),
         )),
-        ChatInputField(id: widget.chat.id, notifyParent: () => setState(() {})),
+        ChatInputField(user: widget.chat, notifyParent: () => setState(() {})),
       ]),
     );
   }

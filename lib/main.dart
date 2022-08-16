@@ -45,21 +45,22 @@ class DisneyChat extends HookWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-          title: 'Disney',
-          theme: themeNotifier.getTheme(),
-          useInheritedMediaQuery: true,
-          debugShowCheckedModeBanner: false,
-          // routes: {
-          //   AuthScreen.route: (context) => const AuthScreen(),
-          //   LoginScreen.route: (context) => const LoginScreen(),
-          //   RegisterScreen.route: (context) => const RegisterScreen(),
-          //   VerifyScreen.route: (context) => const VerifyScreen(),
-          //   HomeScreen.route: (context) => const HomeScreen(),
-          //   SettingScreen.route: (context) => const SettingScreen(),
-          //   ThemeScreen.route: (context) => const ThemeScreen(),
-          //   ListChannel.route: (context) => const ListChannel(),
-          // });
-          home: HomeScreen());
+        title: 'Disney',
+        theme: themeNotifier.getTheme(),
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        // routes: {
+        //   AuthScreen.route: (context) => const AuthScreen(),
+        //   LoginScreen.route: (context) => const LoginScreen(),
+        //   RegisterScreen.route: (context) => const RegisterScreen(),
+        //   VerifyScreen.route: (context) => const VerifyScreen(),
+        //   HomeScreen.route: (context) => const HomeScreen(),
+        //   SettingScreen.route: (context) => const SettingScreen(),
+        //   ThemeScreen.route: (context) => const ThemeScreen(),
+        //   ListChannel.route: (context) => const ListChannel(),
+        // }
+        home: HomeScreen(),
+      );
     });
   }
 }

@@ -17,6 +17,7 @@ import 'package:flutter_hooks/flutter_hooks.dart'
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'components/searchBar.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeScreen extends StatefulHookWidget {
   static const route = '/';
@@ -48,6 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     super.dispose();
     controller.dispose();
+  }
+
+  void connectAndListen() {
+    IO.Socket socket = IO.io('https://b33b-116-102-222-20.ap.ngrok.io',
+        IO.OptionBuilder().setTransports(['websocket']).build());
+    socket.onConnect((_) {
+      print('connect');
+    });
+    print(socket.connected);
+    socket.emit('guild/create', {"name": "test"});
   }
 
   @override
@@ -138,7 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
   IconButton getIcon() {
     if (_page == 0) {
       return IconButton(
-          icon: const Icon(Icons.add), onPressed: () => print("add guild"));
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            connectAndListen();
+          });
     } else {
       return IconButton(
           icon: isSearching

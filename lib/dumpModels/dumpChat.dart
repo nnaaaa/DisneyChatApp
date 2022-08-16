@@ -69,15 +69,15 @@ List<Chat> dumpChat = [
     time: "8m ago",
     isActive: true,
   ),
-  Chat(
-    id: 5,
-    name: "Melody Marks",
-    messages: [],
-    imageUrl:
-        "https://i.pinimg.com/736x/52/81/71/52817168f255a475afae309616e697f0.jpg",
-    time: "5d ago",
-    isActive: false,
-  ),
+  // Chat(
+  //   id: 5,
+  //   name: "Melody Marks",
+  //   messages: [],
+  //   imageUrl:
+  //       "https://i.pinimg.com/736x/52/81/71/52817168f255a475afae309616e697f0.jpg",
+  //   time: "5d ago",
+  //   isActive: false,
+  // ),
   Chat(
     id: 3,
     name: "Leuleu Messi",
@@ -87,13 +87,13 @@ List<Chat> dumpChat = [
     time: "5d ago",
     isActive: true,
   ),
-  Chat(
-    id: 4,
-    name: "Thắng Thông Minh",
-    messages: [],
-    imageUrl:
-        "https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/203707619_970775803715028_5401410019197328519_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=3uE9gwlb3BYAX-HnHng&_nc_ht=scontent.fsgn6-1.fna&oh=03_AVIhksIBYBq3mnl3nW9D3nvZth3iZCQWsQprYQyheU9P0w&oe=62E96240",
-    time: "6d ago",
-    isActive: false,
-  ),
+  // Chat(
+  //   id: 4,
+  //   name: "Thắng Thông Minh",
+  //   messages: [],
+  //   imageUrl:
+  //       "https://scontent.fsgn6-1.fna.fbcdn.net/v/t1.15752-9/203707619_970775803715028_5401410019197328519_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=3uE9gwlb3BYAX-HnHng&_nc_ht=scontent.fsgn6-1.fna&oh=03_AVIhksIBYBq3mnl3nW9D3nvZth3iZCQWsQprYQyheU9P0w&oe=62E96240",
+  //   time: "6d ago",
+  //   isActive: false,
+  // ),
 ];
